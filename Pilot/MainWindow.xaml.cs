@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Pilot.Classes;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,11 +20,18 @@ namespace Pilot
         public MainWindow()
         {
             InitializeComponent();
+            Authentification();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("");
+        }
+
+        private void Authentification()
+        {
+            AuthWindow authWindow = new AuthWindow();
+            bool? result = authWindow.ShowDialog();
         }
     }
 }
