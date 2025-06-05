@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
+    public enum RoleEmploye { Commercial, ResponsableProduction };
     public class Employe
     {
         private int numEmploye;
-        private int numRole;
+        private RoleEmploye role;
         private string nom;
         private string prenom;
         private string password;
