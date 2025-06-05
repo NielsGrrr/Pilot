@@ -7,8 +7,18 @@
         mc:Ignorable="d"
         Title="AuthWindow" Height="400" Width="400">
     <Grid>
-        <StackPanel>
-            
+        <StackPanel Margin="50,50,50,50">
+            <Label Content="Role"/>
+            <ComboBox>
+                <ComboBoxItem Content="Commercial"/>
+                <ComboBoxItem Content="Responsable production"/>
+            </ComboBox>
+            <Label Content="Nom d'utilisateur" Margin="0,19,0,0"/>
+            <TextBox TextWrapping="Wrap" Text=""/>
+            <Label Content="Mot de passe" Margin="0,18,0,0"/>
+            <TextBox TextWrapping="Wrap" Text=""/>
+            <Button Content="Connexion" Margin="0,20,0,0" Background="#FF005CA9" Foreground="White" BorderBrush="White"/>
+
         </StackPanel>
     </Grid>
 </Window>

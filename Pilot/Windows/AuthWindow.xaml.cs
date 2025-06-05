@@ -21,7 +21,13 @@ namespace Pilot.Classes
     {
         public AuthWindow()
         {
+            ChargeData();
             InitializeComponent();
+        }
+
+        private void ChargeData()
+        {
+
         }
     }
 }
