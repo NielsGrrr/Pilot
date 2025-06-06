@@ -19,13 +19,32 @@
         <Label Content="Quantité" />
         <TextBox Text="{Binding QuantiteStock, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
         <Label Content="Type" />
-        <ComboBox x:Name="comboType" DisplayMemberPath="LibelleType"/>
+        <ComboBox x:Name="comboType" DisplayMemberPath="LibelleType" />
         <Label Content="Type de pointe" />
-        <ComboBox x:Name="comboPointe" DisplayMemberPath="LibelleTypePointe"/>
+        <ComboBox x:Name="comboPointe" DisplayMemberPath="LibelleTypePointe" />
         <Label Content="Couleur" />
-        <TextBox Text="" TextWrapping="Wrap" />
-        <CheckBox Content="Disponible" IsChecked="{Binding Disponible, ValidatesOnExceptions=True}"/>
-        <Button Content="Valider"  Margin="0,20,0,0" Background="#FF005CA9" Foreground="White" BorderBrush="White"/>
-        
+        <DataGrid Height="100" d:ItemsSource="{Binding LesCouleurs}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding LibelleCouleur}"
+                    Header="Couleur" />
+                <DataGridCheckBoxColumn Width="*" Header="Utilisée" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <CheckBox
+            Margin="0,20,0,0"
+            Content="Disponible"
+            IsChecked="{Binding Disponible, ValidatesOnExceptions=True}" />
+        <Button
+            x:Name="butValider"
+            Margin="0,20,0,0"
+            Background="#FF005CA9"
+            BorderBrush="White"
+            Click="butValider_Click"
+            Content="Valider"
+            Foreground="White" />
+
+
     </StackPanel>
 </Window>

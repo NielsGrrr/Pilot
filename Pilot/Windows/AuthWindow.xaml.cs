@@ -43,6 +43,7 @@ namespace Pilot.Classes
 
         private void butConnexion_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
             Employe emp = LesEmployes.Find(x => x.Login == txtUtil.Text && x.Password == txtMdp.Password);
             if (emp is null)
             {

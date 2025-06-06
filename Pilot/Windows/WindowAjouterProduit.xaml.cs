@@ -38,5 +38,10 @@ namespace Pilot.Windows
             Produit unProduit = new Produit(1, unePointe, unType, "lecode", "nom produit", 12, 5, true);
             this.DataContext = unProduit;
         }
+
+        private void butValider_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
