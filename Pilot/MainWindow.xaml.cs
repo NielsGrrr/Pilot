@@ -1,4 +1,5 @@
 ﻿using Pilot.Classes;
+using Pilot.Windows;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,7 @@ namespace Pilot
         {
             InitializeComponent();
             Authentification();
+            AjouterProduit();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,6 +34,13 @@ namespace Pilot
         {
             AuthWindow authWindow = new AuthWindow();
             bool? result = authWindow.ShowDialog();
+        }
+
+        private void AjouterProduit()
+        {
+            Produit unProduit = new Produit();
+            WindowAjouterProduit windowAjout = new WindowAjouterProduit(unProduit);
+            bool? result = windowAjout.ShowDialog();
         }
     }
 }

@@ -11,6 +11,12 @@ namespace Pilot.Classes
         private int numTypePointe;
         private string libelleTypePointe;
 
+        public TypePointe(int numTypePointe, string libelleTypePointe)
+        {
+            this.NumTypePointe = numTypePointe;
+            this.LibelleTypePointe = libelleTypePointe;
+        }
+
         public int NumTypePointe
         {
             get

@@ -12,6 +12,13 @@ namespace Pilot.Classes
         private Categorie laCategorie;
         private string libelleCategorie;
 
+        public Type(int numType, Categorie laCategorie, string libelleCategorie)
+        {
+            this.NumType = numType;
+            this.LaCategorie = laCategorie;
+            this.LibelleCategorie = libelleCategorie;
+        }
+
         public int NumType
         {
             get

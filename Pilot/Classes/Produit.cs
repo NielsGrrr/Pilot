@@ -17,6 +17,23 @@ namespace Pilot.Classes
         private int quantiteStock;
         private bool disponible;
 
+        public Produit()
+        {
+
+        }
+
+        public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
+        {
+            this.Numproduit = numproduit;
+            this.LaPointe = laPointe;
+            this.LeType = leType;
+            this.CodeProduit = codeProduit;
+            this.NomProduit = nomProduit;
+            this.PrixVente = prixVente;
+            this.QuantiteStock = quantiteStock;
+            this.Disponible = disponible;
+        }
+
         public int Numproduit
         {
             get
