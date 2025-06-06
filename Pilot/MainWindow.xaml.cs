@@ -38,8 +38,8 @@ namespace Pilot
 
         private void AjouterProduit()
         {
-            Produit unProduit = new Produit();
-            WindowAjouterProduit windowAjout = new WindowAjouterProduit(unProduit);
+            
+            WindowAjouterProduit windowAjout = new WindowAjouterProduit();
             bool? result = windowAjout.ShowDialog();
         }
     }

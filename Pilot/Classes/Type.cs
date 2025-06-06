@@ -10,13 +10,13 @@ namespace Pilot.Classes
     {
         private int numType;
         private Categorie laCategorie;
-        private string libelleCategorie;
+        private string libelleType;
 
-        public Type(int numType, Categorie laCategorie, string libelleCategorie)
+        public Type(int numType, Categorie laCategorie, string libelleType)
         {
             this.NumType = numType;
             this.LaCategorie = laCategorie;
-            this.LibelleCategorie = libelleCategorie;
+            this.LibelleType = libelleType;
         }
 
         public int NumType
@@ -45,16 +45,16 @@ namespace Pilot.Classes
             }
         }
 
-        public string LibelleCategorie
+        public string LibelleType
         {
             get
             {
-                return this.libelleCategorie;
+                return this.libelleType;
             }
 
             set
             {
-                this.libelleCategorie = value;
+                this.libelleType = value;
             }
         }
     }

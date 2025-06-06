@@ -11,6 +11,12 @@ namespace Pilot.Classes
         private int numCategorie;
         private string libelleCategorie;
 
+        public Categorie(int numCategorie, string libelleCategorie)
+        {
+            this.numCategorie = numCategorie;
+            this.libelleCategorie = libelleCategorie;
+        }
+
         public int NumCategorie
         {
             get
