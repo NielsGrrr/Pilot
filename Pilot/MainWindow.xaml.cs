@@ -32,6 +32,15 @@ namespace Pilot
         {
             AuthWindow authWindow = new AuthWindow();
             bool? result = authWindow.ShowDialog();
+            if (result == true)
+            {
+                MessageBox.Show("Authentification réussie", "Authentification", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Authentification annulée, fermuture de l'application","Annulation",MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
         }
     }
 }

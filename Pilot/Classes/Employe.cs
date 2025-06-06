@@ -128,17 +128,17 @@ namespace Pilot.Classes
         public List<Employe> FindAll()
         {
             List<Employe> lesEmployes = new List<Employe>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from employes emp JOIN role r ON emp.numrole=r.numrole;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from employe emp JOIN role r ON emp.numrole=r.numrole;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                 {
                     Employe emp = new Employe((Int32)dr["numemploye"], (String)dr["nom"], (String)dr["prenom"], (String)dr["password"], (String)dr["login"]);
-                    if ((string)dr["role"] == Resources.Commercial)
+                    if ((string)dr["libellerole"] == Resources.Commercial)
                     {
                         emp.Role = RoleEmploye.Commercial;
                     }
-                    else if ((string)dr["role"] == Resources.ResponsableProduction)
+                    else if ((string)dr["libellerole"] == Resources.ResponsableProduction)
                     {
                         emp.Role = RoleEmploye.ResponsableProduction;
                     }
