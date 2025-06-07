@@ -22,7 +22,7 @@ namespace Pilot
         {
 
             InitializeComponent();
-            AjouterProduit();
+            //AjouterProduit();
             Authentification();
             
         }
