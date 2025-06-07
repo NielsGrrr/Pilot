@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
-    public class Commande
+    public class Commande: ICrud<Commande>
     {
         private int numCommande;
         private Employe employe;
@@ -16,6 +18,17 @@ namespace Pilot.Classes
         private DateTime dateCommande;
         private DateTime dateLivraison;
         private decimal prixTotal;
+
+        public Commande(int numCommande, DateTime dateCommande, DateTime dateLivraison)
+        {
+            this.NumCommande = numCommande;
+            this.Employe = new Employe();
+            this.UnTransport = new ModeTransport();
+            this.UnRevendeur = new Revendeur();
+            this.DateCommande = dateCommande;
+            this.DateLivraison = dateLivraison;
+            this.prixTotal = 0;
+        }
 
         public int NumCommande
         {
@@ -106,6 +119,47 @@ namespace Pilot.Classes
             {
                 this.prixTotal = value;
             }
+        }
+
+        public int Create()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Commande> FindAll()
+        {
+            List<Commande> lesCommandes = new List<Commande>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande com JOIN employe emp ON com.numemploye=emp.numemploye JOIN modeTransport mt on com.numtransport = mt.numtransport JOIN revendeur rev on com.numrevendeur = rev.numrevendeur;"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Commande com = new Commande((Int32)dr["numcommande"], (DateTime)dr["datecommande"], (DateTime)dr["datelivraison"]);
+                    lesCommandes.Add(com);
+                }
+                return lesCommandes;
+
+            }
+        }
+
+        public List<Commande> FindBySelection(string criteres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

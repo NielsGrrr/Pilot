@@ -77,7 +77,7 @@ namespace Pilot.Classes
         public List<Type> FindAll()
         {
             List<Type> lesTypes = new List<Type>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from chiens ;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from type ;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
