@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
-    public class Produit
+    public class Produit: ICrud<Produit>
     {
         private int numproduit;
         private TypePointe laPointe;
@@ -151,6 +151,36 @@ namespace Pilot.Classes
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.QuantiteStock);
                 cmdInsert.Parameters.AddWithValue("disponible", this.Disponible);
             }
+        }
+
+        public int Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Produit> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Produit> FindBySelection(string criteres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        int ICrud<Produit>.Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

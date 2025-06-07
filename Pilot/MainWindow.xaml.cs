@@ -20,9 +20,11 @@ namespace Pilot
     {
         public MainWindow()
         {
+
             InitializeComponent();
-            Authentification();
             AjouterProduit();
+            Authentification();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,6 +36,8 @@ namespace Pilot
         {
             AuthWindow authWindow = new AuthWindow();
             bool? result = authWindow.ShowDialog();
+            //A modifier
+            result = true;
             if (result == true)
             {
                 MessageBox.Show("Authentification réussie", "Authentification", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -47,9 +51,20 @@ namespace Pilot
 
         private void AjouterProduit()
         {
-            
-            WindowAjouterProduit windowAjout = new WindowAjouterProduit();
-            bool? result = windowAjout.ShowDialog();
+            Produit unProduit = new Produit();
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit);
+            bool? result = wProduit.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    unProduit.Create();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
@@ -65,7 +80,7 @@ namespace Pilot
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
