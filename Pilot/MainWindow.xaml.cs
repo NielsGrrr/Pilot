@@ -51,5 +51,23 @@ namespace Pilot
             WindowAjouterProduit windowAjout = new WindowAjouterProduit();
             bool? result = windowAjout.ShowDialog();
         }
+
+        private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
+        {
+            Produit unProduit = new Produit();
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit);
+            bool? result = wProduit.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    unProduit.Create();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Le chien n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Pilot.Windows
     /// </summary>
     public partial class WindowAjouterProduit : Window
     {
-        public WindowAjouterProduit()
+        public WindowAjouterProduit(Produit unProduit)
         {
             List<Classes.Type> lesTypes = new List<Classes.Type> { new Classes.Type(1, new Categorie(1, "Cat1"), "typ1"), new Classes.Type(2, new Categorie(1, "Cat1"), "typ2"), new Classes.Type(3, new Categorie(1, "Cat4"), "typ3") };
             List<TypePointe> lesPointes = new List<TypePointe> { new TypePointe(1, "Fine"), new TypePointe(2, "Moyenne"), new TypePointe(3, "Large"), new TypePointe(4, "Xtra large") };
@@ -41,7 +41,7 @@ namespace Pilot.Windows
 
         private void butValider_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = true;
         }
     }
 }
