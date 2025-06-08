@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pilot.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,22 @@ namespace Pilot.UC
         public UserControlConsulterCommandes()
         {
             InitializeComponent();
+            dgCommande.Items.Filter = RechercheMotClefCommande;
+        }
+
+        private bool RechercheMotClefCommande(object obj)
+        {
+            if (String.IsNullOrEmpty(tbMotClefCommande.Text))
+                return true;
+            string motClef = tbMotClefCommande.Text.ToLower();
+            Commande uneCommande = obj as Commande;
+            return (uneCommande.UnRevendeur.RaisonSociale.StartsWith(tbMotClefCommande.Text, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private void tbMotClefCommande_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (dgCommande != null)
+                CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
         }
     }
 }
