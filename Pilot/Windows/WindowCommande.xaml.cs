@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pilot.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,17 @@ namespace Pilot.Windows
     /// </summary>
     public partial class WindowCommande : Window
     {
-        public WindowCommande()
+        public WindowCommande(Commande uneCommande)
         {
+            this.DataContext = uneCommande;
             InitializeComponent();
+        }
+
+        public WindowCommande(Commande uneCommande, Action act)
+        {
+            this.DataContext = uneCommande;
+            InitializeComponent();
+            butValiderCommande.Content = act;
         }
     }
 }

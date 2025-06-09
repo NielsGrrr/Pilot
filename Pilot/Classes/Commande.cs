@@ -17,7 +17,10 @@ namespace Pilot.Classes
         private Revendeur unRevendeur;
         private DateTime dateCommande;
         private DateTime dateLivraison;
-        private decimal prixTotal;
+
+        public Commande()
+        {
+        }
 
         public Commande(int numCommande, DateTime dateCommande, DateTime dateLivraison)
         {
@@ -27,7 +30,16 @@ namespace Pilot.Classes
             this.UnRevendeur = new Revendeur();
             this.DateCommande = dateCommande;
             this.DateLivraison = dateLivraison;
-            this.prixTotal = 0;
+        }
+
+        public Commande(int numCommande, Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison)
+        {
+            this.NumCommande = numCommande;
+            this.Employe = employe;
+            this.UnTransport = unTransport;
+            this.UnRevendeur = unRevendeur;
+            this.DateCommande = DateTime.Today;
+            this.DateLivraison = dateLivraison;
         }
 
         public int NumCommande
@@ -108,18 +120,6 @@ namespace Pilot.Classes
             }
         }
 
-        public decimal PrixTotal
-        {
-            get
-            {
-                return this.prixTotal;
-            }
-
-            set
-            {
-                this.prixTotal = value;
-            }
-        }
 
         public void Create()
         {

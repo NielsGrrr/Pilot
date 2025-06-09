@@ -1,4 +1,5 @@
 ﻿using Pilot.Classes;
+using Pilot.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Pilot.UC
     /// <summary>
     /// Logique d'interaction pour UserControlConsulterCommandes.xaml
     /// </summary>
+    
     public partial class UserControlConsulterCommandes : UserControl
     {
         public UserControlConsulterCommandes()
@@ -40,6 +42,73 @@ namespace Pilot.UC
         {
             if (dgCommande != null)
                 CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+        }
+
+        private void butAjouterCommande_Click(object sender, RoutedEventArgs e)
+        {
+            Commande uneCommande = new Commande();
+            WindowCommande wCommande = new WindowCommande(uneCommande, Action.Créer);
+            bool? result = wCommande.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    // Ajouter la commande à la liste des commandes
+                    uneCommande.Create();
+                    MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void butModifierCommande_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgCommande.SelectedItem == null) 
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Commande commandeSelectionnee = (Commande)dgCommande.SelectedItem;
+                Commande copie = new Commande(commandeSelectionnee.NumCommande, commandeSelectionnee.Employe, commandeSelectionnee.UnTransport, commandeSelectionnee.UnRevendeur, commandeSelectionnee.DateLivraison);
+                WindowCommande wCommande = new WindowCommande(copie, Action.Modifier);
+                bool? result = wCommande.ShowDialog();
+                if (result == true)
+                {
+                    try
+                    {
+                        commandeSelectionnee.NumCommande = copie.NumCommande;
+                        commandeSelectionnee.Employe = copie.Employe;
+                        commandeSelectionnee.UnTransport = copie.UnTransport;
+                        commandeSelectionnee.UnRevendeur = copie.UnRevendeur;
+                        commandeSelectionnee.DateCommande = copie.DateCommande;
+                        commandeSelectionnee.DateLivraison = copie.DateLivraison;
+
+                    }catch (Exception ev)
+                    {
+                        MessageBox.Show("La commande n'a pas pu être modifiée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
+
+        private void butSupprimerCommande_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgCommande.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Commande commandeSelectionnee = (Commande)dgCommande.SelectedItem;
+                Commande copie = new Commande(commandeSelectionnee.NumCommande, commandeSelectionnee.Employe, commandeSelectionnee.UnTransport, commandeSelectionnee.UnRevendeur, commandeSelectionnee.DateLivraison);
+                try
+                {
+                    commandeSelectionnee.Delete();
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("La commande n'a pas pu être supprimée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

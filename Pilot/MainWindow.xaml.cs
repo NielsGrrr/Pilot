@@ -17,6 +17,7 @@ namespace Pilot
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    public enum Action { Modifier, Créer };
     public partial class MainWindow : Window
     {
         public MainWindow()
