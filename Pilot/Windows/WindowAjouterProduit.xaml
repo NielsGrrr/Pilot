@@ -12,19 +12,19 @@
     <StackPanel>
         <Label Content="Ajouter un produit" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
         <StackPanel Margin="20">
-            <Label Content="Reference" />
+            <Label Content="Reference*" />
             <TextBox Text="{Binding CodeProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
-            <Label Content="Nom" />
+            <Label Content="Nom*" />
             <TextBox Text="{Binding NomProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
-            <Label Content="Prix" />
+            <Label Content="Prix*" />
             <TextBox Text="{Binding PrixVente, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
-            <Label Content="Quantité" />
+            <Label Content="Quantité*" />
             <TextBox Text="{Binding QuantiteStock, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
-            <Label Content="Type" />
+            <Label Content="Type*" />
             <ComboBox x:Name="comboType" DisplayMemberPath="LibelleType" />
-            <Label Content="Type de pointe" />
+            <Label Content="Type de pointe*" />
             <ComboBox x:Name="comboPointe" DisplayMemberPath="LibelleTypePointe" />
-            <Label Content="Couleur" />
+            <Label Content="Couleurs" />
             <DataGrid Height="100" d:ItemsSource="{Binding LesCouleurs}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
@@ -53,8 +53,6 @@
                 Click="butValider_Click"
                 Content="Valider"
                 Foreground="White" />
-
-
         </StackPanel>
     </StackPanel>
 </Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="Pilot.Windows.WindowAjouterProduitCommande"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pilot.Windows"
+        mc:Ignorable="d"
+        Title="WindowAjouterProduitCommande" Height="450" Width="300">
+    <StackPanel>
+        <Label Content="Ajouter un poduit à la commande" Background="#FF005CA9" Foreground="White" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" FontWeight="DemiBold"/>
+        <StackPanel Margin="20">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Numéro de commande* : "/>
+                <TextBox Margin="30,0,0,0" Width="70"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Numéro de produit* : "/>
+                <TextBox Margin="30,0,0,0" Width="70"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Quantité* : "/>
+                <TextBox Margin="30,0,0,0" Width="70"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Prix unitaire : "/>
+                <Label Content=""/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Prix total : "/>
+                <Label Content=""/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Prix commande : "/>
+                <Label Content=""/>
+            </StackPanel>
+            <Button x:Name="butValiderProduitCommande" Content="Ajouter" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0" Height="30"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
