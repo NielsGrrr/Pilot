@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pilot.Classes;
+using Pilot.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,31 @@ namespace Pilot.UC
         public UserControlSelectionnerProduit()
         {
             InitializeComponent();
+        }
+
+        private void butAjouterProduitACommande_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgProduits.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Produit unProduit = (Produit)dgProduits.SelectedItem;
+                Produit copie = new Produit(unProduit.Numproduit, unProduit.LaPointe, unProduit.LeType, unProduit.CodeProduit, unProduit.NomProduit, unProduit.PrixVente, unProduit.QuantiteStock, unProduit.Disponible);
+                WindowAjouterProduitCommande wProduit = new WindowAjouterProduitCommande(copie);
+                bool? result = wProduit.ShowDialog();
+                if (result == true)
+                {
+                    try
+                    {
+                        unProduit.Numproduit = copie.Numproduit;
+                        unProduit.NomProduit = copie.NomProduit;
+                        //A terminer
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Le produit n'a pas pu être ajouté à la commande.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
         }
     }
 }

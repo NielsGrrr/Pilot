@@ -1,4 +1,4 @@
-﻿<Window x:Class="Pilot.UC.UserControlSelectionnerProduit"
+﻿<UserControl x:Class="Pilot.UC.UserControlSelectionnerProduit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
         <Label Content="Sélectionner des produits" Background="#FF005CA9" Foreground="White" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" FontWeight="DemiBold"/>
         <StackPanel Margin="20">
             <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            <DataGrid Height="270"  Margin="0,20,0,0">
+            <DataGrid x:Name="dgProduits" Height="270"  Margin="0,20,0,0">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#FF005CA9" />
@@ -20,9 +20,9 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <Button x:Name="butAjouterProduitACommande" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0"/>
+            <Button x:Name="butAjouterProduitACommande" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0" Click="butAjouterProduitACommande_Click"/>
         </StackPanel>
         
 
     </StackPanel>
-</Window>
+</UserControl>

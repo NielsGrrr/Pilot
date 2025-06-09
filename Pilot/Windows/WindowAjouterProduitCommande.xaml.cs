@@ -23,5 +23,11 @@ namespace Pilot.Windows
         {
             InitializeComponent();
         }
+
+        public WindowAjouterProduitCommande(Classes.Produit unProduit)
+        {
+            InitializeComponent();
+            this.DataContext = unProduit;
+        }
     }
 }

@@ -173,5 +173,10 @@ namespace Pilot.Classes
         {
             throw new NotImplementedException();
         }
+
+        int ICrud<Commande>.Create()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
