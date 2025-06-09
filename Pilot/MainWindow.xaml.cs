@@ -1,4 +1,5 @@
 ﻿using Pilot.Classes;
+using Pilot.UC;
 using Pilot.Windows;
 using System.Text;
 using System.Windows;
@@ -23,7 +24,7 @@ namespace Pilot
 
             InitializeComponent();
             //AjouterProduit();
-            Authentification();
+            //Authentification();
             
         }
 
@@ -83,6 +84,16 @@ namespace Pilot
                     MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void menuCommande_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new UserControlConsulterCommandes();
+        }
+
+        private void menuProduits_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new UserControlSelectionnerProduit();
         }
     }
 }

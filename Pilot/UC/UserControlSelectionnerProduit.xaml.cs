@@ -50,6 +50,7 @@ namespace Pilot.UC
                         MessageBox.Show("Le produit n'a pas pu être ajouté à la commande.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+            }
         }
     }
 }
