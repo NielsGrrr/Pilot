@@ -16,7 +16,6 @@
                     <Setter Property="Foreground" Value="White" />
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
-
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Numéro"/>

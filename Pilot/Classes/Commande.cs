@@ -121,14 +121,26 @@ namespace Pilot.Classes
             }
         }
 
-        public int Create()
+        public void Create()
         {
-            throw new NotImplementedException();
+            using (var cmdInsert = new NpgsqlCommand("insert into commande (numCommande,numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numCommande,@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison)"))
+            {
+                cmdInsert.Parameters.AddWithValue("numProduit", this.NumCommande);
+                cmdInsert.Parameters.AddWithValue("numTypePointe", this.Employe.NumEmploye);
+                cmdInsert.Parameters.AddWithValue("numType", this.UnTransport.NumTransport);
+                cmdInsert.Parameters.AddWithValue("codeProduit", this.UnRevendeur.NumRevendeur);
+                cmdInsert.Parameters.AddWithValue("prixVente", this.DateCommande);
+                cmdInsert.Parameters.AddWithValue("quantiteStock", this.DateLivraison);
+            }
         }
 
         public int Delete()
         {
-            throw new NotImplementedException();
+            using (var cmdUpdate = new NpgsqlCommand("delete from commande  where numcommande =@numcommande;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
         }
 
         public List<Commande> FindAll()

@@ -141,7 +141,7 @@ namespace Pilot.Classes
 
         public void Create()
         {
-            using (var cmdInsert = new NpgsqlCommand("insert into produit (numProduit,numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numProduit,@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible) RETURNING idchien"))
+            using (var cmdInsert = new NpgsqlCommand("insert into produit (numProduit,numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numProduit,@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible)"))
             {
                 cmdInsert.Parameters.AddWithValue("numProduit", this.Numproduit);
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.LaPointe.NumTypePointe);
