@@ -13,13 +13,13 @@
         <Label Content="Ajouter un produit" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
         <StackPanel x:Name="panelFormProduit" Margin="20">
             <Label Content="Reference*" />
-            <TextBox Text="{Binding CodeProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
+            <TextBox x:Name="txtCodeProduit" Text="{Binding CodeProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
             <Label Content="Nom*" />
-            <TextBox Text="{Binding NomProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
+            <TextBox x:Name="txtNomProduit" Text="{Binding NomProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
             <Label Content="Prix*" />
-            <TextBox Text="{Binding PrixVente, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
+            <TextBox x:Name="txtPrixVente" Text="{Binding PrixVente, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
             <Label Content="Quantité*" />
-            <TextBox Text="{Binding QuantiteStock, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
+            <TextBox x:Name="txtQuantite" Text="{Binding QuantiteStock, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
             <Label Content="Type*" />
             <ComboBox x:Name="comboType" DisplayMemberPath="LibelleType" />
             <Label Content="Type de pointe*" />
@@ -41,7 +41,7 @@
                     <DataGridCheckBoxColumn Width="*" Header="Utilisée" />
                 </DataGrid.Columns>
             </DataGrid>
-            <CheckBox
+            <CheckBox x:Name="checkDisponible"
                 Margin="0,20,0,0"
                 Content="Disponible"
                 IsChecked="{Binding Disponible, ValidatesOnExceptions=True}" />

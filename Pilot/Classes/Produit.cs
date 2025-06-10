@@ -34,6 +34,17 @@ namespace Pilot.Classes
             this.Disponible = disponible;
         }
 
+        public Produit(TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
+        {
+            this.LaPointe = laPointe;
+            this.LeType = leType;
+            this.CodeProduit = codeProduit;
+            this.NomProduit = nomProduit;
+            this.PrixVente = prixVente;
+            this.QuantiteStock = quantiteStock;
+            this.Disponible = disponible;
+        }
+
         public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
         {
             this.Numproduit = numproduit;
@@ -150,11 +161,11 @@ namespace Pilot.Classes
             }
         }
 
-        public void Create()
+        public int Create()
         {
-            using (var cmdInsert = new NpgsqlCommand("insert into produit (numProduit,numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numProduit,@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible)"))
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into produit (numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible) RETURNING numproduit"))
             {
-                cmdInsert.Parameters.AddWithValue("numProduit", this.Numproduit);
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.LaPointe.NumTypePointe);
                 cmdInsert.Parameters.AddWithValue("numType", this.LeType.NumType);
                 cmdInsert.Parameters.AddWithValue("codeProduit", this.CodeProduit);
@@ -162,8 +173,10 @@ namespace Pilot.Classes
                 cmdInsert.Parameters.AddWithValue("prixVente", this.PrixVente);
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.QuantiteStock);
                 cmdInsert.Parameters.AddWithValue("disponible", this.Disponible);
-                DataAccess.Instance.ExecuteInsert(cmdInsert);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
+            this.Numproduit = nb;
+            return nb;
         }
 
         public int Delete()

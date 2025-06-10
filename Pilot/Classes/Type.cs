@@ -92,7 +92,16 @@ namespace Pilot.Classes
 
         public List<Type> FindBySelection(string criteres)
         {
-            throw new NotImplementedException();
+            List<Type> lesTypes = new Type().FindAll();
+            List<Type> retour = new List<Type>();
+            foreach (Type type in lesTypes)
+            {
+                if (type.libelleType == criteres)
+                {
+                    retour.Add(type);
+                }
+            }
+            return retour;
         }
 
         public void Read()

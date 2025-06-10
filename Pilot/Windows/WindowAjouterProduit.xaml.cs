@@ -53,18 +53,13 @@ namespace Pilot.Windows
 
         private void butValider_Click(object sender, RoutedEventArgs e)
         {
+            Classes.Type leType = (Classes.Type)comboType.SelectedItem;
+            TypePointe pointe = (TypePointe)comboPointe.SelectedItem;
+            //Attention au Parse
+            Produit produit = new Produit(pointe, leType, txtCodeProduit.Text, txtNomProduit.Text, decimal.Parse(txtPrixVente.Text), int.Parse(txtQuantite.Text), (bool)checkDisponible.IsChecked);
+            produit.Create();
             DialogResult = true;
-            bool ok = true;
-            foreach (UIElement uie in panelFormProduit.Children)
-            {
-                if (uie is TextBox)
-                {
-                    TextBox txt = (TextBox)uie;
-                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                }
-                if (Validation.GetHasError(uie)) 
-                    ok = false;
-            }
+            
         }
     }
 }
