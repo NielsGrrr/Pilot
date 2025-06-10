@@ -9,6 +9,7 @@ namespace Pilot
     /// </summary>
     public partial class App : Application
     {
+        public enum Action { Ajouter, Modifier };
     }
 
 }

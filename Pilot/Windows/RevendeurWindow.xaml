@@ -1,0 +1,44 @@
+﻿<Window
+    x:Class="Pilot.Windows.RevendeurWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Pilot.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="RevendeurWindow"
+    Width="400"
+    Height="500"
+    mc:Ignorable="d">
+    <StackPanel Margin="50,50,50,0">
+        <Label Content="Forme juridique" />
+        <ComboBox>
+            <ComboBoxItem x:Name="itemAucune" Content="Aucune" />
+            <ComboBoxItem x:Name="itemEI" Content="EI" />
+            <ComboBoxItem x:Name="itemSARL" Content="SARL" />
+            <ComboBoxItem x:Name="itemSAS" Content="SAS" />
+            <ComboBoxItem x:Name="itemSA" Content="SA" />
+            <ComboBoxItem x:Name="itemSASU" Content="SASU" />
+            <ComboBoxItem x:Name="itemGIE" Content="GIE" />
+            <ComboBoxItem x:Name="itemSCOP" Content="SCOP" />
+        </ComboBox>
+        <Label Content="Nom du revendeur" />
+        <TextBox />
+        <Label Content="Adresse" />
+        <TextBox />
+        <Label Content="Ville" />
+        <TextBox />
+        <Label Content="Code Postal" />
+        <TextBox />
+        <Label />
+        <Button x:Name="but" Background="#FF005CA9" Content="Ajouter" Foreground="White" BorderBrush="White" IsDefault="True" Width="100" Height="20">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </StackPanel>
+</Window>
