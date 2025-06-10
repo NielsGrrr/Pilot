@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -160,7 +161,18 @@ namespace Pilot.Classes
 
         public List<Produit> FindAll()
         {
-            throw new NotImplementedException();
+            List<Produit> lesRevendeurs = new List<Produit>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from produit p JOIN typepointe tp ON p.numtypepointe=tp.numtypepointe JOIN type t ON p.numtype=t.numtype JOIN Categorie c ON t.numcategorie=c.numcategorie;"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lesRevendeurs.Add(new Produit((Int32)dr["numproduit"], new TypePointe((int)dr["numtypepointe"], (string)dr["libelletypepointe"]),
+                        new Type((int)dr["numtype"], new Categorie((int)dr["numcategorie"], (string)dr["libellecategorie"]), (string)dr["libelletype"]),
+                        (string)dr["codeproduit"], (string)dr["nomproduit"], (decimal)dr["prixvente"], (int)dr["quantitestock"], (bool)dr["disponible"]));
+                }
+            }
+            return lesRevendeurs;
         }
 
         public List<Produit> FindBySelection(string criteres)

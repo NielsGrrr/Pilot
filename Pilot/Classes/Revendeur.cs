@@ -20,7 +20,13 @@ namespace Pilot.Classes
         public Revendeur()
         {
         }
-
+        public Revendeur(string raisonSociale, string adresseRue, string adresseCP, string adresseVille)
+        {
+            this.RaisonSociale = raisonSociale;
+            this.AdresseRue = adresseRue;
+            this.AdresseCP = adresseCP;
+            this.AdresseVille = adresseVille;
+        }
         public Revendeur(Int32 numRevendeur, string raisonSociale, string adresseRue, string adresseCP, string adresseVille)
         {
             this.NumRevendeur = numRevendeur;

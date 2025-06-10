@@ -1,4 +1,5 @@
 ﻿using Pilot.Classes;
+using Pilot.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,12 @@ namespace Pilot.UC
                 LogError.Log(ex, "Erreur SQL");
                 Application.Current.Shutdown();
             }
+        }
+
+        private void butAjouterRevendeur_Click(object sender, RoutedEventArgs e)
+        {
+            RevendeurWindow revendeurWindow = new RevendeurWindow();
+            bool? result = revendeurWindow.ShowDialog();
         }
     }
 }
