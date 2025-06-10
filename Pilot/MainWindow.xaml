@@ -16,6 +16,7 @@
             <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Width="100" BorderBrush="White" Click="menuCommande_Click"/>
             <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Width="100" BorderBrush="White" Click="menuProduits_Click"/>
             <MenuItem x:Name="menuRevendeurs" HorizontalAlignment="Center" Header="Revendeurs" Width="100" BorderBrush="White" Click="menuRevendeurs_Click"/>
+            <MenuItem x:Name="menuProduit2" HorizontalAlignment="Center" Header="Prduit2" Width="100" BorderBrush="White" Click="menuProduit2_Click"/>
         </Menu>
         <ContentControl x:Name="MainContent" />
 

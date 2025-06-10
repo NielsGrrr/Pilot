@@ -44,6 +44,17 @@ namespace Pilot.Windows
         private void butValider_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+            bool ok = true;
+            foreach (UIElement uie in panelFormProduit.Children)
+            {
+                if (uie is TextBox)
+                {
+                    TextBox txt = (TextBox)uie;
+                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
+                if (Validation.GetHasError(uie)) 
+                    ok = false;
+            }
         }
     }
 }

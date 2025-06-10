@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,16 @@ namespace Pilot.Classes
         public Produit()
         {
 
+        }
+
+        public Produit(int numproduit, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
+        {
+            this.Numproduit = numproduit;
+            this.CodeProduit = codeProduit;
+            this.NomProduit = nomProduit;
+            this.PrixVente = prixVente;
+            this.QuantiteStock = quantiteStock;
+            this.Disponible = disponible;
         }
 
         public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
@@ -160,7 +171,23 @@ namespace Pilot.Classes
 
         public List<Produit> FindAll()
         {
-            throw new NotImplementedException();
+            List<Produit> lesProduits = new List<Produit>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from produit pr join typepointe tp on pr.numtypepointe = tp.numtypepointe join type ty on pr.numtype = ty.numtype join categorie cat on ty.numcategorie = cat.numcategorie"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Produit pro = new Produit((Int32)dr["numproduit"], (String)dr["codeproduit"], (String)dr["nomproduit"], (decimal)dr["prixvente"], (Int32)dr["quantitestock"], (bool)dr["disponible"]);
+                    TypePointe pointe = new TypePointe((Int32)dr["numtypepointe"], (String)dr["libelletypepointe"]);
+                    pro.LaPointe = pointe;
+                    Categorie cat = new Categorie((Int32)dr["numcategorie"], (String)dr["libellecategorie"]);
+                    Type type = new Type((Int32)dr["numtype"], cat, (String)dr["libelletype"]);
+                    pro.leType = type;
+                    lesProduits.Add(pro);
+                }
+            }
+            return lesProduits;
         }
 
         public List<Produit> FindBySelection(string criteres)

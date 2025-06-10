@@ -11,7 +11,7 @@
     mc:Ignorable="d">
     <StackPanel>
         <Label Content="Ajouter un produit" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
-        <StackPanel Margin="20">
+        <StackPanel x:Name="panelFormProduit" Margin="20">
             <Label Content="Reference*" />
             <TextBox Text="{Binding CodeProduit, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
             <Label Content="Nom*" />
