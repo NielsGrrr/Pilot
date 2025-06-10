@@ -17,12 +17,13 @@ namespace Pilot.Classes
         private Revendeur unRevendeur;
         private DateTime dateCommande;
         private DateTime dateLivraison;
+        private Dictionary<Produit, int> PRODUITS_QUANTITES;
 
         public Commande()
         {
         }
 
-        public Commande(int numCommande, DateTime dateCommande, DateTime dateLivraison)
+        public Commande(int numCommande, DateTime dateCommande, DateTime dateLivraison, Dictionary<Produit, int> produits_quantites)
         {
             this.NumCommande = numCommande;
             this.Employe = new Employe();
@@ -30,6 +31,7 @@ namespace Pilot.Classes
             this.UnRevendeur = new Revendeur();
             this.DateCommande = dateCommande;
             this.DateLivraison = dateLivraison;
+            this.PRODUITS_QUANTITES = produits_quantites;
         }
 
         public Commande(int numCommande, DateTime dateCommande)
@@ -130,6 +132,30 @@ namespace Pilot.Classes
             }
         }
 
+        public decimal PrixFinal
+        {
+            get
+            {
+                decimal res = 0;
+                foreach (Produit prod in this.Produits_quantite.Keys)
+                {
+                    res += prod.PrixVente * Produits_quantite[prod];
+                }
+                return res;
+            }
+        }
+        public Dictionary<Produit, int> Produits_quantite
+        {
+            get
+            {
+                return this.PRODUITS_QUANTITES;
+            }
+
+            set
+            {
+                this.PRODUITS_QUANTITES = value;
+            }
+        }
 
         public void Create()
         {
@@ -139,7 +165,7 @@ namespace Pilot.Classes
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.Employe.NumEmploye);
                 cmdInsert.Parameters.AddWithValue("numType", this.UnTransport.NumTransport);
                 cmdInsert.Parameters.AddWithValue("codeProduit", this.UnRevendeur.NumRevendeur);
-                cmdInsert.Parameters.AddWithValue("prixVente", this.DateCommande);
+                cmdInsert.Parameters.AddWithValue("", this.DateCommande);
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.DateLivraison);
             }
         }
@@ -156,17 +182,30 @@ namespace Pilot.Classes
         public List<Commande> FindAll()
         {
             List<Commande> lesCommandes = new List<Commande>();
+            List<Produit> lesProduits = new List<Produit>(new Produit().FindAll());
+            
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande com JOIN employe emp ON com.numemploye=emp.numemploye JOIN modeTransport mt on com.numtransport = mt.numtransport JOIN revendeur rev on com.numrevendeur = rev.numrevendeur JOIN role ro on emp.numrole = ro.numrole;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 
                 foreach (DataRow dr in dt.Rows)
                 {
+                    Dictionary<Produit, int> dict = new Dictionary<Produit, int>();
                     Commande com = new Commande((Int32)dr["numcommande"], (DateTime)dr["datecommande"]);
                     Revendeur rev = new Revendeur((Int32)dr["numrevendeur"], (String)dr["raisonsociale"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]);
                     com.UnRevendeur = rev;
                     ModeTransport modeTransport = new ModeTransport((Int32)dr["numtransport"], (String)dr["libelletransport"]);
                     com.UnTransport = modeTransport;
+                    using (NpgsqlCommand cmdSelect2 = new NpgsqlCommand("select * from produitcommande pc WHERE pc.numcommande=@id;"))
+                    {
+                        cmdSelect2.Parameters.AddWithValue("id", com.NumCommande);
+                        DataTable dt2 = DataAccess.Instance.ExecuteSelect(cmdSelect2);
+                        foreach(DataRow dr2 in dt2.Rows)
+                        {
+                            dict.Add(lesProduits.Find(x => x.Numproduit == (int)dr2["numproduit"]), (int)dr2["quantitecommande"]);
+                        }
+                    }
+                    com.Produits_quantite = dict;
                     lesCommandes.Add(com);
                 }
             }

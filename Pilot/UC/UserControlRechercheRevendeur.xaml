@@ -28,7 +28,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="butAjouterRevendeur" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0"/>
+                <Button x:Name="butAjouterRevendeur" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0" Click="butAjouterRevendeur_Click"/>
                 <Button x:Name="butModifierRevendeur" Width="30" Height="30" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" ToolTip="Modifier" Background="#FF005CA9" Foreground="White" Margin="20,0,20,0"/>
                 <Button x:Name="butSupprimerRevendeur" Width="30" Height="30" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>
                 <Button x:Name="butDetailRevendeur" Width="30" Height="30" Content="&#xE7B3;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>

@@ -13,7 +13,7 @@
         <Label Content="Ajouter un revendeur" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
         <StackPanel Margin="50,50,50,0">
             <Label Content="Forme juridique" />
-            <ComboBox>
+            <ComboBox x:Name="cmbFormeJuridique">
                 <ComboBoxItem x:Name="itemAucune" Content="Aucune" />
                 <ComboBoxItem x:Name="itemEI" Content="EI" />
                 <ComboBoxItem x:Name="itemSARL" Content="SARL" />
@@ -24,15 +24,15 @@
                 <ComboBoxItem x:Name="itemSCOP" Content="SCOP" />
             </ComboBox>
             <Label Content="Nom du revendeur" />
-            <TextBox />
+            <TextBox x:Name="txtNomRevendeur" />
             <Label Content="Adresse" />
-            <TextBox />
-            <Label Content="Ville" />
-            <TextBox />
+            <TextBox x:Name="txtAdresse" />
+            <Label  Content="Ville" />
+            <TextBox x:Name="txtVille"/>
             <Label Content="Code Postal" />
-            <TextBox />
+            <TextBox x:Name="txtCodePostal" />
             <Label />
-            <Button x:Name="but" Background="#FF005CA9" Content="Ajouter" Foreground="White" BorderBrush="White" IsDefault="True" Width="100" Height="20">
+            <Button x:Name="but" Background="#FF005CA9" Content="Ajouter" Foreground="White" BorderBrush="White" IsDefault="True" Width="100" Height="20" Click="but_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 

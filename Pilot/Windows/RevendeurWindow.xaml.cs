@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pilot.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,13 @@ namespace Pilot.Windows
             {
 
             }
+        }
+
+        private void but_Click(object sender, RoutedEventArgs e)
+        {
+            Revendeur revendeur = new Revendeur(((ComboBoxItem)cmbFormeJuridique.SelectedItem).Content.ToString() + " " + txtNomRevendeur.Text, txtAdresse.Text, txtCodePostal.Text, txtVille.Text);
+            revendeur.Create();
+            DialogResult = true;
         }
     }
 }
