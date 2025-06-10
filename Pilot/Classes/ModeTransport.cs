@@ -11,6 +11,16 @@ namespace Pilot.Classes
         private int numTransport;
         private string libelleTransport;
 
+        public ModeTransport()
+        {
+        }
+
+        public ModeTransport(int numTransport, string libelleTransport)
+        {
+            this.NumTransport = numTransport;
+            this.LibelleTransport = libelleTransport;
+        }
+
         public int NumTransport
         {
             get

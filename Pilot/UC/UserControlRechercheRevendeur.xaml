@@ -9,7 +9,7 @@
     <StackPanel>
         <Label Content="Liste des revendeurs" Background="#FF005CA9" Foreground="White" HorizontalContentAlignment="Center" FontWeight="DemiBold"/>
         <StackPanel Margin="0,20,0,20">
-            <TextBox x:Name="tbMotClefCommande" TextWrapping="Wrap" Text="" Width="120" TextChanged="tbMotClefCommande_TextChanged"/>
+            <TextBox x:Name="tbMotClefCommande" TextWrapping="Wrap" Text="" Width="120"/>
             <DataGrid x:Name="dgRevendeur" Height="270" Margin="20,20,20,0" >
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -28,9 +28,9 @@
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="butAjouterCommande" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0" Click="butAjouterCommande_Click"/>
-                <Button x:Name="butModifierCommande" Width="30" Height="30" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" ToolTip="Modifier" Background="#FF005CA9" Foreground="White" Margin="20,0,20,0" Click="butModifierCommande_Click"/>
-                <Button x:Name="butSupprimerCommande" Width="30" Height="30" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0" Click="butSupprimerCommande_Click"/>
+                <Button x:Name="butAjouterCommande" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0"/>
+                <Button x:Name="butModifierCommande" Width="30" Height="30" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" ToolTip="Modifier" Background="#FF005CA9" Foreground="White" Margin="20,0,20,0"/>
+                <Button x:Name="butSupprimerCommande" Width="30" Height="30" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>
                 <Button x:Name="butDetailCommande" Width="30" Height="30" Content="&#xE7B3;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>
             </StackPanel>
         </StackPanel>

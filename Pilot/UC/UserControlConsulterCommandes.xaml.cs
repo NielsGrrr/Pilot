@@ -2,6 +2,7 @@
 using Pilot.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,14 @@ namespace Pilot.UC
     /// Logique d'interaction pour UserControlConsulterCommandes.xaml
     /// </summary>
     
+
     public partial class UserControlConsulterCommandes : UserControl
     {
+        public ObservableCollection<Commande> LesCommandes { get; set; }
+
         public UserControlConsulterCommandes()
         {
+            ChargeData();
             InitializeComponent();
             dgCommande.Items.Filter = RechercheMotClefCommande;
         }
@@ -36,6 +41,21 @@ namespace Pilot.UC
             string motClef = tbMotClefCommande.Text.ToLower();
             Commande uneCommande = obj as Commande;
             return (uneCommande.UnRevendeur.RaisonSociale.StartsWith(tbMotClefCommande.Text, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private void ChargeData()
+        {
+            try
+            {
+                LesCommandes = new ObservableCollection<Commande>(new Commande().FindAll());
+                this.DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
+                LogError.Log(ex, "Erreur SQL");
+                Application.Current.Shutdown();
+            }
         }
 
         private void tbMotClefCommande_TextChanged(object sender, TextChangedEventArgs e)
