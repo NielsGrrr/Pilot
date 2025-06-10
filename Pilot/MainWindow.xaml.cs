@@ -18,9 +18,10 @@ namespace Pilot
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public enum Action { Modifier, Créer };
+
     public partial class MainWindow : Window
     {
-        
+        public RoleEmploye Role;
         public MainWindow()
         {
 
@@ -37,12 +38,13 @@ namespace Pilot
 
         private void Authentification()
         {
-            AuthWindow authWindow = new AuthWindow();
+            AuthentificationWindow authWindow = new AuthentificationWindow();
             bool? result = authWindow.ShowDialog();
             //A modifier
             result = true;
             if (result == true)
             {
+                authWindow.Role = Role;
                 MessageBox.Show("Authentification réussie", "Authentification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -101,6 +103,11 @@ namespace Pilot
         private void menuRevendeurs_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new UserControlRechercheRevendeur();
+        }
+
+        public void DetailCommande(Commande c)
+        {
+            MainContent.Content = new UserControlDetailCommande(c);
         }
     }
 }

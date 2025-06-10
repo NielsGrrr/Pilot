@@ -8,7 +8,7 @@ namespace Pilot.Classes
 {
     public class ModeTransport
     {
-        private int numTransport;
+        private Int32 numTransport;
         private string libelleTransport;
 
         public ModeTransport()
@@ -21,7 +21,7 @@ namespace Pilot.Classes
             this.LibelleTransport = libelleTransport;
         }
 
-        public int NumTransport
+        public Int32 NumTransport
         {
             get
             {

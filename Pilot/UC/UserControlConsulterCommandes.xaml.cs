@@ -26,7 +26,7 @@ namespace Pilot.UC
     public partial class UserControlConsulterCommandes : UserControl
     {
         public ObservableCollection<Commande> LesCommandes { get; set; }
-
+        public Commande commandeSelectionnee { get; set; }
         public UserControlConsulterCommandes()
         {
             ChargeData();
@@ -133,7 +133,16 @@ namespace Pilot.UC
 
         private void butDetailCommande_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (dgCommande.SelectedItem is null)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                commandeSelectionnee = (Commande)dgCommande.SelectedItem;
+                UserControlDetailCommande userControlDetailCommande = new UserControlDetailCommande(commandeSelectionnee);
+            }
         }
+
     }
 }
