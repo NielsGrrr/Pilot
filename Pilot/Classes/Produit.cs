@@ -158,9 +158,11 @@ namespace Pilot.Classes
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.LaPointe.NumTypePointe);
                 cmdInsert.Parameters.AddWithValue("numType", this.LeType.NumType);
                 cmdInsert.Parameters.AddWithValue("codeProduit", this.CodeProduit);
+                cmdInsert.Parameters.AddWithValue("nomProduit", this.NomProduit);
                 cmdInsert.Parameters.AddWithValue("prixVente", this.PrixVente);
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.QuantiteStock);
                 cmdInsert.Parameters.AddWithValue("disponible", this.Disponible);
+                DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
         }
 

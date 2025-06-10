@@ -1,4 +1,5 @@
 ﻿using Pilot.Classes;
+using Pilot.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,27 @@ namespace Pilot.UC
                 MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
                 LogError.Log(ex, "Erreur SQL");
                 Application.Current.Shutdown();
+            }
+        }
+
+        private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
+        {
+            Produit unProduit = new Produit();
+            unProduit.LaPointe = new TypePointe();
+            unProduit.LeType = new Classes.Type();
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit, Action.Créer);
+            bool? result = wProduit.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    unProduit.Create();
+                    MessageBox.Show("Produit ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le produit n'a pas pu être ajoutée.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
