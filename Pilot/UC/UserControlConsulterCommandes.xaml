@@ -93,7 +93,7 @@
                     Content="&#xE7B3;"
                     FontFamily="Segoe MDL2 Assets"
                     Foreground="White"
-                    ToolTip="Supprimer" />
+                    ToolTip="Supprimer" Click="butDetailCommande_Click" />
             </StackPanel>
         </StackPanel>
     </StackPanel>

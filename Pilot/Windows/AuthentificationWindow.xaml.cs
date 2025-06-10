@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Pilot.Classes;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,15 +13,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Pilot.Classes
+namespace Pilot.Windows
 {
     /// <summary>
-    /// Logique d'interaction pour AuthWindow.xaml
+    /// Logique d'interaction pour AuthentificationWindow.xaml
     /// </summary>
-    public partial class AuthWindow : Window
+    public partial class AuthentificationWindow : Window
     {
         public List<Employe> LesEmployes { get; set; }
-        public AuthWindow()
+        public RoleEmploye Role { get; set; }
+        public AuthentificationWindow()
         {
             ChargeData();
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace Pilot.Classes
             }
             else
             {
+                Role = emp.Role;
                 DialogResult = true;
             }
 

@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Pilot.UC.UserControlDetailCommande"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pilot.UC"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Label x:Name="labCommande"
+            HorizontalContentAlignment="Center"
+            Background="#FF005CA9"
+            Content="Détail de la commande "
+            FontWeight="DemiBold"
+            Foreground="White" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <GroupBox Margin="50,50,50,0" Header="Commande">
+                    <StackPanel DataContext="{Binding Commande}">
+                        <Label Content="Nom" />
+                        <TextBox Text="{Binding NumCommande}"/>
+                        <Label Content="Maitre" />
+                        <TextBox Text="{Binding DateCommande}"/>
+                        <Label Content="Poids" />
+                        <TextBox Text="{Binding DateLivraison}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="50,0,50,0" Header="Employe">
+                    <StackPanel DataContext="{Binding SelectedItem.UnChien, ElementName=dgSejours}">
+                        <Label Content="Nom" />
+                        <TextBox Text="{Binding Nom}"/>
+                        <Label Content="Prénom" />
+                        <TextBox Text="{Binding Prenom}"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <GroupBox Margin="50,50,50,0" Header="Chien">
+                    <StackPanel DataContext="{Binding SelectedItem.UnChien, ElementName=dgSejours}">
+                        <Label Content="Nom" />
+                        <TextBox Text="{Binding Nom}"/>
+                        <Label Content="Maitre" />
+                        <TextBox Text="{Binding Maitre}"/>
+                        <Label Content="Poids" />
+                        <TextBox Text="{Binding Poids}"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>
