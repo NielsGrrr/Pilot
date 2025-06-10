@@ -32,6 +32,16 @@ namespace Pilot.Classes
             this.DateLivraison = dateLivraison;
         }
 
+        public Commande(int numCommande, DateTime dateCommande)
+        {
+            this.NumCommande = numCommande;
+            this.Employe = new Employe();
+            this.UnTransport = new ModeTransport();
+            this.UnRevendeur = new Revendeur();
+            this.DateCommande = dateCommande;
+            this.DateLivraison = new DateTime();
+        }
+
         public Commande(int numCommande, Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison)
         {
             this.NumCommande = numCommande;
@@ -146,17 +156,21 @@ namespace Pilot.Classes
         public List<Commande> FindAll()
         {
             List<Commande> lesCommandes = new List<Commande>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande com JOIN employe emp ON com.numemploye=emp.numemploye JOIN modeTransport mt on com.numtransport = mt.numtransport JOIN revendeur rev on com.numrevendeur = rev.numrevendeur;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande com JOIN employe emp ON com.numemploye=emp.numemploye JOIN modeTransport mt on com.numtransport = mt.numtransport JOIN revendeur rev on com.numrevendeur = rev.numrevendeur JOIN role ro on emp.numrole = ro.numrole;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                
                 foreach (DataRow dr in dt.Rows)
                 {
-                    Commande com = new Commande((Int32)dr["numcommande"], (DateTime)dr["datecommande"], (DateTime)dr["datelivraison"]);
+                    Commande com = new Commande((Int32)dr["numcommande"], (DateTime)dr["datecommande"]);
+                    Revendeur rev = new Revendeur((Int32)dr["numrevendeur"], (String)dr["raisonsociale"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]);
+                    com.UnRevendeur = rev;
+                    ModeTransport modeTransport = new ModeTransport((Int32)dr["numtransport"], (String)dr["libelletransport"]);
+                    com.UnTransport = modeTransport;
                     lesCommandes.Add(com);
                 }
-                return lesCommandes;
-
             }
+            return lesCommandes;
         }
 
         public List<Commande> FindBySelection(string criteres)

@@ -1,37 +1,99 @@
-﻿<UserControl x:Class="Pilot.UC.UserControlConsulterCommandes"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Pilot.UC"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="Pilot.UC.UserControlConsulterCommandes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Pilot.UC"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <StackPanel>
-        <Label Content="Liste des commandes" Background="#FF005CA9" Foreground="White" HorizontalContentAlignment="Center" FontWeight="DemiBold"/>
+        <Label
+            HorizontalContentAlignment="Center"
+            Background="#FF005CA9"
+            Content="Liste des commandes"
+            FontWeight="DemiBold"
+            Foreground="White" />
         <StackPanel Margin="0,20,0,0">
-            <TextBox x:Name="tbMotClefCommande" TextWrapping="Wrap" Text="" Width="120" TextChanged="tbMotClefCommande_TextChanged"/>
-            <DataGrid x:Name="dgCommande" Height="270" Margin="20,20,20,0" >
+            <TextBox
+                x:Name="tbMotClefCommande"
+                Width="120"
+                Text=""
+                TextChanged="tbMotClefCommande_TextChanged"
+                TextWrapping="Wrap" />
+            <DataGrid
+                x:Name="dgCommande"
+                Height="270"
+                Margin="20,20,20,0"
+                ItemsSource="{Binding LesCommandes}"
+                AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#FF005CA9" />
                         <Setter Property="Foreground" Value="White" />
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="Height" Value="30" />
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Numéro"/>
-                    <DataGridCheckBoxColumn Width="*" Header="Revendeur" />
-                    <DataGridTextColumn Width="*" Header="Mode de livraison" />
-                    <DataGridCheckBoxColumn Width="*" Header="Date création" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding NumCommande, ValidatesOnExceptions=true}"
+                        Header="Numéro" />
+                    <DataGridTextColumn Width="*" Binding="{Binding UnRevendeur.RaisonSociale, ValidatesOnExceptions=true}" Header="Revendeur" />
+                    <DataGridTextColumn Width="*" Binding="{Binding UnTransport.LibelleTransport, ValidatesOnExceptions=true}" Header="Mode de livraison" />
+                    <DataGridTextColumn Width="*" Binding="{Binding DateCommande, StringFormat=d,ValidatesOnExceptions=true}" Header="Date création" />
                     <DataGridTextColumn Width="*" Header="Actions" />
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="butAjouterCommande" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0" Click="butAjouterCommande_Click"/>
-                <Button x:Name="butModifierCommande" Width="30" Height="30" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" ToolTip="Modifier" Background="#FF005CA9" Foreground="White" Margin="20,0,20,0" Click="butModifierCommande_Click"/>
-                <Button x:Name="butSupprimerCommande" Width="30" Height="30" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0" Click="butSupprimerCommande_Click"/>
-                <Button x:Name="butDetailCommande" Width="30" Height="30" Content="&#xE7B3;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0" Click="butDetailCommande_Click" />
+            <StackPanel
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="butAjouterCommande"
+                    Width="30"
+                    Height="30"
+                    Margin="20,0,0,0"
+                    Background="#FF005CA9"
+                    Click="butAjouterCommande_Click"
+                    Content="&#xE710;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Ajouter" />
+                <Button
+                    x:Name="butModifierCommande"
+                    Width="30"
+                    Height="30"
+                    Margin="20,0,20,0"
+                    Background="#FF005CA9"
+                    Click="butModifierCommande_Click"
+                    Content="&#xE70F;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Modifier" />
+                <Button
+                    x:Name="butSupprimerCommande"
+                    Width="30"
+                    Height="30"
+                    Margin="0,0,20,0"
+                    Background="#FF005CA9"
+                    Click="butSupprimerCommande_Click"
+                    Content="&#xE74D;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Supprimer" />
+                <Button
+                    x:Name="butDetailCommande"
+                    Width="30"
+                    Height="30"
+                    Margin="0,0,20,0"
+                    Background="#FF005CA9"
+                    Content="&#xE7B3;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Supprimer" />
             </StackPanel>
         </StackPanel>
     </StackPanel>

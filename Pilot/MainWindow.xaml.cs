@@ -20,12 +20,13 @@ namespace Pilot
     public enum Action { Modifier, Créer };
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
 
             InitializeComponent();
             //AjouterProduit();
-            //Authentification();
+            Authentification();
             
         }
 
