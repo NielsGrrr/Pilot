@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
-    public class Produit
+    public class Produit: ICrud<Produit>
     {
         private int numproduit;
         private TypePointe laPointe;
@@ -136,6 +137,50 @@ namespace Pilot.Classes
             {
                 this.disponible = value;
             }
+        }
+
+        public void Create()
+        {
+            using (var cmdInsert = new NpgsqlCommand("insert into produit (numProduit,numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numProduit,@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible)"))
+            {
+                cmdInsert.Parameters.AddWithValue("numProduit", this.Numproduit);
+                cmdInsert.Parameters.AddWithValue("numTypePointe", this.LaPointe.NumTypePointe);
+                cmdInsert.Parameters.AddWithValue("numType", this.LeType.NumType);
+                cmdInsert.Parameters.AddWithValue("codeProduit", this.CodeProduit);
+                cmdInsert.Parameters.AddWithValue("prixVente", this.PrixVente);
+                cmdInsert.Parameters.AddWithValue("quantiteStock", this.QuantiteStock);
+                cmdInsert.Parameters.AddWithValue("disponible", this.Disponible);
+            }
+        }
+
+        public int Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Produit> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Produit> FindBySelection(string criteres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        int ICrud<Produit>.Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

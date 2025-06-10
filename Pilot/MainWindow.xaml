@@ -7,16 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="800"
-    Height="450"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
-    <Grid>
-        <Button
-            Margin="296,150,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="Button_Click"
-            Content="Button" />
+    Height="500"
+    mc:Ignorable="d" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Menu DockPanel.Dock="Top" Height="30" Background="#FF005CA9" Foreground="White" >
+            <MenuItem x:Name="menuConnexion" HorizontalAlignment="Center" Header="Connexion" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="White"/>
+            <MenuItem x:Name="menuAccueil" HorizontalAlignment="Center" Header="Accueil" Width="100" BorderBrush="White"/>
+            <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Width="100" BorderBrush="White" Click="menuCommande_Click"/>
+            <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Width="100" BorderBrush="White" Click="menuProduits_Click"> 
+                
+            </MenuItem>
+        </Menu>
+        <ContentControl x:Name="MainContent" />
 
-    </Grid>
+
+    </StackPanel>
 </Window>

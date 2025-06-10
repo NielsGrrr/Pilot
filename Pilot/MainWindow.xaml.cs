@@ -1,4 +1,5 @@
 ﻿using Pilot.Classes;
+using Pilot.UC;
 using Pilot.Windows;
 using System.Text;
 using System.Windows;
@@ -16,13 +17,16 @@ namespace Pilot
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    public enum Action { Modifier, Créer };
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
+
             InitializeComponent();
-            Authentification();
-            AjouterProduit();
+            //AjouterProduit();
+            //Authentification();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,6 +38,8 @@ namespace Pilot
         {
             AuthWindow authWindow = new AuthWindow();
             bool? result = authWindow.ShowDialog();
+            //A modifier
+            result = true;
             if (result == true)
             {
                 MessageBox.Show("Authentification réussie", "Authentification", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -47,9 +53,48 @@ namespace Pilot
 
         private void AjouterProduit()
         {
-            
-            WindowAjouterProduit windowAjout = new WindowAjouterProduit();
-            bool? result = windowAjout.ShowDialog();
+            Produit unProduit = new Produit();
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit);
+            bool? result = wProduit.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    unProduit.Create();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
+        {
+            Produit unProduit = new Produit();
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit);
+            bool? result = wProduit.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    unProduit.Create();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void menuCommande_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new UserControlConsulterCommandes();
+        }
+
+        private void menuProduits_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new UserControlSelectionnerProduit();
         }
     }
 }

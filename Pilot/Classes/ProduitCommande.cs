@@ -11,7 +11,6 @@ namespace Pilot.Classes
         private Commande uneCommande;
         private Produit unProduit;
         private int quantiteCommande;
-        private decimal prix;
 
         public Commande UneCommande
         {
@@ -52,16 +51,11 @@ namespace Pilot.Classes
             }
         }
 
-        public decimal Prix
+        public decimal PrixTotal
         {
             get
             {
-                return this.prix;
-            }
-
-            set
-            {
-                this.prix = value;
+                return this.unProduit.PrixVente * this.quantiteCommande;
             }
         }
     }
