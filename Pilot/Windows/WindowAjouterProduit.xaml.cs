@@ -21,14 +21,24 @@ namespace Pilot.Windows
     /// </summary>
     public partial class WindowAjouterProduit : Window
     {
-        public WindowAjouterProduit(Produit unProduit)
+        public WindowAjouterProduit(Produit unProduit, Action action)
         {
-            List<Classes.Type> lesTypes = new List<Classes.Type> { new Classes.Type(1, new Categorie(1, "Cat1"), "typ1"), new Classes.Type(2, new Categorie(1, "Cat1"), "typ2"), new Classes.Type(3, new Categorie(1, "Cat4"), "typ3") };
-            List<TypePointe> lesPointes = new List<TypePointe> { new TypePointe(1, "Fine"), new TypePointe(2, "Moyenne"), new TypePointe(3, "Large"), new TypePointe(4, "Xtra large") };
-            ObservableCollection<Classes.Type>  lesTypes2 = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
+            ObservableCollection<Classes.Type> lesTypes = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
+            ObservableCollection<TypePointe> lesPointes = new ObservableCollection<TypePointe>(new TypePointe().FindAll());
             ChargeData();
             InitializeComponent();
-            comboType.ItemsSource = lesTypes2;
+            butValider.Content = action;
+            comboType.ItemsSource = lesTypes;
+            comboPointe.ItemsSource = lesPointes;
+        }
+
+        public WindowAjouterProduit(Produit unProduit)
+        {
+            ObservableCollection<Classes.Type> lesTypes = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
+            ObservableCollection<TypePointe> lesPointes = new ObservableCollection<TypePointe>(new TypePointe().FindAll());
+            ChargeData();
+            InitializeComponent();
+            comboType.ItemsSource = lesTypes;
             comboPointe.ItemsSource = lesPointes;
         }
 
@@ -43,7 +53,13 @@ namespace Pilot.Windows
 
         private void butValider_Click(object sender, RoutedEventArgs e)
         {
+            Classes.Type leType = (Classes.Type)comboType.SelectedItem;
+            TypePointe pointe = (TypePointe)comboPointe.SelectedItem;
+            //Attention au Parse
+            Produit produit = new Produit(pointe, leType, txtCodeProduit.Text, txtNomProduit.Text, decimal.Parse(txtPrixVente.Text), int.Parse(txtQuantite.Text), (bool)checkDisponible.IsChecked);
+            produit.Create();
             DialogResult = true;
+            
         }
     }
 }

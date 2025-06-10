@@ -24,6 +24,27 @@ namespace Pilot.Classes
 
         }
 
+        public Produit(int numproduit, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
+        {
+            this.Numproduit = numproduit;
+            this.CodeProduit = codeProduit;
+            this.NomProduit = nomProduit;
+            this.PrixVente = prixVente;
+            this.QuantiteStock = quantiteStock;
+            this.Disponible = disponible;
+        }
+
+        public Produit(TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
+        {
+            this.LaPointe = laPointe;
+            this.LeType = leType;
+            this.CodeProduit = codeProduit;
+            this.NomProduit = nomProduit;
+            this.PrixVente = prixVente;
+            this.QuantiteStock = quantiteStock;
+            this.Disponible = disponible;
+        }
+
         public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
         {
             this.Numproduit = numproduit;
@@ -140,18 +161,22 @@ namespace Pilot.Classes
             }
         }
 
-        public void Create()
+        public int Create()
         {
-            using (var cmdInsert = new NpgsqlCommand("insert into produit (numProduit,numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numProduit,@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible)"))
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into produit (numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible) RETURNING numproduit"))
             {
-                cmdInsert.Parameters.AddWithValue("numProduit", this.Numproduit);
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.LaPointe.NumTypePointe);
                 cmdInsert.Parameters.AddWithValue("numType", this.LeType.NumType);
                 cmdInsert.Parameters.AddWithValue("codeProduit", this.CodeProduit);
+                cmdInsert.Parameters.AddWithValue("nomProduit", this.NomProduit);
                 cmdInsert.Parameters.AddWithValue("prixVente", this.PrixVente);
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.QuantiteStock);
                 cmdInsert.Parameters.AddWithValue("disponible", this.Disponible);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
+            this.Numproduit = nb;
+            return nb;
         }
 
         public int Delete()
@@ -161,18 +186,23 @@ namespace Pilot.Classes
 
         public List<Produit> FindAll()
         {
-            List<Produit> lesRevendeurs = new List<Produit>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from produit p JOIN typepointe tp ON p.numtypepointe=tp.numtypepointe JOIN type t ON p.numtype=t.numtype JOIN Categorie c ON t.numcategorie=c.numcategorie;"))
+            List<Produit> lesProduits = new List<Produit>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from produit pr join typepointe tp on pr.numtypepointe = tp.numtypepointe join type ty on pr.numtype = ty.numtype join categorie cat on ty.numcategorie = cat.numcategorie"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+
                 foreach (DataRow dr in dt.Rows)
                 {
-                    lesRevendeurs.Add(new Produit((Int32)dr["numproduit"], new TypePointe((int)dr["numtypepointe"], (string)dr["libelletypepointe"]),
-                        new Type((int)dr["numtype"], new Categorie((int)dr["numcategorie"], (string)dr["libellecategorie"]), (string)dr["libelletype"]),
-                        (string)dr["codeproduit"], (string)dr["nomproduit"], (decimal)dr["prixvente"], (int)dr["quantitestock"], (bool)dr["disponible"]));
+                    Produit pro = new Produit((Int32)dr["numproduit"], (String)dr["codeproduit"], (String)dr["nomproduit"], (decimal)dr["prixvente"], (Int32)dr["quantitestock"], (bool)dr["disponible"]);
+                    TypePointe pointe = new TypePointe((Int32)dr["numtypepointe"], (String)dr["libelletypepointe"]);
+                    pro.LaPointe = pointe;
+                    Categorie cat = new Categorie((Int32)dr["numcategorie"], (String)dr["libellecategorie"]);
+                    Type type = new Type((Int32)dr["numtype"], cat, (String)dr["libelletype"]);
+                    pro.leType = type;
+                    lesProduits.Add(pro);
                 }
             }
-            return lesRevendeurs;
+            return lesProduits;
         }
 
         public List<Produit> FindBySelection(string criteres)

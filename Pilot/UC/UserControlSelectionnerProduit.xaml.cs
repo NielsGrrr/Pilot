@@ -2,6 +2,7 @@
 using Pilot.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,11 @@ namespace Pilot.UC
     /// </summary>
     public partial class UserControlSelectionnerProduit : UserControl
     {
+        public ObservableCollection<Produit> LesProduits { get; set; }
+
         public UserControlSelectionnerProduit()
         {
+            ChargeData();
             InitializeComponent();
         }
 
@@ -50,6 +54,21 @@ namespace Pilot.UC
                         MessageBox.Show("Le produit n'a pas pu être ajouté à la commande.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+            }
+        }
+
+        private void ChargeData()
+        {
+            try
+            {
+                LesProduits = new ObservableCollection<Produit>(new Produit().FindAll());
+                this.DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
+                LogError.Log(ex, "Erreur SQL");
+                Application.Current.Shutdown();
             }
         }
     }
