@@ -10,19 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Pilot.Windows
 {
     /// <summary>
-    /// Logique d'interaction pour PageRevendeur.xaml
+    /// Logique d'interaction pour RevendeurWindow.xaml
     /// </summary>
-    public partial class PageRevendeur : Page
+    public partial class RevendeurWindow : Window
     {
-        public PageRevendeur()
+        public RevendeurWindow()
         {
             InitializeComponent();
+            if (true)
+            {
+
+            }
         }
     }
 }

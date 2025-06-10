@@ -8,13 +8,15 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d" WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
         <Button
             Margin="296,150,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Button" Click="Button_Click" />
+            Click="Button_Click"
+            Content="Button" />
 
     </Grid>
 </Window>
