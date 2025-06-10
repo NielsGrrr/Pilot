@@ -27,20 +27,30 @@
                         <TextBox Text="{Binding DateCommande}"/>
                         <Label Content="Poids" />
                         <TextBox Text="{Binding DateLivraison}"/>
+                        <Label Content="Prix total"/>
+                        <TextBox Text="{Binding PrixFinal, StringFormat=C}"/>
                     </StackPanel>
                 </GroupBox>
+                <GroupBox Margin="50,20,50,0" Header="Produits">
+                    <DataGrid>
+                        <DataGridTextColumn Width="*" Header="Code Produit" Binding="{Binding CodeProduit, ValidatesOnExceptions=true}"/>
+                        <DataGridTextColumn Width="*" Header="Ville" Binding="{Binding AdresseVille, ValidatesOnExceptions=true}"/>
+                        <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseRue, ValidatesOnExceptions=true}"/>
+                        <DataGridTextColumn Width="*" Header="Code postal" Binding="{Binding AdresseCP, ValidatesOnExceptions=true}"/>
+                    </DataGrid>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
                 <GroupBox Margin="50,20,50,0" Header="Employe">
-                    <StackPanel DataContext="{Binding SelectedItem.UnChien, ElementName=dgSejours}">
+                    <StackPanel DataContext="{Binding Commande.Employe}">
                         <Label Content="Nom" />
                         <TextBox Text="{Binding Nom}"/>
                         <Label Content="Prénom" />
                         <TextBox Text="{Binding Prenom}"/>
                     </StackPanel>
                 </GroupBox>
-            </StackPanel>
-            <StackPanel Grid.Column="1">
-                <GroupBox Margin="50,50,50,0" Header="Chien">
-                    <StackPanel DataContext="{Binding SelectedItem.UnChien, ElementName=dgSejours}">
+                <GroupBox Margin="50,50,50,0" Header="Revendeur">
+                    <StackPanel DataContext="{Binding SelectedItem.UnChien}">
                         <Label Content="Nom" />
                         <TextBox Text="{Binding Nom}"/>
                         <Label Content="Maitre" />
