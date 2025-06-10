@@ -9,8 +9,8 @@
     <StackPanel>
         <Label Content="Liste des revendeurs" Background="#FF005CA9" Foreground="White" HorizontalContentAlignment="Center" FontWeight="DemiBold"/>
         <StackPanel Margin="0,20,0,20">
-            <TextBox x:Name="tbMotClefCommande" TextWrapping="Wrap" Text="" Width="120" TextChanged="tbMotClefCommande_TextChanged"/>
-            <DataGrid x:Name="dgRevendeur" Height="270" Margin="20,20,20,0" >
+            <TextBox x:Name="tbMotClefCommande" TextWrapping="Wrap" Text="" Width="120" />
+            <DataGrid x:Name="dgRevendeur" Height="270" Margin="20,20,20,0" ItemsSource="{Binding LesRevendeurs}" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#FF005CA9" />
@@ -20,18 +20,18 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Raison Sociale"/>
-                    <DataGridCheckBoxColumn Width="*" Header="Ville" />
-                    <DataGridTextColumn Width="*" Header="Adresse" />
-                    <DataGridCheckBoxColumn Width="*" Header="Code postal" />
-                    <DataGridTextColumn Width="*" Header="Actions" />
+                    <DataGridTextColumn Width="*" Header="Raison Sociale" Binding="{Binding RaisonSociale, ValidatesOnExceptions=true}"/>
+                    <DataGridTextColumn Width="*" Header="Ville" Binding="{Binding AdresseVille, ValidatesOnExceptions=true}"/>
+                    <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseRue, ValidatesOnExceptions=true}"/>
+                    <DataGridTextColumn Width="*" Header="Code postal" Binding="{Binding AdresseCP, ValidatesOnExceptions=true}"/>
+                    <DataGridTextColumn Width="*" Header="Actions"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="butAjouterCommande" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0" Click="butAjouterCommande_Click"/>
-                <Button x:Name="butModifierCommande" Width="30" Height="30" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" ToolTip="Modifier" Background="#FF005CA9" Foreground="White" Margin="20,0,20,0" Click="butModifierCommande_Click"/>
-                <Button x:Name="butSupprimerCommande" Width="30" Height="30" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0" Click="butSupprimerCommande_Click"/>
-                <Button x:Name="butDetailCommande" Width="30" Height="30" Content="&#xE7B3;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>
+                <Button x:Name="butAjouterRevendeur" Width="30" Height="30" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" ToolTip="Ajouter" Background="#FF005CA9" Foreground="White" Margin="20,0,0,0"/>
+                <Button x:Name="butModifierRevendeur" Width="30" Height="30" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" ToolTip="Modifier" Background="#FF005CA9" Foreground="White" Margin="20,0,20,0"/>
+                <Button x:Name="butSupprimerRevendeur" Width="30" Height="30" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>
+                <Button x:Name="butDetailRevendeur" Width="30" Height="30" Content="&#xE7B3;" FontFamily="Segoe MDL2 Assets" ToolTip="Supprimer" Background="#FF005CA9" Foreground="White" Margin="0,0,20,0"/>
             </StackPanel>
         </StackPanel>
 

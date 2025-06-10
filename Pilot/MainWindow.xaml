@@ -14,9 +14,8 @@
             <MenuItem x:Name="menuConnexion" HorizontalAlignment="Center" Header="Connexion" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="White"/>
             <MenuItem x:Name="menuAccueil" HorizontalAlignment="Center" Header="Accueil" Width="100" BorderBrush="White"/>
             <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Width="100" BorderBrush="White" Click="menuCommande_Click"/>
-            <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Width="100" BorderBrush="White" Click="menuProduits_Click"> 
-                
-            </MenuItem>
+            <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Width="100" BorderBrush="White" Click="menuProduits_Click"/>
+            <MenuItem x:Name="menuRevendeurs" HorizontalAlignment="Center" Header="Revendeurs" Width="100" BorderBrush="White" Click="menuRevendeurs_Click"/>
         </Menu>
         <ContentControl x:Name="MainContent" />
 

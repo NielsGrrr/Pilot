@@ -9,36 +9,39 @@
     Width="400"
     Height="500"
     mc:Ignorable="d">
-    <StackPanel Margin="50,50,50,0">
-        <Label Content="Forme juridique" />
-        <ComboBox>
-            <ComboBoxItem x:Name="itemAucune" Content="Aucune" />
-            <ComboBoxItem x:Name="itemEI" Content="EI" />
-            <ComboBoxItem x:Name="itemSARL" Content="SARL" />
-            <ComboBoxItem x:Name="itemSAS" Content="SAS" />
-            <ComboBoxItem x:Name="itemSA" Content="SA" />
-            <ComboBoxItem x:Name="itemSASU" Content="SASU" />
-            <ComboBoxItem x:Name="itemGIE" Content="GIE" />
-            <ComboBoxItem x:Name="itemSCOP" Content="SCOP" />
-        </ComboBox>
-        <Label Content="Nom du revendeur" />
-        <TextBox />
-        <Label Content="Adresse" />
-        <TextBox />
-        <Label Content="Ville" />
-        <TextBox />
-        <Label Content="Code Postal" />
-        <TextBox />
-        <Label />
-        <Button x:Name="but" Background="#FF005CA9" Content="Ajouter" Foreground="White" BorderBrush="White" IsDefault="True" Width="100" Height="20">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+    <StackPanel>
+        <Label Content="Ajouter un revendeur" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
+        <StackPanel Margin="50,50,50,0">
+            <Label Content="Forme juridique" />
+            <ComboBox>
+                <ComboBoxItem x:Name="itemAucune" Content="Aucune" />
+                <ComboBoxItem x:Name="itemEI" Content="EI" />
+                <ComboBoxItem x:Name="itemSARL" Content="SARL" />
+                <ComboBoxItem x:Name="itemSAS" Content="SAS" />
+                <ComboBoxItem x:Name="itemSA" Content="SA" />
+                <ComboBoxItem x:Name="itemSASU" Content="SASU" />
+                <ComboBoxItem x:Name="itemGIE" Content="GIE" />
+                <ComboBoxItem x:Name="itemSCOP" Content="SCOP" />
+            </ComboBox>
+            <Label Content="Nom du revendeur" />
+            <TextBox />
+            <Label Content="Adresse" />
+            <TextBox />
+            <Label Content="Ville" />
+            <TextBox />
+            <Label Content="Code Postal" />
+            <TextBox />
+            <Label />
+            <Button x:Name="but" Background="#FF005CA9" Content="Ajouter" Foreground="White" BorderBrush="White" IsDefault="True" Width="100" Height="20">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
                     BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" SnapsToDevicePixels="True">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
     </StackPanel>
 </Window>

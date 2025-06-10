@@ -110,5 +110,10 @@ namespace Pilot.UC
                 }
             }
         }
+
+        private void butDetailCommande_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -96,5 +96,10 @@ namespace Pilot
         {
             MainContent.Content = new UserControlSelectionnerProduit();
         }
+
+        private void menuRevendeurs_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new UserControlRechercheRevendeur();
+        }
     }
 }

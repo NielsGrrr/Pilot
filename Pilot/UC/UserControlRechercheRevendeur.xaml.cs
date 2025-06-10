@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Pilot.Classes;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,25 @@ namespace Pilot.UC
     /// </summary>
     public partial class UserControlRechercheRevendeur : UserControl
     {
+        public ObservableCollection<Revendeur> LesRevendeurs { get; set; }
         public UserControlRechercheRevendeur()
         {
+            ChargeData();
             InitializeComponent();
+        }
+        public void ChargeData()
+        {
+            try
+            {
+                LesRevendeurs = new ObservableCollection<Revendeur>(new Revendeur().FindAll());
+                this.DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
+                LogError.Log(ex, "Erreur SQL");
+                Application.Current.Shutdown();
+            }
         }
     }
 }

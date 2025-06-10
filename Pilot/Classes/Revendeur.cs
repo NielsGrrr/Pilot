@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
-    public class Revendeur : ICrud<Revendeur>
+    public class Revendeur : ICrud<Revendeur>, INotifyPropertyChanged
     {
         private Int32 numRevendeur;
         private string raisonSociale;
@@ -94,6 +95,8 @@ namespace Pilot.Classes
             }
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int Create()
         {
             int nb = 0;
@@ -111,7 +114,11 @@ namespace Pilot.Classes
 
         public int Delete()
         {
-            throw new NotImplementedException();
+            using (var cmdUpdate = new NpgsqlCommand("delete from revendeur where numrevendeur =@numrevendeur;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numrevendeur", this.NumRevendeur);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
         }
 
         public List<Revendeur> FindAll()
