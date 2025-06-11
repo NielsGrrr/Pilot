@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pilot.Windows"
         mc:Ignorable="d"
-        Title="WindowCommande" Height="450" Width="300">
+        Title="WindowCommande" Height="550" Width="300">
     <StackPanel>
         
     
         <Label Content="Créer une nouvelle commande" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35"/>
         <StackPanel Margin="20">
-        
+
             <StackPanel>
-                <Label Content="Revendeur*"/>
-                <DataGrid Height="100">
+                <Label Content="Employe*"/>
+                <DataGrid x:Name="dgEmploye" Height="100" ItemsSource="{Binding LesEmployes}" AutoGenerateColumns="False">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="#FF005CA9" />
@@ -23,11 +23,28 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="*" Header="Nom"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding Nom}" Header="Nom"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding Role}" Header="Adresse"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </StackPanel>
+            <StackPanel>
+                
+                <Label Content="Revendeur*"/>
+                <DataGrid x:Name="dgRevendeurs" Height="100" ItemsSource="{Binding LesRevendeurs}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF005CA9" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding }" Header="Nom"/>
                         <DataGridTextColumn Width="*" Header="Adresse"/>
                         <DataGridTextColumn Width="*" Header="Téléphone"/>
                     </DataGrid.Columns>
-
                 </DataGrid>
                 <Button Content="Ajouter un revendeur" Background="#FF005CA9" Foreground="White" Margin="0,5,0,0"/>
             </StackPanel>
@@ -37,9 +54,9 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Date de livraison"/>
-                <TextBox TextWrapping="Wrap" Text="" Margin="40,0,0,0" Width="70"/>
+                <TextBox x:Name="txtDateLivraison" TextWrapping="Wrap" Text="" Margin="40,0,0,0" Width="70"/>
             </StackPanel>
-            <Button x:Name="butValiderCommande" Content="Valider la commande" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0" Height="30"/>
+            <Button x:Name="butValiderCommande" Content="Valider la commande" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0" Height="30" Click="butValiderCommande_Click"/>
         </StackPanel>
     </StackPanel>
 </Window>

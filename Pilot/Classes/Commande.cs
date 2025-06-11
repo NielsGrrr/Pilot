@@ -54,6 +54,14 @@ namespace Pilot.Classes
             this.DateLivraison = dateLivraison;
         }
 
+        public Commande(Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison)
+        {
+            this.Employe = employe;
+            this.UnTransport = unTransport;
+            this.UnRevendeur = unRevendeur;
+            this.DateLivraison = dateLivraison;
+        }
+
         public int NumCommande
         {
             get
@@ -157,17 +165,20 @@ namespace Pilot.Classes
             }
         }
 
-        public void Create()
+        public int Create()
         {
-            using (var cmdInsert = new NpgsqlCommand("insert into commande (numCommande,numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numCommande,@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison)"))
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into commande (numCommande,numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numCommande,@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison) Returning numcommande"))
             {
-                cmdInsert.Parameters.AddWithValue("numProduit", this.NumCommande);
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.Employe.NumEmploye);
                 cmdInsert.Parameters.AddWithValue("numType", this.UnTransport.NumTransport);
                 cmdInsert.Parameters.AddWithValue("codeProduit", this.UnRevendeur.NumRevendeur);
-                cmdInsert.Parameters.AddWithValue("", this.DateCommande);
+                cmdInsert.Parameters.AddWithValue("dateCommande", this.DateCommande);
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.DateLivraison);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
+            this.NumCommande = nb;
+            return nb;
         }
 
         public int Delete()
