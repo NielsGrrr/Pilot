@@ -153,14 +153,14 @@ namespace Pilot.Classes
 
         public int Update()
         {
-            using (var cmdInsert = new NpgsqlCommand("update revendeur set raisonsociale=@raisonsociale, adresserue=@adresserue, adressecp=@adressecp, adresseville=@adresseville WHERE numrevendeur=@numrevendeur;"))
+            using (var cmdUpdate = new NpgsqlCommand("update revendeur set raisonsociale=@raisonsociale, adresserue=@adresserue, adressecp=@adressecp, adresseville=@adresseville WHERE numrevendeur=@numrevendeur;"))
             {
-                cmdInsert.Parameters.AddWithValue("raisonsociale", this.RaisonSociale);
-                cmdInsert.Parameters.AddWithValue("adresserue", this.AdresseRue);
-                cmdInsert.Parameters.AddWithValue("adressecp", this.AdresseCP);
-                cmdInsert.Parameters.AddWithValue("adresseville", this.AdresseVille);
-                cmdInsert.Parameters.AddWithValue("numRevendeur",this.NumRevendeur);
-                return DataAccess.Instance.ExecuteInsert(cmdInsert);
+                cmdUpdate.Parameters.AddWithValue("raisonsociale", this.RaisonSociale);
+                cmdUpdate.Parameters.AddWithValue("adresserue", this.AdresseRue);
+                cmdUpdate.Parameters.AddWithValue("adressecp", this.AdresseCP);
+                cmdUpdate.Parameters.AddWithValue("adresseville", this.AdresseVille);
+                cmdUpdate.Parameters.AddWithValue("numRevendeur",this.NumRevendeur);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }
     }

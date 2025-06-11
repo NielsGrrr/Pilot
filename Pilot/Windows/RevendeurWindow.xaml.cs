@@ -20,20 +20,33 @@ namespace Pilot.Windows
     /// </summary>
     public partial class RevendeurWindow : Window
     {
-        public RevendeurWindow()
+        public RevendeurWindow(Revendeur copie, Action action)
         {
+            this.DataContext = copie;
             InitializeComponent();
-            if (true)
-            {
-
-            }
+            but.Content = action.ToString();
         }
-
         private void but_Click(object sender, RoutedEventArgs e)
         {
-            Revendeur revendeur = new Revendeur(((ComboBoxItem)cmbFormeJuridique.SelectedItem).Content.ToString() + " " + txtNomRevendeur.Text, txtAdresse.Text, txtCodePostal.Text, txtVille.Text);
-            revendeur.Create();
-            DialogResult = true;
+            //Revendeur revendeur = new Revendeur(((ComboBoxItem)cmbFormeJuridique.SelectedItem).Content.ToString() + " " + txtNomRevendeur.Text, txtAdresse.Text, txtCodePostal.Text, txtVille.Text);
+            //revendeur.Create();
+            //DialogResult = true;
+            bool ok = true;
+            foreach (UIElement uie in panelFormRevendeur.Children)
+            {
+                if (uie is TextBox)
+                {
+                    TextBox txt = (TextBox)uie;
+                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
+                else if (uie is ComboBox)
+                {
+
+                }
+                if (Validation.GetHasError(uie))
+                    ok = false;
+            }
+            DialogResult = ok;
         }
     }
 }

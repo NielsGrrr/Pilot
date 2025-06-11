@@ -46,8 +46,50 @@ namespace Pilot.UC
 
         private void butAjouterRevendeur_Click(object sender, RoutedEventArgs e)
         {
-            RevendeurWindow revendeurWindow = new RevendeurWindow();
+            Revendeur revendeur = new Revendeur();
+            RevendeurWindow revendeurWindow = new RevendeurWindow(revendeur, Action.Créer);
             bool? result = revendeurWindow.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    revendeur.NumRevendeur = revendeur.Create();
+                    LesRevendeurs.Add(revendeur);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le revendeur n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void butModifierRevendeur_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgRevendeur.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un chien", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Revendeur revendeurSelectionne = (Revendeur)dgRevendeur.SelectedItem;
+                Revendeur copie = new Revendeur(revendeurSelectionne.NumRevendeur, revendeurSelectionne.RaisonSociale, revendeurSelectionne.AdresseRue, revendeurSelectionne.AdresseCP, revendeurSelectionne.AdresseVille);
+                RevendeurWindow wBox = new RevendeurWindow(copie, Action.Modifier);
+                bool? result = wBox.ShowDialog();
+                if (result == true)
+                {
+                    try
+                    {
+                        revendeurSelectionne.RaisonSociale = copie.RaisonSociale;
+                        revendeurSelectionne.AdresseRue = copie.AdresseRue;
+                        revendeurSelectionne.AdresseVille = copie.AdresseVille;
+                        revendeurSelectionne.AdresseCP = copie.AdresseCP;
+                        revendeurSelectionne.Update();
+                        dgRevendeur.Items.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Le revendeur n'a pas pu être modifié.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
     }
 }
