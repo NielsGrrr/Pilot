@@ -65,5 +65,24 @@ namespace Pilot.UC
                 }
             }
         }
+
+        private void butSupprimerProduit_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgProduits.SelectedItem ==  null)
+                MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Produit produitASupprimer = (Produit)dgProduits.SelectedItem;
+                Produit copie = new Produit(produitASupprimer.Numproduit, produitASupprimer.LaPointe, produitASupprimer.LeType, produitASupprimer.CodeProduit, produitASupprimer.NomProduit, produitASupprimer.PrixVente, produitASupprimer.QuantiteStock, produitASupprimer.Disponible);
+                try
+                {
+                    produitASupprimer.Delete();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show( "Le produit n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

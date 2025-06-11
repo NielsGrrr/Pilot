@@ -102,7 +102,7 @@
         Content="&#xE74D;"
         FontFamily="Segoe MDL2 Assets"
         Foreground="White"
-        ToolTip="Supprimer" />
+        ToolTip="Supprimer" Click="butSupprimerProduit_Click" />
                 <Button
         x:Name="butDetailProduit"
         Width="30"

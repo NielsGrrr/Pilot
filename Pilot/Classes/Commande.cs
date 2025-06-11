@@ -172,7 +172,7 @@ namespace Pilot.Classes
 
         public int Delete()
         {
-            using (var cmdUpdate = new NpgsqlCommand("delete from commande  where numcommande =@numcommande;"))
+            using (var cmdUpdate = new NpgsqlCommand("delete from produitcommande  where numcommande =@numcommande; delete from commande  where numcommande =@numcommande;"))
             {
                 cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
