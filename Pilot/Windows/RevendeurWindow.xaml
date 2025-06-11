@@ -6,31 +6,21 @@
     xmlns:local="clr-namespace:Pilot.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="RevendeurWindow"
-    Width="400"
-    Height="500"
+    Width="350"
+    Height="400"
     mc:Ignorable="d">
     <StackPanel>
         <Label Content="Ajouter un revendeur" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
-        <StackPanel Margin="50,50,50,0">
-            <Label Content="Forme juridique" />
-            <ComboBox x:Name="cmbFormeJuridique">
-                <ComboBoxItem x:Name="itemAucune" Content="Aucune" />
-                <ComboBoxItem x:Name="itemEI" Content="EI" />
-                <ComboBoxItem x:Name="itemSARL" Content="SARL" />
-                <ComboBoxItem x:Name="itemSAS" Content="SAS" />
-                <ComboBoxItem x:Name="itemSA" Content="SA" />
-                <ComboBoxItem x:Name="itemSASU" Content="SASU" />
-                <ComboBoxItem x:Name="itemGIE" Content="GIE" />
-                <ComboBoxItem x:Name="itemSCOP" Content="SCOP" />
-            </ComboBox>
-            <Label Content="Nom du revendeur" />
-            <TextBox x:Name="txtNomRevendeur" />
-            <Label Content="Adresse" />
-            <TextBox x:Name="txtAdresse" />
-            <Label  Content="Ville" />
-            <TextBox x:Name="txtVille"/>
-            <Label Content="Code Postal" />
-            <TextBox x:Name="txtCodePostal" />
+        <StackPanel x:Name="panelFormRevendeur" Margin="50,50,50,0">
+           
+            <Label Content="Raison sociale*" />
+            <TextBox x:Name="txtNomRevendeur" Text="{Binding RaisonSociale, ValidatesOnExceptions=True}"/>
+            <Label Content="Adresse*" />
+            <TextBox x:Name="txtAdresse" Text="{Binding AdresseRue, ValidatesOnExceptions=True}"/>
+            <Label  Content="Ville*" />
+            <TextBox x:Name="txtVille" Text="{Binding AdresseVille, ValidatesOnExceptions=True}"/>
+            <Label Content="Code Postal*" />
+            <TextBox x:Name="txtCodePostal" Text="{Binding AdresseCP, ValidatesOnExceptions=True}"/>
             <Label />
             <Button x:Name="but" Background="#FF005CA9" Content="Ajouter" Foreground="White" BorderBrush="White" IsDefault="True" Width="100" Height="20" Click="but_Click">
                 <Button.Template>
