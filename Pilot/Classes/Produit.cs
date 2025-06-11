@@ -181,7 +181,11 @@ namespace Pilot.Classes
 
         public int Delete()
         {
-            throw new NotImplementedException();
+            using (var cmdDelete = new NpgsqlCommand("delete from produit where numproduit = @numproduit ;"))
+            {
+                cmdDelete.Parameters.AddWithValue("numproduit", this.Numproduit);
+                return DataAccess.Instance.ExecuteSet(cmdDelete);
+            }
         }
 
         public List<Produit> FindAll()

@@ -124,7 +124,8 @@ namespace Pilot.UC
                 try
                 {
                     commandeSelectionnee.Delete();
-                }catch(Exception ex)
+                }
+                catch(Exception ex)
                 {
                     MessageBox.Show("La commande n'a pas pu être supprimée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
