@@ -32,7 +32,7 @@
             <StackPanel>
                 
                 <Label Content="Revendeur*"/>
-                <DataGrid x:Name="dgRevendeurs" Height="100" ItemsSource="{Binding LesRevendeurs}">
+                <DataGrid x:Name="dgRevendeurs" Height="100" ItemsSource="{Binding LesRevendeurs}" AutoGenerateColumns="False">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="#FF005CA9" />
@@ -41,9 +41,9 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="*" Binding="{Binding }" Header="Nom"/>
-                        <DataGridTextColumn Width="*" Header="Adresse"/>
-                        <DataGridTextColumn Width="*" Header="Téléphone"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding RaisonSociale}" Header="Nom"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding AdresseRue}" Header="Adresse"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding AdresseCP}" Header="Code postal"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Ajouter un revendeur" Background="#FF005CA9" Foreground="White" Margin="0,5,0,0"/>
