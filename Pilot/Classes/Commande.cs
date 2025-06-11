@@ -23,12 +23,12 @@ namespace Pilot.Classes
         {
         }
 
-        public Commande(int numCommande, DateTime dateCommande, DateTime dateLivraison, Dictionary<Produit, int> produits_quantites)
+        public Commande(int numCommande, Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison, Dictionary<Produit, int> produits_quantites)
         {
             this.NumCommande = numCommande;
-            this.Employe = new Employe();
-            this.UnTransport = new ModeTransport();
-            this.UnRevendeur = new Revendeur();
+            this.Employe = employe;
+            this.UnTransport = unTransport;
+            this.UnRevendeur = unRevendeur;
             this.DateCommande = dateCommande;
             this.DateLivraison = dateLivraison;
             this.PRODUITS_QUANTITES = produits_quantites;
