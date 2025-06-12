@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\brand-logo.png" />
     <None Remove="img\logo-blanc.png" />
     <None Remove="img\logo-bleu.png" />
   </ItemGroup>
@@ -33,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\brand-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\logo-blanc.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

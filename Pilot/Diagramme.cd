@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Pilot.Classes.Categorie" Collapsed="true">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAABAAAAAAAAAAAAAAAAAAAAAIAAAAEAAAAA=</HashCode>
+      <FileName>Classes\Categorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pilot.Classes.Commande" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQIAAARAEAAEABAACIYCAAiCAEAQEgAAAEAACCAAAA=</HashCode>
+      <FileName>Classes\Commande.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.Couleur" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAEAAAAEAAAAAAAAQCAAgAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Couleur.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.DataAccess" Collapsed="true">
+    <Position X="5.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAgAAQABIREAAAFAABACQAgAAhAAAAA=</HashCode>
+      <FileName>Classes\DataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pilot.Classes.Employe" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAACAAAAEAAQKBAgACECIEACACAQAgAAEAA=</HashCode>
+      <FileName>Classes\Employe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.LogError" Collapsed="true">
+    <Position X="7.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\LogError.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pilot.Classes.ModeTransport" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAKAAAAAAAAAAQCAAgAAEACEAAAAAIAAAAAAA=</HashCode>
+      <FileName>Classes\ModeTransport.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.Produit" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AZSAAAAAgAAAApgARACQCEQggAEEgEAABAAQAAEQEAA=</HashCode>
+      <FileName>Classes\Produit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.Revendeur" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAEAAAAAACAgAQCgAgkAEAAEGAAAABgAAAAAA=</HashCode>
+      <FileName>Classes\Revendeur.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.Type" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAAAAAAAAAAAAQCAAgAAEAAEACAAAEAQAABAE=</HashCode>
+      <FileName>Classes\Type.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pilot.Classes.TypePointe" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAQCAAgAAEAAEgAAAAIAAACAAA=</HashCode>
+      <FileName>Classes\TypePointe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Pilot.Classes.ICrud&lt;T&gt;">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAQCAAgAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ICrud.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Pilot.Classes.RoleEmploye" Collapsed="true">
+    <Position X="7.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Employe.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
