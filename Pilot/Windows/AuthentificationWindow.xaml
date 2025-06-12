@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pilot.Windows"
         mc:Ignorable="d"
-        Title="AuthentificationWindow" Height="400" Width="400">
+        Title="AuthentificationWindow" Height="400" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Image Source="/img/logo-bleu.png" Margin="10,10,290,347"/>
-        <StackPanel Margin="100,70,100,50">
+        
+        <StackPanel Margin="100,25,100,50">
+            <Image Source="/img/logo-bleu.png"/>
             <Label Content="Nom d'utilisateur" Margin="0,20,0,0"/>
             <TextBox x:Name="txtUtil" TextWrapping="Wrap"/>
             <Label Content="Mot de passe" Margin="0,20,0,0"/>
             <PasswordBox x:Name="txtMdp"/>
-            <Label x:Name="labMsg" Content="" Foreground="#FFFB0000" Margin="0,10,0,0"/>
+            <Label x:Name="labMsg" Content="" Foreground="#FFFB0000" Margin="0,10,0,0" FontSize="9"/>
             <Button x:Name="butConnexion" Content="Connexion" Margin="0,10,0,0" Background="#FF005CA9" Foreground="White" BorderBrush="Transparent"
                 Click="butConnexion_Click" IsDefault="True" Width="100" Height="20">
             </Button>
-
         </StackPanel>
+        
     </Grid>
 </Window>

@@ -69,6 +69,7 @@ namespace Pilot.Windows
                 // Ajouter la commande à la liste des commandes
                 uneCommande.NumCommande = uneCommande.Create();
                 MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                LesCommandes.Add(uneCommande);
             }
             catch (Exception ex)
             {

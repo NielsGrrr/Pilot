@@ -24,6 +24,7 @@ namespace Pilot.Windows
         public RoleEmploye Role { get; set; }
         public AuthentificationWindow()
         {
+            DataAccess.Admin = true;
             ChargeData();
             InitializeComponent();
         }
@@ -44,18 +45,26 @@ namespace Pilot.Windows
 
         private void butConnexion_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Employe emp = LesEmployes.Find(x => x.Login == txtUtil.Text && x.Password == txtMdp.Password);
-            if (emp is null)
+            DataAccess.Username = txtUtil.Text;
+            DataAccess.Password = txtMdp.Password;
+            DataAccess.Admin = false;
+            try
+            {
+                Employe emp = LesEmployes.Find(x => x.Login == txtUtil.Text);
+                if (emp is null || DataAccess.Instance.GetConnection().State == System.Data.ConnectionState.Closed || DataAccess.Instance.GetConnection().State == System.Data.ConnectionState.Broken)
+                {
+                    labMsg.Content = "Nom d'utilisateur ou mot de passe incorrect";
+                }
+                else
+                {
+                    Role = emp.Role;
+                    DialogResult = true;
+                }
+            }
+            catch (Exception ex)
             {
                 labMsg.Content = "Nom d'utilisateur ou mot de passe incorrect";
             }
-            else
-            {
-                Role = emp.Role;
-                DialogResult = true;
-            }
-
         }
     }
 }

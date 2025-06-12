@@ -18,8 +18,6 @@ namespace Pilot.Classes
         private Revendeur unRevendeur;
         private DateTime dateCommande;
         private DateTime dateLivraison;
-        private ObservableCollection<Produit> lesProduits = new ObservableCollection<Produit>();
-        private List<int> lesQuantites = new List<int>();
         private Dictionary<Produit, int> produitsQuantites;
 
         public Commande()
@@ -164,19 +162,6 @@ namespace Pilot.Classes
             }
         }
 
-        public ObservableCollection<Produit> LesProduits
-        {
-            get
-            {
-                return this.lesProduits;
-            }
-
-            set
-            {
-                this.lesProduits = value;
-            }
-        }
-
         public int Create()
         {
             int nb = 0;
@@ -214,7 +199,6 @@ namespace Pilot.Classes
                 foreach (DataRow dr in dt.Rows)
                 {
                     Dictionary<Produit, int> dict = new Dictionary<Produit, int>();
-                    Produit produit = new Produit();
                     Employe employe = new Employe((Int32)dr["numemploye"], (string)dr["nom"], (string)dr["prenom"], (string)dr["password"], (string)dr["login"]);
                     Commande com = new Commande((Int32)dr["numcommande"], (DateTime)dr["datecommande"]);
                     Revendeur rev = new Revendeur((Int32)dr["numrevendeur"], (String)dr["raisonsociale"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]);
@@ -228,9 +212,7 @@ namespace Pilot.Classes
                         DataTable dt2 = DataAccess.Instance.ExecuteSelect(cmdSelect2);
                         foreach(DataRow dr2 in dt2.Rows)
                         {
-                            produit = tousLesProduits.Find(x => x.Numproduit == (int)dr2["numproduit"]);
-                            com.LesProduits.Add(produit);
-                            dict.Add(produit, (int)dr2["quantitecommande"]);
+                            dict.Add(tousLesProduits.Find(x => x.Numproduit == (int)dr2["numproduit"]), (int)dr2["quantitecommande"]);
                         }
                     }
                     com.ProduitsQuantites = dict;

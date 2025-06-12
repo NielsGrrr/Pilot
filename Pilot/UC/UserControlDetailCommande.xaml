@@ -31,26 +31,19 @@
                         <TextBox Text="{Binding PrixFinal, StringFormat=C, Mode=OneWay}" IsEnabled="False"/>
                     </StackPanel>
                 </GroupBox>
-                
-                <DataGrid Margin="10,10,10,0" ItemsSource="{Binding LesProduits}" AutoGenerateColumns="False">
-                    <DataGrid.Resources>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Background" Value="#FF005CA9" />
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="Height" Value="20" />
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="*" Binding="{Binding CodeProduit, ValidatesOnExceptions=true}" Header="Code" />
-                        <DataGridTextColumn Width="*" Binding="{Binding LaPointe.LibelleTypePointe, ValidatesOnExceptions=true}" Header="Pointe"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding LeType.LibelleType, ValidatesOnExceptions=true}" Header="Type"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding LeType.LaCategorie.LibelleCategorie, ValidatesOnExceptions=true}" Header="Categorie"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding PrixVente, ValidatesOnExceptions=true}" Header="Prix"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding Quantite, ValidatesOnExceptions=true}" Header="Quantite"/>
-                    </DataGrid.Columns>
-                    
-                </DataGrid>
+
+                <ListView ItemsSource="{Binding ProduitsQuantites}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Key.CodeProduit}" />
+                            <GridViewColumn Header="Pointe" DisplayMemberBinding="{Binding Key.LaPointe.LibelleTypePointe}" />
+                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Key.LeType.LibelleType}" />
+                            <GridViewColumn Header="Catégorie" DisplayMemberBinding="{Binding Key.LeType.LaCategorie.LibelleCategorie}" />
+                            <GridViewColumn Header="Prix" DisplayMemberBinding="{Binding Key.PrixVente}" />
+                            <GridViewColumn Header="Quantité" DisplayMemberBinding="{Binding Value}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <GroupBox Margin="50,10,50,0" Header="Employe">

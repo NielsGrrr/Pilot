@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\logo-blanc.png" />
+    <None Remove="img\logo-bleu.png" />
+    <None Remove="Windows\logo-bleu.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Npgsql" Version="9.0.3" />
   </ItemGroup>
 
@@ -28,7 +34,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="img\" />
+    <Resource Include="img\logo-blanc.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\logo-bleu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Windows\logo-bleu.png" />
   </ItemGroup>
 
 </Project>

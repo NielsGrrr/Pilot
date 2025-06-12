@@ -10,21 +10,72 @@ namespace Pilot.Classes
 {
     public class DataAccess
     {
-        private static readonly DataAccess instance = new DataAccess();
+        private static bool admin;
+        private static string username, password;
+        private static DataAccess instance;
         private readonly string connectionString = "Host=srv-peda-new;Port=5433;Username=stiefvan;Password=dGAxKU;Database=pilot_41;Options='-c search_path=sae'";
         private NpgsqlConnection connection;
         public static DataAccess Instance
         {
             get
             {
+                if (instance != null)
+                    instance.CloseConnection();
+                if (Admin)
+                {
+                    instance = new DataAccess();
+                }
+                else
+                {
+                    instance = new DataAccess(Username, Password);
+                }
                 return instance;
+            }
+        }
+
+        public static bool Admin
+        {
+            get
+            {
+                return admin;
+            }
+
+            set
+            {
+                admin = value;
+            }
+        }
+
+        public static string Username
+        {
+            get
+            {
+                return username;
+            }
+
+            set
+            {
+                username = value;
+            }
+        }
+
+        public static string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
             }
         }
 
         //  Constructeur privé pour empêcher l'instanciation multiple
         private DataAccess()
         {
-
+            
             try
             {
                 connection = new NpgsqlConnection(connectionString);
@@ -36,6 +87,19 @@ namespace Pilot.Classes
             }
         }
 
+        private DataAccess(string username, string password)
+        {
+            connectionString = $"Host=srv-peda-new;Port=5433;Username={username};Password={password};Database=pilot_41;Options='-c search_path=sae'";
+            try
+            {
+                connection = new NpgsqlConnection(connectionString);
+            }
+            catch (Exception ex)
+            {
+                LogError.Log(ex, "Pb de connexion GetConnection \n" + connectionString);
+                throw;
+            }
+        }
 
         // pour récupérer la connexion (et l'ouvrir si nécessaire)
         public NpgsqlConnection GetConnection()
