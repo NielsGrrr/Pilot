@@ -56,6 +56,7 @@ namespace Pilot.UC
             {
                 try
                 {
+                    LesProduits.Add(unProduit);
                     unProduit.Create();
                     MessageBox.Show("Produit ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
@@ -81,6 +82,39 @@ namespace Pilot.UC
                 catch (Exception ex)
                 {
                     MessageBox.Show( "Le produit n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void butModifierProduit_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgProduits.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Produit produitSelectionne = (Produit)dgProduits.SelectedItem;
+                Produit copie = new Produit(produitSelectionne.Numproduit, produitSelectionne.LaPointe, produitSelectionne.LeType, produitSelectionne.CodeProduit, produitSelectionne.NomProduit, produitSelectionne.PrixVente, produitSelectionne.QuantiteStock, produitSelectionne.Disponible);
+                WindowAjouterProduit wBox = new WindowAjouterProduit(copie, Action.Modifier);
+                bool? result = wBox.ShowDialog();
+                if (result == true)
+                {
+                    try
+                    {
+                        produitSelectionne.Numproduit = copie.Numproduit;
+                        produitSelectionne.LaPointe = copie.LaPointe;
+                        produitSelectionne.LeType = copie.LeType;
+                        produitSelectionne.CodeProduit = copie.CodeProduit;
+                        produitSelectionne.NomProduit = copie.NomProduit;
+                        produitSelectionne.PrixVente = copie.PrixVente;
+                        produitSelectionne.QuantiteStock = copie.QuantiteStock;
+                        produitSelectionne.Disponible = copie.Disponible;
+                        produitSelectionne.Update();
+                        dgProduits.Items.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Le produit n'a pas pu être modifié.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }

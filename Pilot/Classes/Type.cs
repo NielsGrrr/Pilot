@@ -77,12 +77,12 @@ namespace Pilot.Classes
         public List<Type> FindAll()
         {
             List<Type> lesTypes = new List<Type>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from type ;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from type JOIN categorie ON type.numcategorie=categorie.numcategorie;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                 {
-                    Categorie laCategorie = new Categorie((Int32)dr["numcategorie"], "test");
+                    Categorie laCategorie = new Categorie((Int32)dr["numcategorie"], (string)dr["libellecategorie"]);
                     lesTypes.Add(new Type((Int32)dr["numtype"], laCategorie, (String)dr["libelletype"]));
                 }
                     

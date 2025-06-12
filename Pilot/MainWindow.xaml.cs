@@ -57,7 +57,7 @@ namespace Pilot
         private void AjouterProduit()
         {
             Produit unProduit = new Produit();
-            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit);
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit, Action.Créer);
             bool? result = wProduit.ShowDialog();
             if (result == true)
             {
@@ -75,7 +75,7 @@ namespace Pilot
         private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
         {
             Produit unProduit = new Produit();
-            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit);
+            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit, Action.Créer);
             bool? result = wProduit.ShowDialog();
             if (result == true)
             {

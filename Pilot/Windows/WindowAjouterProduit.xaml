@@ -21,9 +21,9 @@
             <Label Content="Quantité*" />
             <TextBox x:Name="txtQuantite" Text="{Binding QuantiteStock, ValidatesOnExceptions=True}" TextWrapping="Wrap" />
             <Label Content="Type*" />
-            <ComboBox x:Name="comboType" DisplayMemberPath="LibelleType" />
+            <ComboBox x:Name="comboType" SelectedItem="{Binding LeType}" DisplayMemberPath="LibelleType" />
             <Label Content="Type de pointe*" />
-            <ComboBox x:Name="comboPointe" DisplayMemberPath="LibelleTypePointe" />
+            <ComboBox x:Name="comboPointe" SelectedItem="{Binding LaPointe}" DisplayMemberPath="LibelleTypePointe" />
             <Label Content="Couleurs" />
             <DataGrid Height="100" d:ItemsSource="{Binding LesCouleurs}">
                 <DataGrid.Resources>

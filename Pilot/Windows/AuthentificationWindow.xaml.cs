@@ -27,6 +27,7 @@ namespace Pilot.Windows
             DataAccess.Admin = true;
             ChargeData();
             InitializeComponent();
+            img.Source = new BitmapImage(new Uri("pack://application:,,,/img/logo-bleu.png"));
         }
 
         private void ChargeData()

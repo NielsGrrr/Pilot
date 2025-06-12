@@ -221,7 +221,18 @@ namespace Pilot.Classes
 
         public int Update()
         {
-            throw new NotImplementedException();
+            using (var cmdUpdate = new NpgsqlCommand("update produit set numtype=@numtype, numtypepointe=@numtypepointe, codeproduit=@codeproduit, nomproduit=@nomproduit, prixvente=@prixvente, quantitestock=@quantitestock, disponible=@disponible, numproduit=@numproduit WHERE numproduit=@numproduit;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numtype", this.LeType.NumType);
+                cmdUpdate.Parameters.AddWithValue("numtypepointe", this.LaPointe.NumTypePointe);
+                cmdUpdate.Parameters.AddWithValue("codeproduit", this.codeProduit);
+                cmdUpdate.Parameters.AddWithValue("nomproduit", this.NomProduit);
+                cmdUpdate.Parameters.AddWithValue("prixvente", this.prixVente);
+                cmdUpdate.Parameters.AddWithValue("quantitestock", this.QuantiteStock);
+                cmdUpdate.Parameters.AddWithValue("disponible", this.Disponible);
+                cmdUpdate.Parameters.AddWithValue("numproduit", this.Numproduit);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
         }
 
         int ICrud<Produit>.Create()

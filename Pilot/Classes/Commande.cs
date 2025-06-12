@@ -165,7 +165,7 @@ namespace Pilot.Classes
         public int AjouterProduit(Produit produit, int quantite)
         {
             bool present = false;
-            foreach (Produit pr in LesProduits)
+            foreach (Produit pr in this.ProduitsQuantites.Keys)
             {
                 if (pr.CodeProduit == produit.CodeProduit)
                 {
@@ -177,8 +177,6 @@ namespace Pilot.Classes
             if (present)
             {
                 int quantiteTotale = quantite;
-                this.LesProduits.Add(produit);
-                this.lesQuantites.Add(quantite);
                 this.ProduitsQuantites.Add(produit, quantite);
                 int nb = 0;
                 using (var cmdUpdate = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))
@@ -193,8 +191,6 @@ namespace Pilot.Classes
             }
             else
             {
-                this.LesProduits.Add(produit);
-                this.lesQuantites.Add(quantite);
                 this.ProduitsQuantites.Add(produit, quantite);
                 int nb = 0;
                 using (var cmdInsert = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))

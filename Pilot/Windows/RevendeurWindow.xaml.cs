@@ -39,10 +39,6 @@ namespace Pilot.Windows
                     TextBox txt = (TextBox)uie;
                     txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                 }
-                else if (uie is ComboBox)
-                {
-
-                }
                 if (Validation.GetHasError(uie))
                     ok = false;
             }
