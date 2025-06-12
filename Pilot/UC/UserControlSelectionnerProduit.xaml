@@ -18,13 +18,32 @@
             FontWeight="DemiBold"
             Foreground="White" />
         <StackPanel Margin="20">
-            <TextBox
-                Width="120"
-                Text=""
-                TextWrapping="Wrap" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Mot clé" />
+                    <TextBox x:Name="tbMotCle" Width="80" Text="" TextWrapping="Wrap" TextChanged="tbMotCle_TextChanged" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Type de pointe" />
+                    <TextBox x:Name="tbTypePointe" Width="80" Text="" TextWrapping="Wrap" TextChanged="tbTypePointe_TextChanged" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Type" />
+                    <TextBox x:Name="tbType" Width="80" Text="" TextWrapping="Wrap" TextChanged="tbType_TextChanged" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Catégorie" />
+                    <TextBox x:Name="tbCategorie" Width="80" Text="" TextWrapping="Wrap" TextChanged="tbCategorie_TextChanged" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Couleur" />
+                    <TextBox x:Name="tbCouleur" Width="80" Text="" TextWrapping="Wrap" TextChanged="tbCouleur_TextChanged" />
+                </StackPanel>
+
+            </StackPanel>
             <DataGrid
                 x:Name="dgProduits"
-                Height="270"
+                Height="220"
                 Margin="0,20,0,0"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding LesProduits}">
@@ -41,12 +60,30 @@
                         Width="*"
                         Binding="{Binding CodeProduit, ValidatesOnExceptions=true}"
                         Header="Code" />
-                    <DataGridTextColumn Width="*"  Binding="{Binding LaPointe.LibelleTypePointe, ValidatesOnExceptions=true}" Header="Pointe"/>
-                    <DataGridTextColumn Width="*"  Binding="{Binding LeType.LibelleType, ValidatesOnExceptions=true}" Header="Type"/>
-                    <DataGridTextColumn Width="*"  Binding="{Binding LeType.LaCategorie.LibelleCategorie, ValidatesOnExceptions=true}" Header="Categorie"/>
-                    <DataGridTextColumn Width="*"  Binding="{Binding PrixVente, ValidatesOnExceptions=true}" Header="Prix"/>
-                    <DataGridTextColumn Width="*"  Binding="{Binding QuantiteStock, ValidatesOnExceptions=true}" Header="Quantite"/>
-                    <DataGridCheckBoxColumn Width="*"  Binding="{Binding Disponible, ValidatesOnExceptions=true}" Header="Quantite"/>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding LaPointe.LibelleTypePointe, ValidatesOnExceptions=true}"
+                        Header="Pointe" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding LeType.LibelleType, ValidatesOnExceptions=true}"
+                        Header="Type" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding LeType.LaCategorie.LibelleCategorie, ValidatesOnExceptions=true}"
+                        Header="Categorie" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding PrixVente, ValidatesOnExceptions=true}"
+                        Header="Prix" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding QuantiteStock, ValidatesOnExceptions=true}"
+                        Header="Quantite" />
+                    <DataGridCheckBoxColumn
+                        Width="*"
+                        Binding="{Binding Disponible, ValidatesOnExceptions=true}"
+                        Header="Disponible" />
                 </DataGrid.Columns>
             </DataGrid>
             <Button

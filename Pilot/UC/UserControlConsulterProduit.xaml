@@ -20,13 +20,48 @@
             Foreground="White" />
 
         <StackPanel Margin="20">
-            <TextBox
-                Width="120"
-                Text="TextBox"
-                TextWrapping="Wrap" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Mot clé" />
+                    <TextBox
+                        x:Name="tbMotCle"
+                        Width="80"
+                        Text=""
+                        TextChanged="tbMotCle_TextChanged"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Type de pointe" />
+                    <TextBox
+                        x:Name="tbTypePointe"
+                        Width="80"
+                        Text=""
+                        TextChanged="tbTypePointe_TextChanged"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Type" />
+                    <TextBox
+                        x:Name="tbType"
+                        Width="80"
+                        Text=""
+                        TextChanged="tbType_TextChanged"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Margin="20,0,20,0">
+                    <Label Content="Catégorie" />
+                    <TextBox
+                        x:Name="tbCategorie"
+                        Width="80"
+                        Text=""
+                        TextChanged="tbCategorie_TextChanged"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+
+            </StackPanel>
             <DataGrid
                 x:Name="dgProduits"
-                Height="270"
+                Height="220"
                 Margin="0,20,0,0"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding LesProduits}">
@@ -66,23 +101,24 @@
                     <DataGridCheckBoxColumn
                         Width="*"
                         Binding="{Binding Disponible, ValidatesOnExceptions=true}"
-                        Header="Quantite" />
+                        Header="Disponible" />
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel
-    Margin="0,20,0,0"
-    HorizontalAlignment="Center"
-    Orientation="Horizontal">
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
                 <Button
-        x:Name="butAjouterProduit"
-        Width="30"
-        Height="30"
-        Margin="20,0,0,0"
-        Background="#FF005CA9"
-        Content="&#xE710;"
-        FontFamily="Segoe MDL2 Assets"
-        Foreground="White"
-        ToolTip="Ajouter" Click="butAjouterProduit_Click" />
+                    x:Name="butAjouterProduit"
+                    Width="30"
+                    Height="30"
+                    Margin="20,0,0,0"
+                    Background="#FF005CA9"
+                    Click="butAjouterProduit_Click"
+                    Content="&#xE710;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Ajouter" />
                 <Button
         x:Name="butModifierProduit"
         Width="30"
@@ -94,25 +130,26 @@
         Foreground="White"
         ToolTip="Modifier" Click="butModifierProduit_Click" />
                 <Button
-        x:Name="butSupprimerProduit"
-        Width="30"
-        Height="30"
-        Margin="0,0,20,0"
-        Background="#FF005CA9"
-        Content="&#xE74D;"
-        FontFamily="Segoe MDL2 Assets"
-        Foreground="White"
-        ToolTip="Supprimer" Click="butSupprimerProduit_Click" />
+                    x:Name="butSupprimerProduit"
+                    Width="30"
+                    Height="30"
+                    Margin="0,0,20,0"
+                    Background="#FF005CA9"
+                    Click="butSupprimerProduit_Click"
+                    Content="&#xE74D;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Supprimer" />
                 <Button
-        x:Name="butDetailProduit"
-        Width="30"
-        Height="30"
-        Margin="0,0,20,0"
-        Background="#FF005CA9"
-        Content="&#xE7B3;"
-        FontFamily="Segoe MDL2 Assets"
-        Foreground="White"
-        ToolTip="Supprimer" />
+                    x:Name="butDetailProduit"
+                    Width="30"
+                    Height="30"
+                    Margin="0,0,20,0"
+                    Background="#FF005CA9"
+                    Content="&#xE7B3;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Foreground="White"
+                    ToolTip="Supprimer" />
             </StackPanel>
         </StackPanel>
     </StackPanel>
