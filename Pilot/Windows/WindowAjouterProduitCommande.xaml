@@ -52,15 +52,15 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Prix unitaire : " />
-                <Label Content="" />
+                <Label x:Name="labPrixUnitaire" Content="" />
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Prix total : " />
-                <Label Content="" />
+                <Label x:Name="labPrixTotal" Content="" />
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Prix commande : " />
-                <Label Content="" />
+                <Label x:Name="labPrixCommande" Content="" />
             </StackPanel>
             <Button
                 x:Name="butValiderProduitCommande"
