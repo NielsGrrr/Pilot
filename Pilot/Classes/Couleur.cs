@@ -32,6 +32,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro de couleur ne peut pas être négatif");
                 this.numCouleur = value;
             }
         }

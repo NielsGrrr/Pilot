@@ -34,6 +34,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro de type ne peut pas être négatif");
                 this.numType = value;
             }
         }

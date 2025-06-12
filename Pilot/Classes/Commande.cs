@@ -63,6 +63,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro de commande ne peut pas être négatif");
                 this.numCommande = value;
             }
         }
@@ -128,6 +130,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < this.DateCommande)
+                    throw new ArgumentOutOfRangeException("La livraison ne peut pas être avant lacommande");
                 this.dateLivraison = value;
             }
         }
@@ -145,6 +149,8 @@ namespace Pilot.Classes
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le prix final ne peut pas être négatif");
                 this.PrixFinal = value;
             }
         }
