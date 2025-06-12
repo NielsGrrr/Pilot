@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,16 @@ namespace Pilot.Classes
     {
         private int numCouleur;
         private string libelleCouleur;
+
+        public Couleur()
+        {
+        }
+
+        public Couleur(int numCouleur, string libelleCouleur)
+        {
+            this.NumCouleur = numCouleur;
+            this.LibelleCouleur = libelleCouleur;
+        }
 
         public int NumCouleur
         {
@@ -49,7 +61,16 @@ namespace Pilot.Classes
 
         public List<Couleur> FindAll()
         {
-            throw new NotImplementedException();
+            List<Couleur> lesCouleurs = new List<Couleur>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from couleur;"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lesCouleurs.Add(new Couleur((Int32)dr["numcouleur"], (string)dr["libellecouleur"]));
+                }
+            }
+            return lesCouleurs;
         }
 
         public List<Couleur> FindBySelection(string criteres)

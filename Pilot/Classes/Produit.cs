@@ -59,6 +59,11 @@ namespace Pilot.Classes
             this.Disponible = disponible;
         }
 
+        public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible, ObservableCollection<Couleur> lesCouleurs) : this(numproduit, laPointe, leType, codeProduit, nomProduit, prixVente, quantiteStock, disponible)
+        {
+            this.LesCouleurs = lesCouleurs;
+        }
+
         public int Numproduit
         {
             get
@@ -206,7 +211,7 @@ namespace Pilot.Classes
         public List<Produit> FindAll()
         {
             List<Produit> lesProduits = new List<Produit>();
-            List<Couleur> desCouleurs = new List<Couleur>();
+            List<Couleur> desCouleurs = new List<Couleur>(new Couleur().FindAll());
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from produit pr join typepointe tp on pr.numtypepointe = tp.numtypepointe join type ty on pr.numtype = ty.numtype join categorie cat on ty.numcategorie = cat.numcategorie"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
