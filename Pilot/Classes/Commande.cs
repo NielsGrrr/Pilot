@@ -208,8 +208,6 @@ namespace Pilot.Classes
             }
             else
             {
-                this.LesProduits.Add(produit);
-                this.lesQuantites.Add(quantite);
                 this.ProduitsQuantites.Add(produit, quantite);
                 int nb = 0;
                 using (var cmdInsert = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))

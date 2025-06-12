@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Pilot.Classes
         private decimal prixVente;
         private int quantiteStock;
         private bool disponible;
+        private ObservableCollection<Couleur> lesCouleurs = new ObservableCollection<Couleur>();
 
         public Produit()
         {
@@ -161,6 +163,19 @@ namespace Pilot.Classes
             }
         }
 
+        public ObservableCollection<Couleur> LesCouleurs
+        {
+            get
+            {
+                return this.lesCouleurs;
+            }
+
+            set
+            {
+                this.lesCouleurs = value;
+            }
+        }
+
         public int Create()
         {
             int nb = 0;
@@ -191,6 +206,7 @@ namespace Pilot.Classes
         public List<Produit> FindAll()
         {
             List<Produit> lesProduits = new List<Produit>();
+            List<Couleur> desCouleurs = new List<Couleur>();
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from produit pr join typepointe tp on pr.numtypepointe = tp.numtypepointe join type ty on pr.numtype = ty.numtype join categorie cat on ty.numcategorie = cat.numcategorie"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
@@ -198,11 +214,24 @@ namespace Pilot.Classes
                 foreach (DataRow dr in dt.Rows)
                 {
                     Produit pro = new Produit((Int32)dr["numproduit"], (String)dr["codeproduit"], (String)dr["nomproduit"], (decimal)dr["prixvente"], (Int32)dr["quantitestock"], (bool)dr["disponible"]);
+                    Couleur couleur = new Couleur();
                     TypePointe pointe = new TypePointe((Int32)dr["numtypepointe"], (String)dr["libelletypepointe"]);
                     pro.LaPointe = pointe;
                     Categorie cat = new Categorie((Int32)dr["numcategorie"], (String)dr["libellecategorie"]);
                     Type type = new Type((Int32)dr["numtype"], cat, (String)dr["libelletype"]);
                     pro.leType = type;
+                    //Ici
+                    using (NpgsqlCommand cmdSelect2 = new NpgsqlCommand("select * from couleurproduit cp WHERE cp.numproduit=@id;"))
+                    {
+                        cmdSelect2.Parameters.AddWithValue("id", pro.Numproduit);
+                        DataTable dt2 = DataAccess.Instance.ExecuteSelect(cmdSelect2);
+                        foreach (DataRow dr2 in dt2.Rows)
+                        {
+                            couleur = desCouleurs.Find(x => x.NumCouleur == (int)dr2["numcouleur"]);
+                            pro.LesCouleurs.Add(couleur);
+                        }
+                    }
+                    //Ici
                     lesProduits.Add(pro);
                 }
             }

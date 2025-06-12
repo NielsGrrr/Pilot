@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
-    public class Couleur
+    public class Couleur:ICrud<Couleur>
     {
         private int numCouleur;
         private string libelleCouleur;
@@ -35,6 +35,36 @@ namespace Pilot.Classes
             {
                 this.libelleCouleur = value;
             }
+        }
+
+        public int Create()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Couleur> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Couleur> FindBySelection(string criteres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

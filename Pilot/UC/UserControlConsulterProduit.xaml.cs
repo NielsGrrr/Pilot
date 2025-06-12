@@ -28,6 +28,15 @@ namespace Pilot.UC
         {
             ChargeData();
             InitializeComponent();
+            dgProduits.Items.Filter = RechercherMotCle;
+        }
+
+        private bool RechercherMotCle(object obj)
+        {
+            if (String.IsNullOrEmpty(tbMotCle.Text) && String.IsNullOrEmpty(tbType.Text) && String.IsNullOrEmpty(tbTypePointe.Text) && String.IsNullOrEmpty(tbCategorie.Text))
+                return true;
+            Produit produit = obj as Produit;
+            return (produit.CodeProduit.StartsWith(tbMotCle.Text, StringComparison.OrdinalIgnoreCase) && produit.LeType.LibelleType.StartsWith(tbType.Text, StringComparison.OrdinalIgnoreCase) && produit.LaPointe.LibelleTypePointe.StartsWith(tbTypePointe.Text, StringComparison.OrdinalIgnoreCase) && produit.LeType.LaCategorie.LibelleCategorie.StartsWith(tbCategorie.Text, StringComparison.OrdinalIgnoreCase));
         }
 
         private void ChargeData()
@@ -83,6 +92,30 @@ namespace Pilot.UC
                     MessageBox.Show( "Le produit n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void tbCategorie_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (dgProduits != null)
+                CollectionViewSource.GetDefaultView(dgProduits.ItemsSource).Refresh();
+        }
+
+        private void tbMotCle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (dgProduits != null)
+                CollectionViewSource.GetDefaultView(dgProduits.ItemsSource).Refresh();
+        }
+
+        private void tbTypePointe_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (dgProduits != null)
+                CollectionViewSource.GetDefaultView(dgProduits.ItemsSource).Refresh();
+        }
+
+        private void tbType_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (dgProduits != null)
+                CollectionViewSource.GetDefaultView(dgProduits.ItemsSource).Refresh();
         }
     }
 }
