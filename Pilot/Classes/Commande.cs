@@ -177,23 +177,52 @@ namespace Pilot.Classes
             }
         }
 
-        public void AjouterProduit(Produit produit, int quantite)
+        public int AjouterProduit(Produit produit, int quantite)
         {
-            this.LesProduits.Add(produit);
-            this.lesQuantites.Add(quantite);
-            this.ProduitsQuantites.Add(produit, quantite);
-            int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into produitcommande (numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison) Returning numcommande"))
+            bool present = false;
+            foreach (Produit pr in LesProduits)
             {
-                cmdInsert.Parameters.AddWithValue("numEmploye", this.Employe.NumEmploye);
-                cmdInsert.Parameters.AddWithValue("numTransport", this.UnTransport.NumTransport);
-                cmdInsert.Parameters.AddWithValue("numRevendeur", this.UnRevendeur.NumRevendeur);
-                cmdInsert.Parameters.AddWithValue("dateCommande", this.DateCommande);
-                cmdInsert.Parameters.AddWithValue("dateLivraison", this.DateLivraison);
-                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+                if (pr.CodeProduit == produit.CodeProduit)
+                {
+                    present = true;
+                }
             }
-            this.NumCommande = nb;
-            //return nb;
+
+            //A terminer avec un UPDATE et en aditionant les quantités
+            if (present)
+            {
+                int quantiteTotale = quantite;
+                this.LesProduits.Add(produit);
+                this.lesQuantites.Add(quantite);
+                this.ProduitsQuantites.Add(produit, quantite);
+                int nb = 0;
+                using (var cmdUpdate = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))
+                {
+                    cmdUpdate.Parameters.AddWithValue("numCommande", this.NumCommande);
+                    cmdUpdate.Parameters.AddWithValue("numProduit", produit.Numproduit);
+                    cmdUpdate.Parameters.AddWithValue("quantiteCommande", quantite);
+                    cmdUpdate.Parameters.AddWithValue("prix", produit.PrixVente);
+                    nb = DataAccess.Instance.ExecuteInsert(cmdUpdate);
+                }
+                return nb;
+            }
+            else
+            {
+                this.LesProduits.Add(produit);
+                this.lesQuantites.Add(quantite);
+                this.ProduitsQuantites.Add(produit, quantite);
+                int nb = 0;
+                using (var cmdInsert = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))
+                {
+                    cmdInsert.Parameters.AddWithValue("numCommande", this.NumCommande);
+                    cmdInsert.Parameters.AddWithValue("numProduit", produit.Numproduit);
+                    cmdInsert.Parameters.AddWithValue("quantiteCommande", quantite);
+                    cmdInsert.Parameters.AddWithValue("prix", produit.PrixVente);
+                    nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+                }
+                return nb;
+            }
+            
         }
 
         public int Create()
