@@ -150,7 +150,25 @@ namespace Pilot.Classes
 
         public List<Employe> FindBySelection(string criteres)
         {
-            throw new NotImplementedException();
+            List<Employe> lesEmployes = new List<Employe>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from employe emp JOIN role r ON emp.numrole=r.numrole WHERE " + criteres + ";"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Employe emp = new Employe((Int32)dr["numemploye"], (String)dr["nom"], (String)dr["prenom"], (String)dr["password"], (String)dr["login"]);
+                    if ((string)dr["libellerole"] == Resources.Commercial)
+                    {
+                        emp.Role = RoleEmploye.Commercial;
+                    }
+                    else if ((string)dr["libellerole"] == Resources.ResponsableProduction)
+                    {
+                        emp.Role = RoleEmploye.ResponsableProduction;
+                    }
+                    lesEmployes.Add(emp);
+                }
+                return lesEmployes;
+            }
         }
 
         public void Read()
