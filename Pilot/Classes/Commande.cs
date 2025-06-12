@@ -177,6 +177,25 @@ namespace Pilot.Classes
             }
         }
 
+        public void AjouterProduit(Produit produit, int quantite)
+        {
+            this.LesProduits.Add(produit);
+            this.lesQuantites.Add(quantite);
+            this.ProduitsQuantites.Add(produit, quantite);
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into produitcommande (numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison) Returning numcommande"))
+            {
+                cmdInsert.Parameters.AddWithValue("numEmploye", this.Employe.NumEmploye);
+                cmdInsert.Parameters.AddWithValue("numTransport", this.UnTransport.NumTransport);
+                cmdInsert.Parameters.AddWithValue("numRevendeur", this.UnRevendeur.NumRevendeur);
+                cmdInsert.Parameters.AddWithValue("dateCommande", this.DateCommande);
+                cmdInsert.Parameters.AddWithValue("dateLivraison", this.DateLivraison);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+            }
+            this.NumCommande = nb;
+            //return nb;
+        }
+
         public int Create()
         {
             int nb = 0;
@@ -253,6 +272,22 @@ namespace Pilot.Classes
         public int Update()
         {
             throw new NotImplementedException();
+        }
+
+        public int UpdateProduitCommande()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Commande FindNumCommande()
+        {
+            List<Commande> commandes = new Commande().FindAll();
+            foreach (Commande com in commandes)
+            {
+                if (com.NumCommande == this.NumCommande)
+                    return com;
+            }
+            return new Commande();
         }
 
     }
