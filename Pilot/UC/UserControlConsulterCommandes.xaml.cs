@@ -70,7 +70,6 @@ namespace Pilot.UC
             Commande uneCommande = new Commande();
             WindowCommande wCommande = new WindowCommande(uneCommande, Action.Créer);
             bool? result = wCommande.ShowDialog();
-            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
             /*
             if (result == true)
             {
@@ -78,6 +77,7 @@ namespace Pilot.UC
                 {
                     // Ajouter la commande à la liste des commandes
                     uneCommande.NumCommande = uneCommande.Create();
+                    LesCommandes.Add(uneCommande);
                     MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
@@ -107,7 +107,7 @@ namespace Pilot.UC
                         commandeSelectionnee.UnRevendeur = copie.UnRevendeur;
                         commandeSelectionnee.DateCommande = copie.DateCommande;
                         commandeSelectionnee.DateLivraison = copie.DateLivraison;
-
+                        dgCommande.Items.Refresh();
                     }catch (Exception ev)
                     {
                         MessageBox.Show("La commande n'a pas pu être modifiée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -127,6 +127,7 @@ namespace Pilot.UC
                 try
                 {
                     commandeSelectionnee.Delete();
+                    LesCommandes.Remove(commandeSelectionnee);
                 }
                 catch(Exception ex)
                 {
