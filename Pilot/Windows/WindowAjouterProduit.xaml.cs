@@ -21,29 +21,27 @@ namespace Pilot.Windows
     /// </summary>
     public partial class WindowAjouterProduit : Window
     {
+        public ObservableCollection<Classes.Type> LesTypes {  get; set; }
+        public ObservableCollection<TypePointe> LesPointes { get; set; }
         public WindowAjouterProduit(Produit unProduit, Action action)
         {
-            ObservableCollection<Classes.Type> lesTypes = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
-            ObservableCollection<TypePointe> lesPointes = new ObservableCollection<TypePointe>(new TypePointe().FindAll());
             ChargeData();
             InitializeComponent();
             butValider.Content = action;
-            comboType.ItemsSource = lesTypes;
-            comboPointe.ItemsSource = lesPointes;
+            comboType.ItemsSource = LesTypes;
+            comboPointe.ItemsSource = LesPointes;
         }
 
         public WindowAjouterProduit(Produit unProduit)
         {
-            ObservableCollection<Classes.Type> lesTypes = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
-            ObservableCollection<TypePointe> lesPointes = new ObservableCollection<TypePointe>(new TypePointe().FindAll());
             ChargeData();
             InitializeComponent();
-            comboType.ItemsSource = lesTypes;
-            comboPointe.ItemsSource = lesPointes;
         }
 
         private void ChargeData()
         {
+            LesTypes = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
+            LesPointes = new ObservableCollection<TypePointe>(new TypePointe().FindAll());
             TypePointe unePointe = new TypePointe(1, "nom pointe");
             Categorie uneCategorie = new Categorie(1, "nom Categorie");
             Classes.Type unType = new Classes.Type(1, uneCategorie, "nom type");

@@ -70,19 +70,21 @@ namespace Pilot.UC
             Commande uneCommande = new Commande();
             WindowCommande wCommande = new WindowCommande(uneCommande, Action.Créer);
             bool? result = wCommande.ShowDialog();
+            CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
+            /*
             if (result == true)
             {
                 try
                 {
                     // Ajouter la commande à la liste des commandes
-                    uneCommande.Create();
+                    uneCommande.NumCommande = uneCommande.Create();
                     MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
+            }*/
         }
 
         private void butModifierCommande_Click(object sender, RoutedEventArgs e)

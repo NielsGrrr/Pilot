@@ -52,6 +52,7 @@ namespace Pilot.Classes
             this.Employe = employe;
             this.UnTransport = unTransport;
             this.UnRevendeur = unRevendeur;
+            this.DateCommande = DateTime.Today;
             this.DateLivraison = dateLivraison;
         }
 
@@ -144,6 +145,10 @@ namespace Pilot.Classes
                 }
                 return res;
             }
+            set
+            {
+                this.PrixFinal = value;
+            }
         }
 
         public Dictionary<Produit, int> ProduitsQuantites
@@ -175,13 +180,13 @@ namespace Pilot.Classes
         public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into commande (numCommande,numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numCommande,@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison) Returning numcommande"))
+            using (var cmdInsert = new NpgsqlCommand("insert into commande (numEmploye,numTransport,numRevendeur,dateCommande,dateLivraison) values (@numEmploye,@numTransport,@numRevendeur,@dateCommande,@dateLivraison) Returning numcommande"))
             {
-                cmdInsert.Parameters.AddWithValue("numTypePointe", this.Employe.NumEmploye);
-                cmdInsert.Parameters.AddWithValue("numType", this.UnTransport.NumTransport);
-                cmdInsert.Parameters.AddWithValue("codeProduit", this.UnRevendeur.NumRevendeur);
+                cmdInsert.Parameters.AddWithValue("numEmploye", this.Employe.NumEmploye);
+                cmdInsert.Parameters.AddWithValue("numTransport", this.UnTransport.NumTransport);
+                cmdInsert.Parameters.AddWithValue("numRevendeur", this.UnRevendeur.NumRevendeur);
                 cmdInsert.Parameters.AddWithValue("dateCommande", this.DateCommande);
-                cmdInsert.Parameters.AddWithValue("quantiteStock", this.DateLivraison);
+                cmdInsert.Parameters.AddWithValue("dateLivraison", this.DateLivraison);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
             this.NumCommande = nb;
