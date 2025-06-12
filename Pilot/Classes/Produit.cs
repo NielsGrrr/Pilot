@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Pilot.Classes
 {
@@ -20,10 +21,15 @@ namespace Pilot.Classes
         private int quantiteStock;
         private bool disponible;
         private ObservableCollection<Couleur> lesCouleurs = new ObservableCollection<Couleur>();
-
+        public ObservableCollection<Couleur> ToutesLesCouleurs { get; set; } = new ObservableCollection<Couleur>(new Couleur().FindAll());
+        private Dictionary<Couleur, bool> couleursUtilisees = new Dictionary<Couleur, bool>();
         public Produit()
         {
-
+            this.CouleursUtilisees = new Dictionary<Couleur, bool>();
+            foreach (Couleur coul in ToutesLesCouleurs)
+            {
+                this.CouleursUtilisees.Add(coul, false);
+            }
         }
 
         public Produit(int numproduit, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible)
@@ -62,6 +68,11 @@ namespace Pilot.Classes
         public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible, ObservableCollection<Couleur> lesCouleurs) : this(numproduit, laPointe, leType, codeProduit, nomProduit, prixVente, quantiteStock, disponible)
         {
             this.LesCouleurs = lesCouleurs;
+        }
+
+        public Produit(int numproduit, TypePointe laPointe, Type leType, string codeProduit, string nomProduit, decimal prixVente, int quantiteStock, bool disponible, ObservableCollection<Couleur> lesCouleurs, Dictionary<Couleur, bool> couleursUtilisees) : this(numproduit, laPointe, leType, codeProduit, nomProduit, prixVente, quantiteStock, disponible, lesCouleurs)
+        {
+            this.CouleursUtilisees = couleursUtilisees;
         }
 
         public int Numproduit
@@ -181,6 +192,19 @@ namespace Pilot.Classes
             }
         }
 
+        public Dictionary<Couleur, bool> CouleursUtilisees
+        {
+            get
+            {
+                return this.couleursUtilisees;
+            }
+
+            set
+            {
+                this.couleursUtilisees = value;
+            }
+        }
+
         public int Create()
         {
             int nb = 0;
@@ -225,18 +249,29 @@ namespace Pilot.Classes
                     Categorie cat = new Categorie((Int32)dr["numcategorie"], (String)dr["libellecategorie"]);
                     Type type = new Type((Int32)dr["numtype"], cat, (String)dr["libelletype"]);
                     pro.leType = type;
-                    //Ici
                     using (NpgsqlCommand cmdSelect2 = new NpgsqlCommand("select * from couleurproduit cp WHERE cp.numproduit=@id;"))
                     {
                         cmdSelect2.Parameters.AddWithValue("id", pro.Numproduit);
                         DataTable dt2 = DataAccess.Instance.ExecuteSelect(cmdSelect2);
+                        List<Couleur> couleursProd = new List<Couleur>();
                         foreach (DataRow dr2 in dt2.Rows)
                         {
                             couleur = desCouleurs.Find(x => x.NumCouleur == (int)dr2["numcouleur"]);
                             pro.LesCouleurs.Add(couleur);
+                            couleursProd.Add(couleur);
+                        }
+                        foreach (Couleur coul in ToutesLesCouleurs)
+                        {
+                            bool present = false;
+                            foreach (Couleur coul2 in couleursProd)
+                                if (coul.NumCouleur == coul2.NumCouleur)
+                                {
+                                    present = true;
+                                }
+                            pro.CouleursUtilisees.Add(coul, present);
                         }
                     }
-                    //Ici
+                    
                     lesProduits.Add(pro);
                 }
             }

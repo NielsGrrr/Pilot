@@ -25,7 +25,7 @@
             <Label Content="Type de pointe*" />
             <ComboBox x:Name="comboPointe" SelectedItem="{Binding LaPointe}" DisplayMemberPath="LibelleTypePointe" />
             <Label Content="Couleurs" />
-            <DataGrid Height="100" ItemsSource="{Binding LesCouleurs}" AutoGenerateColumns="False">
+            <DataGrid Height="100" ItemsSource="{Binding CouleursUtilisees}" AutoGenerateColumns="True">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#FF005CA9" />
@@ -36,9 +36,9 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding LibelleCouleur}"
+                        Binding="{Binding Key.LibelleCouleur}"
                         Header="Couleur" />
-                    <DataGridCheckBoxColumn Width="*" Header="Utilisée" />
+                    <DataGridCheckBoxColumn Width="*" Binding="{Binding Key.Value, ValidatesOnExceptions=true}" Header="Utilisée" />
                 </DataGrid.Columns>
             </DataGrid>
             <CheckBox x:Name="checkDisponible"

@@ -126,7 +126,7 @@ namespace Pilot.UC
             else
             {
                 Produit produitSelectionne = (Produit)dgProduits.SelectedItem;
-                Produit copie = new Produit(produitSelectionne.Numproduit, produitSelectionne.LaPointe, produitSelectionne.LeType, produitSelectionne.CodeProduit, produitSelectionne.NomProduit, produitSelectionne.PrixVente, produitSelectionne.QuantiteStock, produitSelectionne.Disponible, produitSelectionne.LesCouleurs);
+                Produit copie = new Produit(produitSelectionne.Numproduit, produitSelectionne.LaPointe, produitSelectionne.LeType, produitSelectionne.CodeProduit, produitSelectionne.NomProduit, produitSelectionne.PrixVente, produitSelectionne.QuantiteStock, produitSelectionne.Disponible, produitSelectionne.LesCouleurs, produitSelectionne.CouleursUtilisees);
                 WindowAjouterProduit wBox = new WindowAjouterProduit(copie, Action.Modifier);
                 bool? result = wBox.ShowDialog();
                 if (result == true)
