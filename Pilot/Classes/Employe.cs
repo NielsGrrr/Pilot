@@ -46,6 +46,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro d'employé ne peut pas être négatif");
                 this.numEmploye = value;
             }
         }

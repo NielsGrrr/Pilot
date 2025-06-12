@@ -26,6 +26,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0 )
+                    throw new ArgumentOutOfRangeException("Le numéro de catégorie ne peut pas être négatif");
                 this.numCategorie = value;
             }
         }

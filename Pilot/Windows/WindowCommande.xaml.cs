@@ -55,21 +55,28 @@ namespace Pilot.Windows
 
         private void butValiderCommande_Click(object sender, RoutedEventArgs e)
         {
-            Employe employe = (Employe)dgEmploye.SelectedItem;
-            Revendeur revendeur = (Revendeur)dgRevendeurs.SelectedItem;
-            ModeTransport mt = (ModeTransport)comboModeLivraison.SelectedItem;
-            //Attention au Parse
-            Commande uneCommande = new Commande(employe, mt, revendeur, DateTime.Parse(txtDateLivraison.Text));
-            try
+            if (dgEmploye.SelectedItem == null || dgRevendeurs.SelectedItem == null || comboModeLivraison.SelectedItem == null)
             {
-                // Ajouter la commande à la liste des commandes
-                MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Veuillez sélectionner un employé, un revendeur et un mode de livraison.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                Employe employe = (Employe)dgEmploye.SelectedItem;
+                Revendeur revendeur = (Revendeur)dgRevendeurs.SelectedItem;
+                ModeTransport mt = (ModeTransport)comboModeLivraison.SelectedItem;
+                //Attention au Parse
+                Commande uneCommande = new Commande(employe, mt, revendeur, DateTime.Parse(txtDateLivraison.Text));
+                try
+                {
+                    // Ajouter la commande à la liste des commandes
+                    MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                DialogResult = true;
             }
-            DialogResult = true;
         }
     }
 }
