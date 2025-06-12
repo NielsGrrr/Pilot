@@ -22,19 +22,16 @@ namespace Pilot.Windows
     /// </summary>
     public partial class WindowCommande : Window
     {
-        public ObservableCollection<Commande> LesCommandes { get; set; }
         public ObservableCollection<Revendeur> LesRevendeurs { get; set; }
         public ObservableCollection<Employe> LesEmployes { get; set; }
         public ObservableCollection<ModeTransport> LesTransports { get; set; }
-        public WindowCommande(Commande uneCommande)
-        {
-            ChargeData();
-            InitializeComponent();
-        }
+        public Commande UneCommande { get; set; }
 
         public WindowCommande(Commande uneCommande, Action act)
         {
+            UneCommande = uneCommande;
             ChargeData();
+            this.DataContext = this;
             InitializeComponent();
             butValiderCommande.Content = act;
             comboModeLivraison.ItemsSource = LesTransports;
@@ -45,10 +42,8 @@ namespace Pilot.Windows
             try
             {
                 LesEmployes = new ObservableCollection<Employe>(new Employe().FindAll());
-                LesCommandes = new ObservableCollection<Commande>(new Commande().FindAll());
                 LesRevendeurs = new ObservableCollection<Revendeur>(new Revendeur().FindAll());
                 LesTransports = new ObservableCollection<ModeTransport>(new ModeTransport().FindAll());
-                this.DataContext = this;
             }
             catch (Exception ex)
             {
@@ -68,9 +63,7 @@ namespace Pilot.Windows
             try
             {
                 // Ajouter la commande à la liste des commandes
-                uneCommande.NumCommande = uneCommande.Create();
                 MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
-                LesCommandes.Add(uneCommande);
             }
             catch (Exception ex)
             {

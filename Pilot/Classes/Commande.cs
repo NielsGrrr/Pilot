@@ -278,7 +278,16 @@ namespace Pilot.Classes
 
         public int Update()
         {
-            throw new NotImplementedException();
+            using (var cmdUpdate = new NpgsqlCommand("update commande set numrevendeur=@numrevendeur, numemploye=@numemploye, numtransport=@numtransport, datecommande=@datecommande, datelivraison=@datelivraison WHERE numcommande=@numcommande;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numrevendeur", this.UnRevendeur.NumRevendeur);
+                cmdUpdate.Parameters.AddWithValue("numemploye", this.Employe.NumEmploye);
+                cmdUpdate.Parameters.AddWithValue("numtransport", this.UnTransport.NumTransport);
+                cmdUpdate.Parameters.AddWithValue("datecommande", this.DateCommande);
+                cmdUpdate.Parameters.AddWithValue("datelivraison", this.DateLivraison);
+                cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
         }
 
         public int UpdateProduitCommande()

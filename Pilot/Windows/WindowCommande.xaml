@@ -32,7 +32,7 @@
             <StackPanel>
                 
                 <Label Content="Revendeur*"/>
-                <DataGrid x:Name="dgRevendeurs" Height="100" ItemsSource="{Binding LesRevendeurs}" AutoGenerateColumns="False">
+                <DataGrid x:Name="dgRevendeurs" Height="100" ItemsSource="{Binding LesRevendeurs}" SelectedItem="{Binding UneCommande.UnRevendeur}" AutoGenerateColumns="False">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="#FF005CA9" />
@@ -50,7 +50,7 @@
             </StackPanel>
             <StackPanel Margin="0,10,0,0">
                 <Label Content="Mode de livraison*"/>
-                <ComboBox x:Name="comboModeLivraison" DisplayMemberPath="LibelleTransport"/>
+                <ComboBox SelectedItem="{Binding UneCommande.UnTransport}" x:Name="comboModeLivraison" DisplayMemberPath="LibelleTransport"/>
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Date de livraison"/>

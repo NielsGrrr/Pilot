@@ -107,6 +107,7 @@ namespace Pilot.UC
                         commandeSelectionnee.UnRevendeur = copie.UnRevendeur;
                         commandeSelectionnee.DateCommande = copie.DateCommande;
                         commandeSelectionnee.DateLivraison = copie.DateLivraison;
+                        commandeSelectionnee.Update();
                         dgCommande.Items.Refresh();
                     }catch (Exception ev)
                     {
