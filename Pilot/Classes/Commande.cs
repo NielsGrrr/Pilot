@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Net;
@@ -17,21 +18,13 @@ namespace Pilot.Classes
         private Revendeur unRevendeur;
         private DateTime dateCommande;
         private DateTime dateLivraison;
-        private Dictionary<Produit, int> PRODUITS_QUANTITES;
+        private ObservableCollection<Produit> lesProduits = new ObservableCollection<Produit>();
+        private List<int> lesQuantites = new List<int>();
+        private Dictionary<Produit, int> produitsQuantites;
 
         public Commande()
         {
-        }
 
-        public Commande(int numCommande, Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison, Dictionary<Produit, int> produits_quantites)
-        {
-            this.NumCommande = numCommande;
-            this.Employe = employe;
-            this.UnTransport = unTransport;
-            this.UnRevendeur = unRevendeur;
-            this.DateCommande = dateCommande;
-            this.DateLivraison = dateLivraison;
-            this.PRODUITS_QUANTITES = produits_quantites;
         }
 
         public Commande(int numCommande, DateTime dateCommande)
@@ -145,23 +138,37 @@ namespace Pilot.Classes
             get
             {
                 decimal res = 0;
-                foreach (Produit prod in this.Produits_quantite.Keys)
+                foreach (Produit prod in this.ProduitsQuantites.Keys)
                 {
-                    res += prod.PrixVente * Produits_quantite[prod];
+                    res += prod.PrixVente * ProduitsQuantites[prod];
                 }
                 return res;
             }
         }
-        public Dictionary<Produit, int> Produits_quantite
+
+        public Dictionary<Produit, int> ProduitsQuantites
         {
             get
             {
-                return this.PRODUITS_QUANTITES;
+                return this.produitsQuantites;
             }
 
             set
             {
-                this.PRODUITS_QUANTITES = value;
+                this.produitsQuantites = value;
+            }
+        }
+
+        public ObservableCollection<Produit> LesProduits
+        {
+            get
+            {
+                return this.lesProduits;
+            }
+
+            set
+            {
+                this.lesProduits = value;
             }
         }
 
@@ -193,7 +200,7 @@ namespace Pilot.Classes
         public List<Commande> FindAll()
         {
             List<Commande> lesCommandes = new List<Commande>();
-            List<Produit> lesProduits = new List<Produit>(new Produit().FindAll());
+            List<Produit> tousLesProduits = new List<Produit>(new Produit().FindAll());
             
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande com JOIN employe emp ON com.numemploye=emp.numemploye JOIN modeTransport mt on com.numtransport = mt.numtransport JOIN revendeur rev on com.numrevendeur = rev.numrevendeur JOIN role ro on emp.numrole = ro.numrole;"))
             {
@@ -202,9 +209,12 @@ namespace Pilot.Classes
                 foreach (DataRow dr in dt.Rows)
                 {
                     Dictionary<Produit, int> dict = new Dictionary<Produit, int>();
+                    Produit produit = new Produit();
+                    Employe employe = new Employe((Int32)dr["numemploye"], (string)dr["nom"], (string)dr["prenom"], (string)dr["password"], (string)dr["login"]);
                     Commande com = new Commande((Int32)dr["numcommande"], (DateTime)dr["datecommande"]);
                     Revendeur rev = new Revendeur((Int32)dr["numrevendeur"], (String)dr["raisonsociale"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]);
                     com.UnRevendeur = rev;
+                    com.Employe = employe;
                     ModeTransport modeTransport = new ModeTransport((Int32)dr["numtransport"], (String)dr["libelletransport"]);
                     com.UnTransport = modeTransport;
                     using (NpgsqlCommand cmdSelect2 = new NpgsqlCommand("select * from produitcommande pc WHERE pc.numcommande=@id;"))
@@ -213,10 +223,12 @@ namespace Pilot.Classes
                         DataTable dt2 = DataAccess.Instance.ExecuteSelect(cmdSelect2);
                         foreach(DataRow dr2 in dt2.Rows)
                         {
-                            dict.Add(lesProduits.Find(x => x.Numproduit == (int)dr2["numproduit"]), (int)dr2["quantitecommande"]);
+                            produit = tousLesProduits.Find(x => x.Numproduit == (int)dr2["numproduit"]);
+                            com.LesProduits.Add(produit);
+                            dict.Add(produit, (int)dr2["quantitecommande"]);
                         }
                     }
-                    com.Produits_quantite = dict;
+                    com.ProduitsQuantites = dict;
                     lesCommandes.Add(com);
                 }
             }
@@ -238,9 +250,5 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
-        int ICrud<Commande>.Create()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

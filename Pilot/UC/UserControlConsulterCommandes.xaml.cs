@@ -3,6 +3,7 @@ using Pilot.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -142,6 +143,10 @@ namespace Pilot.UC
             {
                 commandeSelectionnee = (Commande)dgCommande.SelectedItem;
                 UserControlDetailCommande userControlDetailCommande = new UserControlDetailCommande(commandeSelectionnee);
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.MainContent.Content = userControlDetailCommande;
+                }
             }
         }
 

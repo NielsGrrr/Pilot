@@ -105,14 +105,10 @@ namespace Pilot
             MainContent.Content = new UserControlRechercheRevendeur();
         }
 
-        public void DetailCommande(Commande c)
-        {
-            MainContent.Content = new UserControlDetailCommande(c);
-        }
-
         private void menuProduit2_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new UserControlConsulterProduit();
         }
+
     }
 }

@@ -8,41 +8,53 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Label x:Name="labCommande"
-            HorizontalContentAlignment="Center"
-            Background="#FF005CA9"
-            Content="Détail de la commande "
-            FontWeight="DemiBold"
-            Foreground="White" />
+        HorizontalContentAlignment="Center"
+        Background="#FF005CA9"
+        Content="Détail de la commande "
+        FontWeight="DemiBold"
+        Foreground="White" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel>
-                <GroupBox Margin="50,50,50,0" Header="Commande">
-                    <StackPanel DataContext="{Binding Commande}">
-                        <Label Content="Nom" />
+                <GroupBox Margin="50,10,50,0" Header="Commande">
+                    <StackPanel>
+                        <Label Content="Numéro" />
                         <TextBox Text="{Binding NumCommande}"/>
                         <Label Content="Maitre" />
-                        <TextBox Text="{Binding DateCommande}"/>
+                        <TextBox Text="{Binding DateCommande, StringFormat=d}"/>
                         <Label Content="Poids" />
-                        <TextBox Text="{Binding DateLivraison}"/>
+                        <TextBox Text="{Binding DateLivraison, StringFormat=d}"/>
                         <Label Content="Prix total"/>
-                        <TextBox Text="{Binding PrixFinal, StringFormat=C}"/>
+                        <TextBox Text="{Binding PrixFinal, StringFormat=C, Mode=OneWay}" IsEnabled="False"/>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Margin="50,20,50,0" Header="Produits">
-                    <DataGrid>
-                        <DataGridTextColumn Width="*" Header="Code Produit" Binding="{Binding CodeProduit, ValidatesOnExceptions=true}"/>
-                        <DataGridTextColumn Width="*" Header="Ville" Binding="{Binding AdresseVille, ValidatesOnExceptions=true}"/>
-                        <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseRue, ValidatesOnExceptions=true}"/>
-                        <DataGridTextColumn Width="*" Header="Code postal" Binding="{Binding AdresseCP, ValidatesOnExceptions=true}"/>
-                    </DataGrid>
-                </GroupBox>
+                
+                <DataGrid Margin="10,10,10,0" ItemsSource="{Binding LesProduits}" AutoGenerateColumns="False">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF005CA9" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Height" Value="20" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding CodeProduit, ValidatesOnExceptions=true}" Header="Code" />
+                        <DataGridTextColumn Width="*" Binding="{Binding LaPointe.LibelleTypePointe, ValidatesOnExceptions=true}" Header="Pointe"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding LeType.LibelleType, ValidatesOnExceptions=true}" Header="Type"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding LeType.LaCategorie.LibelleCategorie, ValidatesOnExceptions=true}" Header="Categorie"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding PrixVente, ValidatesOnExceptions=true}" Header="Prix"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding Quantite, ValidatesOnExceptions=true}" Header="Quantite"/>
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <GroupBox Margin="50,20,50,0" Header="Employe">
-                    <StackPanel DataContext="{Binding Commande.Employe}">
+                <GroupBox Margin="50,10,50,0" Header="Employe">
+                    <StackPanel DataContext="{Binding Employe}">
                         <Label Content="Nom" />
                         <TextBox Text="{Binding Nom}"/>
                         <Label Content="Prénom" />
@@ -50,13 +62,15 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Margin="50,50,50,0" Header="Revendeur">
-                    <StackPanel DataContext="{Binding SelectedItem.UnChien}">
+                    <StackPanel DataContext="{Binding UnRevendeur}">
                         <Label Content="Nom" />
-                        <TextBox Text="{Binding Nom}"/>
-                        <Label Content="Maitre" />
-                        <TextBox Text="{Binding Maitre}"/>
-                        <Label Content="Poids" />
-                        <TextBox Text="{Binding Poids}"/>
+                        <TextBox Text="{Binding RaisonSociale}"/>
+                        <Label Content="Ville" />
+                        <TextBox Text="{Binding AdresseVille}"/>
+                        <Label Content="Adresse" />
+                        <TextBox Text="{Binding AdresseRue}"/>
+                        <Label Content="Code postal" />
+                        <TextBox Text="{Binding AdresseCP}"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

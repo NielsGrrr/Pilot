@@ -20,7 +20,7 @@
         <StackPanel Margin="20">
             <TextBox
                 Width="120"
-                Text="TextBox"
+                Text=""
                 TextWrapping="Wrap" />
             <DataGrid
                 x:Name="dgProduits"

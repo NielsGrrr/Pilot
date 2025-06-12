@@ -28,6 +28,7 @@ namespace Pilot.UC
         {
             ChargeData();
             InitializeComponent();
+            dgRevendeur.Items.Filter = RechercheMotClefRevendeur;
         }
         public void ChargeData()
         {
@@ -90,6 +91,17 @@ namespace Pilot.UC
                     }
                 }
             }
+        }
+        private bool RechercheMotClefRevendeur(object obj)
+        {
+            if (String.IsNullOrEmpty(tbMotClefRevendeur.Text))
+                return true;
+            Revendeur rev = obj as Revendeur;
+            return (rev.RaisonSociale.StartsWith(tbMotClefRevendeur.Text, StringComparison.OrdinalIgnoreCase));
+        }
+        private void tbMotClefRevendeur_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(dgRevendeur.ItemsSource).Refresh();
         }
     }
 }
