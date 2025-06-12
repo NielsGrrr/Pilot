@@ -162,6 +162,54 @@ namespace Pilot.Classes
             }
         }
 
+        public int AjouterProduit(Produit produit, int quantite)
+        {
+            bool present = false;
+            foreach (Produit pr in LesProduits)
+            {
+                if (pr.CodeProduit == produit.CodeProduit)
+                {
+                    present = true;
+                }
+            }
+
+            //A terminer avec un UPDATE et en aditionant les quantités
+            if (present)
+            {
+                int quantiteTotale = quantite;
+                this.LesProduits.Add(produit);
+                this.lesQuantites.Add(quantite);
+                this.ProduitsQuantites.Add(produit, quantite);
+                int nb = 0;
+                using (var cmdUpdate = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))
+                {
+                    cmdUpdate.Parameters.AddWithValue("numCommande", this.NumCommande);
+                    cmdUpdate.Parameters.AddWithValue("numProduit", produit.Numproduit);
+                    cmdUpdate.Parameters.AddWithValue("quantiteCommande", quantite);
+                    cmdUpdate.Parameters.AddWithValue("prix", produit.PrixVente);
+                    nb = DataAccess.Instance.ExecuteInsert(cmdUpdate);
+                }
+                return nb;
+            }
+            else
+            {
+                this.LesProduits.Add(produit);
+                this.lesQuantites.Add(quantite);
+                this.ProduitsQuantites.Add(produit, quantite);
+                int nb = 0;
+                using (var cmdInsert = new NpgsqlCommand("insert into produitcommande (numcommande,numproduit,quantitecommande,prix) values (@numcommande,@numproduit,@quantitecommande,@prix) Returning numcommande"))
+                {
+                    cmdInsert.Parameters.AddWithValue("numCommande", this.NumCommande);
+                    cmdInsert.Parameters.AddWithValue("numProduit", produit.Numproduit);
+                    cmdInsert.Parameters.AddWithValue("quantiteCommande", quantite);
+                    cmdInsert.Parameters.AddWithValue("prix", produit.PrixVente);
+                    nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+                }
+                return nb;
+            }
+            
+        }
+
         public int Create()
         {
             int nb = 0;
@@ -235,6 +283,22 @@ namespace Pilot.Classes
         public int Update()
         {
             throw new NotImplementedException();
+        }
+
+        public int UpdateProduitCommande()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Commande FindNumCommande()
+        {
+            List<Commande> commandes = new Commande().FindAll();
+            foreach (Commande com in commandes)
+            {
+                if (com.NumCommande == this.NumCommande)
+                    return com;
+            }
+            return new Commande();
         }
 
     }

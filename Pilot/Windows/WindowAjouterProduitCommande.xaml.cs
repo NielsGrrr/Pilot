@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Pilot.Classes;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,15 +22,44 @@ namespace Pilot.Windows
     /// </summary>
     public partial class WindowAjouterProduitCommande : Window
     {
+        public ObservableCollection<Commande> LesCommandes { get; set; }
+        public Produit produit { get; set; }
         public WindowAjouterProduitCommande()
         {
+            ChargeData();
             InitializeComponent();
         }
 
-        public WindowAjouterProduitCommande(Classes.Produit unProduit)
+        public WindowAjouterProduitCommande(Produit unProduit)
         {
+            ChargeData();
             InitializeComponent();
-            this.DataContext = unProduit;
+            produit = unProduit; 
+        }
+
+        private void ChargeData()
+        {
+            try
+            {
+                LesCommandes = new ObservableCollection<Commande>(new Commande().FindAll());
+                this.DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
+                LogError.Log(ex, "Erreur SQL");
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void butValiderProduitCommande_Click(object sender, RoutedEventArgs e)
+        {
+            Commande uneCommande = (Commande)dgCommande.SelectedItem;
+            Commande laCommande = uneCommande.FindNumCommande();
+            //Attention au Parse
+            int quantite = int.Parse(tbQuantite.Text);
+            laCommande.AjouterProduit(produit, quantite);
+            DialogResult = true;
         }
     }
 }
