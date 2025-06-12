@@ -26,9 +26,11 @@ namespace Pilot
         {
 
             InitializeComponent();
-            //AjouterProduit();
             Authentification();
-            
+            if (Role == RoleEmploye.Commercial)
+                MainContent.Content = new UserControlConsulterCommandes();
+            else if (Role == RoleEmploye.ResponsableProduction)
+                MainContent.Content = new UserControlConsulterProduit();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,7 +46,7 @@ namespace Pilot
             result = true;
             if (result == true)
             {
-                authWindow.Role = Role;
+                Role = authWindow.Role;
                 MessageBox.Show("Authentification réussie", "Authentification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -54,41 +56,7 @@ namespace Pilot
             }
         }
 
-        private void AjouterProduit()
-        {
-            Produit unProduit = new Produit();
-            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit, Action.Créer);
-            bool? result = wProduit.ShowDialog();
-            if (result == true)
-            {
-                try
-                {
-                    unProduit.Create();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
-
-        private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
-        {
-            Produit unProduit = new Produit();
-            WindowAjouterProduit wProduit = new WindowAjouterProduit(unProduit, Action.Créer);
-            bool? result = wProduit.ShowDialog();
-            if (result == true)
-            {
-                try
-                {
-                    unProduit.Create();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, "Le produit n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
+        
 
         private void menuCommande_Click(object sender, RoutedEventArgs e)
         {

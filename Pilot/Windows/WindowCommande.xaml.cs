@@ -41,7 +41,7 @@ namespace Pilot.Windows
         {
             try
             {
-                LesEmployes = new ObservableCollection<Employe>(new Employe().FindAll());
+                LesEmployes = new ObservableCollection<Employe>(new Employe().FindBySelection("libellerole = 'Commercial'"));
                 LesRevendeurs = new ObservableCollection<Revendeur>(new Revendeur().FindAll());
                 LesTransports = new ObservableCollection<ModeTransport>(new ModeTransport().FindAll());
             }
