@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace Pilot.Classes
         public Couleur(int numCouleur, string libelleCouleur)
         {
             this.NumCouleur = numCouleur;
+            this.LibelleCouleur = libelleCouleur;
+        }
+
+        public Couleur(string libelleCouleur)
+        {
             this.LibelleCouleur = libelleCouleur;
         }
 
@@ -75,7 +81,7 @@ namespace Pilot.Classes
             return lesCouleurs;
         }
 
-        public List<Couleur> FindBySelection(string criteres)
+        public List<Couleur> FindBySelection(string numCouleur)
         {
             throw new NotImplementedException();
         }
@@ -88,6 +94,18 @@ namespace Pilot.Classes
         public int Update()
         {
             throw new NotImplementedException();
+        }
+
+        public bool EstPresent(ObservableCollection<Couleur> lesCouleurs)
+        {
+            if (lesCouleurs == null)
+                return false;
+            foreach (Couleur coul in lesCouleurs)
+            {
+                if (coul.LibelleCouleur == this.LibelleCouleur)
+                    return true;
+            }
+            return false;
         }
     }
 }

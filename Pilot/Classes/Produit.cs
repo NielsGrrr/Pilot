@@ -319,5 +319,27 @@ namespace Pilot.Classes
         {
             throw new NotImplementedException();
         }
+
+        public void AjouterCouleur(Couleur uneCouleur)
+        {
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into couleurproduit (numproduit,numcouleur) values (@numproduit,@numcouleur) Returning numproduit"))
+            {
+                cmdInsert.Parameters.AddWithValue("numproduit", this.Numproduit);
+                cmdInsert.Parameters.AddWithValue("numcouleur", uneCouleur.NumCouleur);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+            }            
+        }
+
+        public int SupprimerCouleur(Couleur uneCouleur)
+        {
+            this.LesCouleurs.Remove(uneCouleur);
+            int nb = 0;
+            using (var cmdDelete = new NpgsqlCommand("delete from couleurproduit  where numcouleur =@numcouleur;"))
+            {
+                cmdDelete.Parameters.AddWithValue("numcouleur", uneCouleur.NumCouleur);
+                return DataAccess.Instance.ExecuteSet(cmdDelete);
+            }
+        }
     }
 }

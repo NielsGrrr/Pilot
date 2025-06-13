@@ -142,6 +142,7 @@ namespace Pilot.UC
                         produitSelectionne.PrixVente = copie.PrixVente;
                         produitSelectionne.QuantiteStock = copie.QuantiteStock;
                         produitSelectionne.Disponible = copie.Disponible;
+                        produitSelectionne.LesCouleurs = copie.LesCouleurs;
                         produitSelectionne.Update();
                         dgProduits.Items.Refresh();
                     }

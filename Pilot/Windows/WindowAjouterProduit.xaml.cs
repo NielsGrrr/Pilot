@@ -23,8 +23,12 @@ namespace Pilot.Windows
     {
         public ObservableCollection<Classes.Type> LesTypes { get; set; }
         public ObservableCollection<TypePointe> LesPointes { get; set; }
+        public ObservableCollection<Couleur> LesCouleurs { get; set; }
+        public ObservableCollection<Couleur> ToutesLesCouleurs { get; set; }
+        public Produit prodWindow { get; set; }
         public WindowAjouterProduit(Produit unProduit, Action action)
         {
+            prodWindow = unProduit;
             ChargeData();
             this.DataContext = unProduit;
             InitializeComponent();
@@ -43,6 +47,8 @@ namespace Pilot.Windows
         {
             LesTypes = new ObservableCollection<Classes.Type>(new Classes.Type().FindAll());
             LesPointes = new ObservableCollection<TypePointe>(new TypePointe().FindAll());
+            ToutesLesCouleurs = new ObservableCollection<Couleur>(new Couleur().FindAll());
+            LesCouleurs = prodWindow.LesCouleurs;
         }
 
         private void butValider_Click(object sender, RoutedEventArgs e)
@@ -56,7 +62,7 @@ namespace Pilot.Windows
                 bool ok = true;
                 foreach (UIElement uie in panelFormProduit.Children)
                 {
-                    if (uie is TextBox)
+                    if (uie is TextBox && uie != txtCouleurs)
                     {
                         TextBox txt = (TextBox)uie;
                         txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
@@ -64,10 +70,60 @@ namespace Pilot.Windows
                     if (Validation.GetHasError(uie))
                         ok = false;
                 }
+                if (ok)
+                {
+                    prodWindow.CodeProduit = txtCodeProduit.Text;
+                }
                 DialogResult = ok;
             }
             
 
+        }
+
+        private void butAjoutCouleurs_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtCouleurs.Text == null)
+                MessageBox.Show("Veuillez saisir une couleur valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Couleur couleurAAjouter;
+                Couleur uneCouleur = new Couleur(txtCouleurs.Text);
+                if (uneCouleur.EstPresent(ToutesLesCouleurs))
+                {
+                    foreach (Couleur coul in ToutesLesCouleurs)
+                    {
+                        if (coul.LibelleCouleur == (uneCouleur.LibelleCouleur))
+                            uneCouleur = coul;
+                    }
+                    LesCouleurs.Add(uneCouleur);
+                    prodWindow.AjouterCouleur(uneCouleur);
+                }
+                else
+                {
+                    MessageBox.Show("La couleur n'existe pas", "Attetion", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            
+        }
+
+        private void butSupprCouleurs_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbCouleurs.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Couleur couleurASupprimer = (Couleur)lbCouleurs.SelectedItem;
+                Couleur copie = new Couleur(couleurASupprimer.NumCouleur, couleurASupprimer.LibelleCouleur);
+                try
+                {
+                    prodWindow.SupprimerCouleur(couleurASupprimer);
+                    LesCouleurs.Remove(couleurASupprimer);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le produit n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

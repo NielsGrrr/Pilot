@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="WindowAjouterProduit"
     Width="300"
-    Height="600"
+    Height="700"
     mc:Ignorable="d">
     <StackPanel>
         <Label Content="Ajouter un produit" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35" />
@@ -25,22 +25,10 @@
             <Label Content="Type de pointe*" />
             <ComboBox x:Name="comboPointe" SelectedItem="{Binding LaPointe}" DisplayMemberPath="LibelleTypePointe" />
             <Label Content="Couleurs" />
-            <DataGrid Height="100" ItemsSource="{Binding CouleursUtilisees}" AutoGenerateColumns="True">
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#FF005CA9" />
-                        <Setter Property="Foreground" Value="White" />
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Key.LibelleCouleur}"
-                        Header="Couleur" />
-                    <DataGridCheckBoxColumn Width="*" Binding="{Binding [], ValidatesOnExceptions=true}" Header="Utilisée" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <ListBox x:Name="lbCouleurs" Height="100" ItemsSource="{Binding LesCouleurs}" DisplayMemberPath="LibelleCouleur"/>
+            <TextBox x:Name="txtCouleurs" TextWrapping="Wrap" />
+            <Button x:Name="butAjoutCouleurs" Content="Ajouter" Click="butAjoutCouleurs_Click"/>
+            <Button x:Name="butSupprCouleurs" Content="Supprimer" Click="butSupprCouleurs_Click"/>
             <CheckBox x:Name="checkDisponible"
                 Margin="0,20,0,0"
                 Content="Disponible"
