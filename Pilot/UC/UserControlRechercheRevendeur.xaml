@@ -24,7 +24,6 @@
                     <DataGridTextColumn Width="*" Header="Ville" Binding="{Binding AdresseVille, ValidatesOnExceptions=true}"/>
                     <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseRue, ValidatesOnExceptions=true}"/>
                     <DataGridTextColumn Width="*" Header="Code postal" Binding="{Binding AdresseCP, ValidatesOnExceptions=true}"/>
-                    <DataGridTextColumn Width="*" Header="Actions"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">

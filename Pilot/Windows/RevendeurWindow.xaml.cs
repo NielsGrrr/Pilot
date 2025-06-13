@@ -28,21 +28,27 @@ namespace Pilot.Windows
         }
         private void but_Click(object sender, RoutedEventArgs e)
         {
-            //Revendeur revendeur = new Revendeur(((ComboBoxItem)cmbFormeJuridique.SelectedItem).Content.ToString() + " " + txtNomRevendeur.Text, txtAdresse.Text, txtCodePostal.Text, txtVille.Text);
-            //revendeur.Create();
-            //DialogResult = true;
-            bool ok = true;
-            foreach (UIElement uie in panelFormRevendeur.Children)
+            int cp;
+            if (txtRaisonSociale.Text.Length == 0 || txtAdresse.Text.Length == 0 || txtVille.Text.Length == 0)
+                MessageBox.Show("Les champs ne sont pas remplis", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else if (txtCodePostal.Text.Length != 5 )
+                MessageBox.Show("Le code postal doit être de longueur 5", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
             {
-                if (uie is TextBox)
+                bool ok = true;
+                foreach (UIElement uie in panelFormRevendeur.Children)
                 {
-                    TextBox txt = (TextBox)uie;
-                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    if (uie is TextBox)
+                    {
+                        TextBox txt = (TextBox)uie;
+                        txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    }
+                    if (Validation.GetHasError(uie))
+                        ok = false;
                 }
-                if (Validation.GetHasError(uie))
-                    ok = false;
+                DialogResult = ok;
             }
-            DialogResult = ok;
+            
         }
     }
 }
