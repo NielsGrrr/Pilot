@@ -15,7 +15,7 @@ namespace Pilot.Classes.Tests
         public void EmployeTest()
         {
             Employe employe = new Employe(1,RoleEmploye.Commercial, "nom", "prenom", "mdp", "login");
-            Assert.AreEqual(employe.NumEmploye, 1)
+            Assert.AreEqual(employe.NumEmploye, 1);
         }
 
         [TestMethod()]

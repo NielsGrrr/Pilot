@@ -189,12 +189,7 @@ namespace Pilot.Classes
                 }
                 return res;
             }
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException("Le prix final ne peut pas être négatif");
-                this.PrixFinal = value;
-            }
+
         }
 
         /// <summary>
