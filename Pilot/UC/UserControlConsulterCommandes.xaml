@@ -37,7 +37,6 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Binding="{Binding NumCommande, ValidatesOnExceptions=true}" Header="Numéro" />
                     <DataGridTextColumn Width="*" Binding="{Binding UnRevendeur.RaisonSociale, ValidatesOnExceptions=true}" Header="Revendeur" />
                     <DataGridTextColumn Width="*" Binding="{Binding UnTransport.LibelleTransport, ValidatesOnExceptions=true}" Header="Mode de livraison" />
                     <DataGridTextColumn Width="*" Binding="{Binding DateCommande, StringFormat=d,ValidatesOnExceptions=true}" Header="Date création" />

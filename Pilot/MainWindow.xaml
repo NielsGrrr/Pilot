@@ -10,7 +10,9 @@
     Height="500"
     mc:Ignorable="d" WindowStartupLocation="CenterScreen"
     Background="#FFF0F0F0">
-    <StackPanel>
+    
+        <StackPanel>
+           
         <StackPanel.Resources>
             <Style TargetType="MenuItem">
                 <Setter Property="Width" Value="100"/>

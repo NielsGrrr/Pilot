@@ -8,15 +8,13 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <!-- Filtres -->
             <RowDefinition Height="*"/>
-            <!-- DataGrid -->
             <RowDefinition Height="Auto"/>
-            <!-- Bouton -->
         </Grid.RowDefinitions>
         <Label Grid.Row="0"
             Height="35"
@@ -53,7 +51,7 @@
                 x:Name="dgProduits" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeRows="False" 
                 Margin="50,20,50,0"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding LesProduits}">
+                ItemsSource="{Binding LesProduits}" VerticalScrollBarVisibility="Auto">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#FF005CA9" />

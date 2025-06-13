@@ -314,6 +314,7 @@ namespace Pilot.Classes
                     Revendeur rev = new Revendeur((Int32)dr["numrevendeur"], (String)dr["raisonsociale"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]);
                     com.UnRevendeur = rev;
                     com.Employe = employe;
+                    com.DateLivraison = (DateTime)dr["datelivraison"];
                     ModeTransport modeTransport = new ModeTransport((Int32)dr["numtransport"], (String)dr["libelletransport"]);
                     com.UnTransport = modeTransport;
                     using (NpgsqlCommand cmdSelect2 = new NpgsqlCommand("select * from produitcommande pc WHERE pc.numcommande=@id;"))
