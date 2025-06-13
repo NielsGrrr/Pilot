@@ -50,10 +50,14 @@ namespace Pilot
             {
                 MainContent.Content = new UserControlConsulterCommandes();
                 menuProduitResponsable.Visibility = Visibility.Collapsed;
+                menuCommande.Visibility = Visibility.Visible;
+                menuProduitsCommande.Visibility = Visibility.Visible;
+                menuRevendeurs.Visibility = Visibility.Visible;
             }
             else if (Role == RoleEmploye.ResponsableProduction)
             {
                 MainContent.Content = new UserControlConsulterProduit();
+                menuProduitResponsable.Visibility = Visibility.Visible;
                 menuCommande.Visibility = Visibility.Collapsed;
                 menuProduitsCommande.Visibility = Visibility.Collapsed;
                 menuRevendeurs.Visibility = Visibility.Collapsed;
