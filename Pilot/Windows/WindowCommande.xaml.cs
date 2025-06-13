@@ -25,16 +25,14 @@ namespace Pilot.Windows
         public ObservableCollection<Revendeur> LesRevendeurs { get; set; }
         public ObservableCollection<Employe> LesEmployes { get; set; }
         public ObservableCollection<ModeTransport> LesTransports { get; set; }
-        public Commande UneCommande { get; set; }
 
         public WindowCommande(Commande uneCommande, Action act)
         {
-            UneCommande = uneCommande;
             ChargeData();
-            this.DataContext = this;
+            this.DataContext = uneCommande;
             InitializeComponent();
             butValiderCommande.Content = act;
-            comboModeLivraison.ItemsSource = LesTransports;
+            
         }
 
         private void ChargeData()
@@ -44,6 +42,9 @@ namespace Pilot.Windows
                 LesEmployes = new ObservableCollection<Employe>(new Employe().FindBySelection("libellerole = 'Commercial'"));
                 LesRevendeurs = new ObservableCollection<Revendeur>(new Revendeur().FindAll());
                 LesTransports = new ObservableCollection<ModeTransport>(new ModeTransport().FindAll());
+                comboModeLivraison.ItemsSource = LesTransports;
+                dgEmploye.ItemsSource = LesEmployes;
+                dgRevendeurs.ItemsSource = LesRevendeurs;
             }
             catch (Exception ex)
             {
@@ -61,11 +62,20 @@ namespace Pilot.Windows
             }
             else
             {
-                Employe employe = (Employe)dgEmploye.SelectedItem;
-                Revendeur revendeur = (Revendeur)dgRevendeurs.SelectedItem;
-                ModeTransport mt = (ModeTransport)comboModeLivraison.SelectedItem;
-                //Attention au Parse
-                Commande uneCommande = new Commande(employe, mt, revendeur, DateTime.Parse(txtDateLivraison.Text));
+                //Console.WriteLine(this.DataContext);
+                bool ok = true;
+                foreach (UIElement uie in panelFormCommande.Children)
+                {
+                    if (uie is TextBox)
+                    {
+                        TextBox txt = (TextBox)uie;
+                        txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    }
+                    if (Validation.GetHasError(uie))
+                        ok = false;
+
+                }
+                //Console.WriteLine(this.DataContext);
                 try
                 {
                     // Ajouter la commande à la liste des commandes
@@ -75,7 +85,7 @@ namespace Pilot.Windows
                 {
                     MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                DialogResult = true;
+                DialogResult = ok;
             }
         }
     }

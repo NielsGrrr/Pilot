@@ -37,15 +37,11 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding NumCommande, ValidatesOnExceptions=true}"
-                        Header="Numéro" />
+                    <DataGridTextColumn Width="*" Binding="{Binding NumCommande, ValidatesOnExceptions=true}" Header="Numéro" />
                     <DataGridTextColumn Width="*" Binding="{Binding UnRevendeur.RaisonSociale, ValidatesOnExceptions=true}" Header="Revendeur" />
                     <DataGridTextColumn Width="*" Binding="{Binding UnTransport.LibelleTransport, ValidatesOnExceptions=true}" Header="Mode de livraison" />
                     <DataGridTextColumn Width="*" Binding="{Binding DateCommande, StringFormat=d,ValidatesOnExceptions=true}" Header="Date création" />
                     <DataGridTextColumn Width="*" Binding="{Binding PrixFinal,ValidatesOnExceptions=true}" Header="Prix" />
-                    <DataGridTextColumn Width="*" Header="Actions" />
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel
