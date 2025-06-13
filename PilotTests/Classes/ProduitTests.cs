@@ -9,10 +9,16 @@ using System.Threading.Tasks;
 namespace Pilot.Classes.Tests
 {
     [TestClass()]
-    public class CategorieTests
+    public class ProduitTests
     {
         [TestMethod()]
-        public void CategorieTest()
+        public void ProduitTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void CreateTest()
         {
 
         }

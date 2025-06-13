@@ -62,7 +62,6 @@ namespace Pilot.Windows
             }
             else
             {
-                //Console.WriteLine(this.DataContext);
                 bool ok = true;
                 foreach (UIElement uie in panelFormCommande.Children)
                 {
@@ -71,11 +70,15 @@ namespace Pilot.Windows
                         TextBox txt = (TextBox)uie;
                         txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     }
+                    if (uie is DatePicker)
+                    {
+                        DatePicker datePicker = (DatePicker)uie;
+                        datePicker.GetBindingExpression(DatePicker.TextProperty).UpdateSource();
+                    }
                     if (Validation.GetHasError(uie))
                         ok = false;
 
                 }
-                //Console.WriteLine(this.DataContext);
                 try
                 {
                     // Ajouter la commande à la liste des commandes

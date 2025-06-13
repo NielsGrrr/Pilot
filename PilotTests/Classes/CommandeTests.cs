@@ -14,79 +14,22 @@ namespace Pilot.Classes.Tests
         [TestMethod()]
         public void CommandeTest()
         {
-
+            //test constructeur
         }
 
-        [TestMethod()]
-        public void CommandeTest1()
-        {
-
-        }
-
-        [TestMethod()]
-        public void CommandeTest2()
-        {
-
-        }
-
-        [TestMethod()]
-        public void CommandeTest3()
-        {
-
-        }
-
-        [TestMethod()]
-        public void AjouterProduitTest()
-        {
-
-        }
-
-        [TestMethod()]
         public void CreateTest()
         {
-
+            //Test unicité d'une commande
         }
 
-        [TestMethod()]
-        public void DeleteTest()
+        public void CalculTotalTest()
         {
-
+            //Vérifier le prix total calculé
         }
 
-        [TestMethod()]
-        public void FindAllTest()
+        public void AjouterProduit()
         {
-
-        }
-
-        [TestMethod()]
-        public void FindBySelectionTest()
-        {
-
-        }
-
-        [TestMethod()]
-        public void ReadTest()
-        {
-
-        }
-
-        [TestMethod()]
-        public void UpdateTest()
-        {
-
-        }
-
-        [TestMethod()]
-        public void UpdateProduitCommandeTest()
-        {
-
-        }
-
-        [TestMethod()]
-        public void FindNumCommandeTest()
-        {
-
+            //Test d'unicité des produits dans les comandes
         }
     }
 }
