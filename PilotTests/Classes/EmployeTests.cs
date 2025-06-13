@@ -16,12 +16,11 @@ namespace Pilot.Classes.Tests
         {
             Employe employe = new Employe(1,RoleEmploye.Commercial, "nom", "prenom", "mdp", "login");
             Assert.AreEqual(employe.NumEmploye, 1);
-        }
-
-        [TestMethod()]
-        public void CreateTest()
-        {
-
+            Assert.AreEqual(employe.Role, RoleEmploye.Commercial);
+            Assert.AreEqual(employe.Nom, "nom");
+            Assert.AreEqual(employe.Prenom, "prenom");
+            Assert.AreEqual(employe.Password, "mdp");
+            Assert.AreEqual(employe.Login, "login");
         }
     }
 }
