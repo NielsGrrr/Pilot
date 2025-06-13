@@ -10,6 +10,15 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
+    /// <summary>
+    /// Stocke les informations d'une commande :
+    /// - un entier : le numéro de la commande
+    /// - un employé : celui qui a enregistré la commande
+    /// - un transport : mode de transport utilisé
+    /// - un revendeur : client ayant passé la commande
+    /// - deux dates : la date de commande et la date de livraison
+    /// - un dictionnaire : les produits commandés et leur quantité
+    /// </summary>
     public class Commande: ICrud<Commande>
     {
         private int numCommande;
@@ -20,11 +29,20 @@ namespace Pilot.Classes
         private DateTime dateLivraison;
         private Dictionary<Produit, int> produitsQuantites;
 
+        /// <summary>
+        /// Construit une commande vide.
+        /// Initialise un dictionnaire vide pour les produits.
+        /// </summary>
         public Commande()
         {
             this.ProduitsQuantites = new Dictionary<Produit, int>();
         }
 
+        /// <summary>
+        /// Construit une commande avec son numéro et sa date.
+        /// </summary>
+        /// <param name="numCommande">Numéro de la commande</param>
+        /// <param name="dateCommande">Date de la commande</param>
         public Commande(int numCommande, DateTime dateCommande)
         {
             this.NumCommande = numCommande;
@@ -35,6 +53,15 @@ namespace Pilot.Classes
             this.DateLivraison = new DateTime();
         }
 
+        /// <summary>
+        /// Construit une commande complète (numéro, employé, transport, revendeur, livraison).
+        /// La date de commande est automatiquement mise au jour actuel.
+        /// </summary>
+        /// <param name="numCommande"></param>
+        /// <param name="employe"></param>
+        /// <param name="unTransport"></param>
+        /// <param name="unRevendeur"></param>
+        /// <param name="dateLivraison"></param>
         public Commande(int numCommande, Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison)
         {
             this.NumCommande = numCommande;
@@ -45,15 +72,11 @@ namespace Pilot.Classes
             this.DateLivraison = dateLivraison;
         }
 
-        public Commande(Employe employe, ModeTransport unTransport, Revendeur unRevendeur, DateTime dateLivraison)
-        {
-            this.Employe = employe;
-            this.UnTransport = unTransport;
-            this.UnRevendeur = unRevendeur;
-            this.DateCommande = DateTime.Today;
-            this.DateLivraison = dateLivraison;
-        }
-
+        /// <summary>
+        /// Obtient ou définit le numéro de la commande.
+        /// Doit être un entier positif.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Renvoyée si le numéro est négatif</exception>
         public int NumCommande
         {
             get
@@ -69,6 +92,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit l'employé ayant pris la commande.
+        /// </summary>
         public Employe Employe
         {
             get
@@ -82,6 +108,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le mode de transport pour la livraison.
+        /// </summary>
         public ModeTransport UnTransport
         {
             get
@@ -95,6 +124,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le revendeur ayant passé la commande.
+        /// </summary>
         public Revendeur UnRevendeur
         {
             get
@@ -108,6 +140,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit la date à laquelle la commande a été passée.
+        /// </summary>
         public DateTime DateCommande
         {
             get
@@ -121,6 +156,10 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit la date de livraison prévue.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Date de livraison avant la date de création</exception>
         public DateTime DateLivraison
         {
             get
@@ -136,6 +175,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Calcule et retourne le prix total de la commande.
+        /// </summary>
         public decimal PrixFinal
         {
             get
@@ -155,6 +197,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le dictionnaire des produits et quantités commandés.
+        /// </summary>
         public Dictionary<Produit, int> ProduitsQuantites
         {
             get
@@ -168,6 +213,12 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Ajoute un produit à la commande et enregistre l'association en base de données.
+        /// </summary>
+        /// <param name="produit">Produit à ajouter</param>
+        /// <param name="quantite">Quantité commandée</param>
+        /// <returns>Numéro de commande généré par la base</returns>
         public int AjouterProduit(Produit produit, int quantite)
         {
             bool present = false;
@@ -212,6 +263,10 @@ namespace Pilot.Classes
             
         }
 
+        /// <summary>
+        /// Insère la commande en base de données.
+        /// </summary>
+        /// <returns>Numéro de commande généré</returns>
         public int Create()
         {
             int nb = 0;
@@ -228,6 +283,10 @@ namespace Pilot.Classes
             return nb;
         }
 
+        /// <summary>
+        /// Supprime la commande et ses produits associés de la base.
+        /// </summary>
+        /// <returns>Nombre de lignes supprimées</returns>
         public int Delete()
         {
             using (var cmdUpdate = new NpgsqlCommand("delete from produitcommande  where numcommande =@numcommande; delete from commande  where numcommande =@numcommande;"))
@@ -237,6 +296,10 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Récupère toutes les commandes depuis la base de données.
+        /// </summary>
+        /// <returns>Liste des commandes</returns>
         public List<Commande> FindAll()
         {
             List<Commande> lesCommandes = new List<Commande>();
@@ -282,6 +345,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Met à jour les informations de la commande en base.
+        /// </summary>
+        /// <returns>Nombre de lignes modifiées</returns>
         public int Update()
         {
             using (var cmdUpdate = new NpgsqlCommand("update commande set numrevendeur=@numrevendeur, numemploye=@numemploye, numtransport=@numtransport, datecommande=@datecommande, datelivraison=@datelivraison WHERE numcommande=@numcommande;"))
@@ -296,11 +363,10 @@ namespace Pilot.Classes
             }
         }
 
-        public int UpdateProduitCommande()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Recherche une commande existante ayant le même numéro que l'instance.
+        /// </summary>
+        /// <returns>Commande trouvée ou une commande vide</returns>
         public Commande FindNumCommande()
         {
             List<Commande> commandes = new Commande().FindAll();
