@@ -38,7 +38,7 @@
                         Width="*"
                         Binding="{Binding Key.LibelleCouleur}"
                         Header="Couleur" />
-                    <DataGridCheckBoxColumn Width="*" Binding="{Binding Key.Value, ValidatesOnExceptions=true}" Header="Utilisée" />
+                    <DataGridCheckBoxColumn Width="*" Binding="{Binding [], ValidatesOnExceptions=true}" Header="Utilisée" />
                 </DataGrid.Columns>
             </DataGrid>
             <CheckBox x:Name="checkDisponible"
