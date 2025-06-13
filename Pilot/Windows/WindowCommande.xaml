@@ -54,7 +54,7 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Date de livraison"/>
-                <DatePicker x:Name="DatePickerLivraison" Text="" Margin="20,0,0,0" Width="70"/>
+                <DatePicker SelectedDate="{Binding DateLivraison}" x:Name="DatePickerLivraison" Text="" Margin="20,0,0,0" Width="70"/>
 
             </StackPanel>
             <Button x:Name="butValiderCommande" Content="Valider la commande" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0" Height="30" Click="butValiderCommande_Click"/>
