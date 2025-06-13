@@ -130,8 +130,8 @@ namespace Pilot.Classes
 
             set
             {
-                if (value < this.DateCommande)
-                    throw new ArgumentOutOfRangeException("La livraison ne peut pas être avant lacommande");
+                //if (value < this.DateCommande)
+                //    throw new ArgumentOutOfRangeException("La livraison ne peut pas être avant lacommande");
                 this.dateLivraison = value;
             }
         }

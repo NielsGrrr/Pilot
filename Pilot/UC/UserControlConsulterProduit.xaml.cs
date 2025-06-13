@@ -87,6 +87,7 @@ namespace Pilot.UC
                 try
                 {
                     produitASupprimer.Delete();
+                    LesProduits.Remove(produitASupprimer);
                 }
                 catch (Exception ex)
                 {
