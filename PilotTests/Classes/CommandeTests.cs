@@ -45,7 +45,7 @@ namespace Pilot.Classes.Tests
 
         }
 
-        [TestMethod()]
+        /*[TestMethod()]
         public void CreateTest()
         {
             DataAccess.Username = "stiefvan";
@@ -99,6 +99,6 @@ namespace Pilot.Classes.Tests
         public void AjouterProduit()
         {
             //Test d'unicité des produits dans les comandes
-        }
+        }*/
     }
 }

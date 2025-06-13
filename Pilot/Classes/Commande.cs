@@ -36,6 +36,8 @@ namespace Pilot.Classes
         public Commande()
         {
             this.ProduitsQuantites = new Dictionary<Produit, int>();
+            this.DateCommande = DateTime.Today;
+            this.dateLivraison = DateTime.Today.AddDays(1);
         }
 
         /// <summary>
