@@ -66,7 +66,7 @@ namespace Pilot.Windows
             {
                 MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else if (tbQuantite.Text == "" || quantite <= 0)
+            else if (String.IsNullOrWhiteSpace(tbQuantite.Text) || quantite <= 0)
             {
                 MessageBox.Show("Veuillez saisir une quantité supérieure à 0", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             }

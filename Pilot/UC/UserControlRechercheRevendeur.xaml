@@ -9,8 +9,9 @@
     <StackPanel>
         <Label Content="Liste des revendeurs" Background="#FF005CA9" Foreground="White" HorizontalContentAlignment="Center" FontWeight="DemiBold"/>
         <StackPanel Margin="0,20,0,20">
+            <Label Content="Raison sociale" HorizontalAlignment="Center"/>
             <TextBox x:Name="tbMotClefRevendeur" TextWrapping="Wrap" Text="" Width="120" TextChanged="tbMotClefRevendeur_TextChanged" />
-            <DataGrid x:Name="dgRevendeur" Height="270" Margin="20,20,20,0" ItemsSource="{Binding LesRevendeurs}" AutoGenerateColumns="False">
+            <DataGrid x:Name="dgRevendeur" Height="250" Margin="20,20,20,0" ItemsSource="{Binding LesRevendeurs}" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#FF005CA9" />

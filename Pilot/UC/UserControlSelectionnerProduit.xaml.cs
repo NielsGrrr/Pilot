@@ -35,26 +35,34 @@ namespace Pilot.UC
         private void butAjouterProduitACommande_Click(object sender, RoutedEventArgs e)
         {
             if (dgProduits.SelectedItem == null)
-                MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
             {
                 Produit unProduit = (Produit)dgProduits.SelectedItem;
-                Produit copie = new Produit(unProduit.Numproduit, unProduit.LaPointe, unProduit.LeType, unProduit.CodeProduit, unProduit.NomProduit, unProduit.PrixVente, unProduit.QuantiteStock, unProduit.Disponible);
-                WindowAjouterProduitCommande wProduit = new WindowAjouterProduitCommande(copie);
-                bool? result = wProduit.ShowDialog();
-                if (result == true)
+                if (!unProduit.Disponible)
                 {
-                    try
+                    MessageBox.Show("Le produit est indisponible", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    Produit copie = new Produit(unProduit.Numproduit, unProduit.LaPointe, unProduit.LeType, unProduit.CodeProduit, unProduit.NomProduit, unProduit.PrixVente, unProduit.QuantiteStock, unProduit.Disponible);
+                    WindowAjouterProduitCommande wProduit = new WindowAjouterProduitCommande(copie);
+                    bool? result = wProduit.ShowDialog();
+                    if (result == true)
                     {
-                        unProduit.Numproduit = copie.Numproduit;
-                        unProduit.NomProduit = copie.NomProduit;
-                        //A terminer
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Le produit n'a pas pu être ajouté à la commande.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                        try
+                        {
+                            unProduit.Numproduit = copie.Numproduit;
+                            unProduit.NomProduit = copie.NomProduit;
+                            //A terminer
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Le produit n'a pas pu être ajouté à la commande.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
+                
             }
         }
 

@@ -22,11 +22,11 @@ namespace Pilot.Classes.Tests
             Assert.AreEqual("cpost", revendeur.AdresseCP);
             Assert.AreEqual("ville", revendeur.AdresseVille);
         }
-
+        /*
         [TestMethod()]
         public void CreateTest()
         {
-            /*DataAccess.Username = "stiefvan";
+            DataAccess.Username = "stiefvan";
             DataAccess.Password = "dGAxKU";
             Revendeur revendeur = new Revendeur("raisonsociale", "rue", "cpost", "ville");
             int id = revendeur.Create();
@@ -36,8 +36,8 @@ namespace Pilot.Classes.Tests
                 if (rev.NumRevendeur > max)
                     max = rev.NumRevendeur;
             }
-            Assert.AreEqual(max+1, id);
-            revendeur.Delete();*/
-        }
+            Assert.AreEqual(max, id);
+            revendeur.Delete();
+        }*/
     }
 }

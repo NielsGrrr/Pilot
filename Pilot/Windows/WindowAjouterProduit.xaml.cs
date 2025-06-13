@@ -55,8 +55,10 @@ namespace Pilot.Windows
         {
             if (txtCodeProduit.Text == null)
             {
-                MessageBox.Show("Veuillez saisir uncode produit valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Veuillez saisir un code produit valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else if (String.IsNullOrWhiteSpace(txtCodeProduit.Text) || String.IsNullOrWhiteSpace(txtNomProduit.Text) || String.IsNullOrWhiteSpace(txtPrixVente.Text) || String.IsNullOrWhiteSpace(txtQuantite.Text))
+                MessageBox.Show("Veuillez remplir tous les champs obligatoires", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
             {
                 bool ok = true;
