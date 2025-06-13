@@ -22,7 +22,7 @@ namespace Pilot.Classes
 
         public Commande()
         {
-
+            this.ProduitsQuantites = new Dictionary<Produit, int>();
         }
 
         public Commande(int numCommande, DateTime dateCommande)

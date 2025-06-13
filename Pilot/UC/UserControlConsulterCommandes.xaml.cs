@@ -70,13 +70,12 @@ namespace Pilot.UC
             Commande uneCommande = new Commande();
             WindowCommande wCommande = new WindowCommande(uneCommande, Action.Créer);
             bool? result = wCommande.ShowDialog();
-            /*
             if (result == true)
             {
                 try
                 {
                     // Ajouter la commande à la liste des commandes
-                    uneCommande.NumCommande = uneCommande.Create();
+                    uneCommande.Create();
                     LesCommandes.Add(uneCommande);
                     MessageBox.Show("Commande ajoutée avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
@@ -84,7 +83,7 @@ namespace Pilot.UC
                 {
                     MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }*/
+            }
         }
 
         private void butModifierCommande_Click(object sender, RoutedEventArgs e)
