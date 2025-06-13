@@ -32,7 +32,9 @@ namespace Pilot.Windows
             this.DataContext = uneCommande;
             InitializeComponent();
             butValiderCommande.Content = act;
-            
+            comboModeLivraison.ItemsSource = LesTransports;
+            dgEmploye.ItemsSource = LesEmployes;
+            dgRevendeurs.ItemsSource = LesRevendeurs;
         }
 
         private void ChargeData()
@@ -42,9 +44,7 @@ namespace Pilot.Windows
                 LesEmployes = new ObservableCollection<Employe>(new Employe().FindBySelection("libellerole = 'Commercial'"));
                 LesRevendeurs = new ObservableCollection<Revendeur>(new Revendeur().FindAll());
                 LesTransports = new ObservableCollection<ModeTransport>(new ModeTransport().FindAll());
-                comboModeLivraison.ItemsSource = LesTransports;
-                dgEmploye.ItemsSource = LesEmployes;
-                dgRevendeurs.ItemsSource = LesRevendeurs;
+                
             }
             catch (Exception ex)
             {

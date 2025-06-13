@@ -30,12 +30,14 @@
         <StackPanel Background="#FF005CA9" Orientation="Horizontal">
             <Image Source="/img/brand-logo.png" Margin="10,0,0,0"  Height="30"/>
         
-        <Menu DockPanel.Dock="Top" Height="30" Background="#FF005CA9" Foreground="White" FontWeight="Bold" FontSize="14">
-            <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Click="menuCommande_Click"/>
-            <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Click="menuProduits_Click"/>
-            <MenuItem x:Name="menuRevendeurs" HorizontalAlignment="Center" Header="Revendeurs" Click="menuRevendeurs_Click"/>
-            <MenuItem x:Name="menuProduit2" HorizontalAlignment="Center" Header="Prduit2" Click="menuProduit2_Click"/>
-        </Menu>
+            <Menu x:Name="menuTop" DockPanel.Dock="Top" Height="30" Background="#FF005CA9" Foreground="White" FontWeight="Bold" FontSize="14">
+                <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Click="menuCommande_Click"/>
+                <MenuItem x:Name="menuProduitsCommande" HorizontalAlignment="Center" Header="Produits" Click="menuProduits_Click"/>
+                <MenuItem x:Name="menuRevendeurs" HorizontalAlignment="Center" Header="Revendeurs" Click="menuRevendeurs_Click"/>
+                <MenuItem x:Name="menuProduitResponsable" HorizontalAlignment="Center" Header="Produits" Click="menuProduit2_Click"/>
+                <MenuItem x:Name="menuDeconnexion" HorizontalAlignment="Center" Header="Déconnexion" Click="menuDeconnexion_Click"/>
+            </Menu>
+            
         </StackPanel>
         <ContentControl x:Name="MainContent" />
 

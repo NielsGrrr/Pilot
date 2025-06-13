@@ -27,15 +27,7 @@ namespace Pilot
 
             InitializeComponent();
             Authentification();
-            if (Role == RoleEmploye.Commercial)
-                MainContent.Content = new UserControlConsulterCommandes();
-            else if (Role == RoleEmploye.ResponsableProduction)
-                MainContent.Content = new UserControlConsulterProduit();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("");
+            
         }
 
         private void Authentification()
@@ -52,7 +44,19 @@ namespace Pilot
             else
             {
                 MessageBox.Show("Authentification annulée, fermuture de l'application","Annulation",MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
+                Application.Current.Shutdown();
+            }
+            if (Role == RoleEmploye.Commercial)
+            {
+                MainContent.Content = new UserControlConsulterCommandes();
+                menuProduitResponsable.Visibility = Visibility.Collapsed;
+            }
+            else if (Role == RoleEmploye.ResponsableProduction)
+            {
+                MainContent.Content = new UserControlConsulterProduit();
+                menuCommande.Visibility = Visibility.Collapsed;
+                menuProduitsCommande.Visibility = Visibility.Collapsed;
+                menuRevendeurs.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -78,5 +82,11 @@ namespace Pilot
             MainContent.Content = new UserControlConsulterProduit();
         }
 
+        private void menuDeconnexion_Click(object sender, RoutedEventArgs e)
+        {
+            DataAccess.Instance.CloseConnection();
+            Authentification();
+            InitializeComponent();
+        }
     }
 }

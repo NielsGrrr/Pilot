@@ -315,9 +315,5 @@ namespace Pilot.Classes
             }
         }
 
-        int ICrud<Produit>.Create()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

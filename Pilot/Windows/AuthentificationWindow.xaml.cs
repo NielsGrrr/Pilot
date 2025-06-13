@@ -24,6 +24,7 @@ namespace Pilot.Windows
         public RoleEmploye Role { get; set; }
         public AuthentificationWindow()
         {
+            
             DataAccess.Admin = true;
             ChargeData();
             InitializeComponent();
