@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pilot.Windows"
-        xmlns:UC="clr-namespace:Pilot.UC" x:Name="windowCommande" x:Class="Pilot.Windows.WindowCommande"
+        xmlns:UC="clr-namespace:Pilot.UC" x:Class="Pilot.Windows.WindowCommande"
         mc:Ignorable="d"
         Title="WindowCommande" Height="550" Width="300">
     <StackPanel>

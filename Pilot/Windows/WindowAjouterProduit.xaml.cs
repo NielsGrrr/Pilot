@@ -47,18 +47,26 @@ namespace Pilot.Windows
 
         private void butValider_Click(object sender, RoutedEventArgs e)
         {
-            bool ok = true;
-            foreach (UIElement uie in panelFormProduit.Children)
+            if (txtCodeProduit.Text == null)
             {
-                if (uie is TextBox)
-                {
-                    TextBox txt = (TextBox)uie;
-                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                }
-                if (Validation.GetHasError(uie))
-                    ok = false;
+                MessageBox.Show("Veuillez saisir uncode produit valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            DialogResult = ok;
+            else
+            {
+                bool ok = true;
+                foreach (UIElement uie in panelFormProduit.Children)
+                {
+                    if (uie is TextBox)
+                    {
+                        TextBox txt = (TextBox)uie;
+                        txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    }
+                    if (Validation.GetHasError(uie))
+                        ok = false;
+                }
+                DialogResult = ok;
+            }
+            
 
         }
     }

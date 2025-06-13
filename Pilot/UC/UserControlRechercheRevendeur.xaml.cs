@@ -103,5 +103,25 @@ namespace Pilot.UC
         {
             CollectionViewSource.GetDefaultView(dgRevendeur.ItemsSource).Refresh();
         }
+
+        private void butSupprimerRevendeur_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgRevendeur.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un revendeur", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Revendeur revendeurASupprimer = (Revendeur)dgRevendeur.SelectedItem;
+                Revendeur copie = new Revendeur(revendeurASupprimer.NumRevendeur, revendeurASupprimer.RaisonSociale, revendeurASupprimer.AdresseRue, revendeurASupprimer.AdresseCP, revendeurASupprimer.AdresseVille);
+                try
+                {
+                    revendeurASupprimer.Delete();
+                    LesRevendeurs.Remove(revendeurASupprimer);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le revendeur n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }
