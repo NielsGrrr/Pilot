@@ -45,6 +45,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro de revendeur ne peut pas être négatif");
                 this.numRevendeur = value;
             }
         }
@@ -84,6 +86,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value.Length != 5)
+                    throw new ArgumentException("Le code postal doit contenir 5 caractères");
                 this.adresseCP = value;
             }
         }

@@ -23,16 +23,16 @@
                     <StackPanel>
                         <Label Content="Numéro" />
                         <TextBox Text="{Binding NumCommande}"/>
-                        <Label Content="Maitre" />
+                        <Label Content="Date de création" />
                         <TextBox Text="{Binding DateCommande, StringFormat=d}"/>
-                        <Label Content="Poids" />
+                        <Label Content="Date de livraison" />
                         <TextBox Text="{Binding DateLivraison, StringFormat=d}"/>
                         <Label Content="Prix total"/>
                         <TextBox Text="{Binding PrixFinal, StringFormat=C, Mode=OneWay}" IsEnabled="False"/>
                     </StackPanel>
                 </GroupBox>
 
-                <ListView ItemsSource="{Binding ProduitsQuantites}">
+                <ListView ItemsSource="{Binding ProduitsQuantites}" Margin="20,20,20,20">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Key.CodeProduit}" />
@@ -56,7 +56,7 @@
                 </GroupBox>
                 <GroupBox Margin="50,50,50,0" Header="Revendeur">
                     <StackPanel DataContext="{Binding UnRevendeur}">
-                        <Label Content="Nom" />
+                        <Label Content="Raison sociale" />
                         <TextBox Text="{Binding RaisonSociale}"/>
                         <Label Content="Ville" />
                         <TextBox Text="{Binding AdresseVille}"/>

@@ -34,7 +34,8 @@ namespace Pilot.Windows
         {
             ChargeData();
             InitializeComponent();
-            produit = unProduit; 
+            produit = unProduit;
+            labPrixUnitaire.Content = unProduit.PrixVente;
         }
 
         private void ChargeData()
@@ -56,10 +57,25 @@ namespace Pilot.Windows
         {
             Commande uneCommande = (Commande)dgCommande.SelectedItem;
             Commande laCommande = uneCommande.FindNumCommande();
-            //Attention au Parse
-            int quantite = int.Parse(tbQuantite.Text);
-            laCommande.AjouterProduit(produit, quantite);
-            DialogResult = true;
+            int quantite;
+            if (int.TryParse(tbQuantite.Text, out quantite) == false)
+            {
+                MessageBox.Show("Veuillez saisir une quantité valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (dgCommande.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (tbQuantite.Text == "" || quantite <= 0)
+            {
+                MessageBox.Show("Veuillez saisir une quantité supérieure à 0", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                laCommande.AjouterProduit(produit, quantite);
+                DialogResult = true;
+            }
+            
         }
     }
 }

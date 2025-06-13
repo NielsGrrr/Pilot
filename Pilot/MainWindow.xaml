@@ -8,16 +8,35 @@
     Title="MainWindow"
     Width="800"
     Height="500"
-    mc:Ignorable="d" WindowStartupLocation="CenterScreen">
+    mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+    Background="#FFF0F0F0">
     <StackPanel>
-        <Menu DockPanel.Dock="Top" Height="30" Background="#FF005CA9" Foreground="White" >
-            <MenuItem x:Name="menuConnexion" HorizontalAlignment="Center" Header="Connexion" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="White"/>
-            <MenuItem x:Name="menuAccueil" HorizontalAlignment="Center" Header="Accueil" Width="100" BorderBrush="White"/>
-            <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Width="100" BorderBrush="White" Click="menuCommande_Click"/>
-            <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Width="100" BorderBrush="White" Click="menuProduits_Click"/>
-            <MenuItem x:Name="menuRevendeurs" HorizontalAlignment="Center" Header="Revendeurs" Width="100" BorderBrush="White" Click="menuRevendeurs_Click"/>
-            <MenuItem x:Name="menuProduit2" HorizontalAlignment="Center" Header="Prduit2" Width="100" BorderBrush="White" Click="menuProduit2_Click"/>
+        <StackPanel.Resources>
+            <Style TargetType="MenuItem">
+                <Setter Property="Width" Value="100"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Margin" Value="5,0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="MenuItem">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" ContentSource="Header"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </StackPanel.Resources>
+        <StackPanel Background="#FF005CA9" Orientation="Horizontal">
+            <Image Source="/img/brand-logo.png" Margin="10,0,0,0"  Height="30"/>
+        
+        <Menu DockPanel.Dock="Top" Height="30" Background="#FF005CA9" Foreground="White" FontWeight="Bold" FontSize="14">
+            <MenuItem x:Name="menuCommande" HorizontalAlignment="Center" Header="Commandes" Click="menuCommande_Click"/>
+            <MenuItem x:Name="menuProduits" HorizontalAlignment="Center" Header="Produits" Click="menuProduits_Click"/>
+            <MenuItem x:Name="menuRevendeurs" HorizontalAlignment="Center" Header="Revendeurs" Click="menuRevendeurs_Click"/>
+            <MenuItem x:Name="menuProduit2" HorizontalAlignment="Center" Header="Prduit2" Click="menuProduit2_Click"/>
         </Menu>
+        </StackPanel>
         <ContentControl x:Name="MainContent" />
 
 

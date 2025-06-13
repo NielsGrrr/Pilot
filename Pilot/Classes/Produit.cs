@@ -84,6 +84,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro de produit ne peut pas être négatif");
                 this.numproduit = value;
             }
         }
@@ -123,6 +125,11 @@ namespace Pilot.Classes
 
             set
             {
+                if (value.Length != 5)
+                {
+                    MessageBox.Show("Le code produit doit comporter 5 caractères");
+                    throw new ArgumentException("Le code produit doit comporter 5 caractères");
+                }
                 this.codeProduit = value;
             }
         }
@@ -149,6 +156,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le prix de vente ne peut pas être négatif");
                 this.prixVente = value;
             }
         }
@@ -162,6 +171,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("La quantité en stock ne peut pas être négative");
                 this.quantiteStock = value;
             }
         }

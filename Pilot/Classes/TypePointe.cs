@@ -32,6 +32,8 @@ namespace Pilot.Classes
 
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Le numéro de pointe ne peut pas être négatif");
                 this.numTypePointe = value;
             }
         }

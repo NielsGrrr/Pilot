@@ -1,14 +1,15 @@
-﻿<Window x:Class="Pilot.Windows.WindowCommande"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pilot.Windows"
+        xmlns:UC="clr-namespace:Pilot.UC" x:Class="Pilot.Windows.WindowCommande"
         mc:Ignorable="d"
         Title="WindowCommande" Height="550" Width="300">
     <StackPanel>
-        
-    
+
+
         <Label Content="Créer une nouvelle commande" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35"/>
         <StackPanel Margin="20">
 
@@ -16,7 +17,7 @@
                 <Label Content="Employe*"/>
                 <DataGrid x:Name="dgEmploye" Height="100" ItemsSource="{Binding LesEmployes}" AutoGenerateColumns="False">
                     <DataGrid.Resources>
-                        <Style TargetType="DataGridColumnHeader">
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#FF005CA9" />
                             <Setter Property="Foreground" Value="White" />
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -30,11 +31,11 @@
                 </DataGrid>
             </StackPanel>
             <StackPanel>
-                
+
                 <Label Content="Revendeur*"/>
                 <DataGrid x:Name="dgRevendeurs" Height="100" ItemsSource="{Binding LesRevendeurs}" SelectedItem="{Binding UneCommande.UnRevendeur}" AutoGenerateColumns="False">
                     <DataGrid.Resources>
-                        <Style TargetType="DataGridColumnHeader">
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#FF005CA9" />
                             <Setter Property="Foreground" Value="White" />
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -46,7 +47,9 @@
                         <DataGridTextColumn Width="*" Binding="{Binding AdresseCP}" Header="Code postal"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Ajouter un revendeur" Background="#FF005CA9" Foreground="White" Margin="0,5,0,0"/>
+                <Button Background="#FF005CA9" Foreground="White" Margin="0,5,0,0">
+                    <UC:UserControlConsulterCommandes/>
+                </Button>
             </StackPanel>
             <StackPanel Margin="0,10,0,0">
                 <Label Content="Mode de livraison*"/>
