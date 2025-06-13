@@ -16,6 +16,7 @@
             FontWeight="DemiBold"
             Foreground="White" />
         <StackPanel Margin="0,20,0,0">
+            <Label Content="Raison sociale du revendeur" HorizontalAlignment="Center"/>
             <TextBox
                 x:Name="tbMotClefCommande"
                 Width="120"
@@ -24,7 +25,7 @@
                 TextWrapping="Wrap" />
             <DataGrid
                 x:Name="dgCommande"
-                Height="270"
+                Height="250"
                 Margin="20,20,20,0"
                 ItemsSource="{Binding LesCommandes}"
                 AutoGenerateColumns="False">

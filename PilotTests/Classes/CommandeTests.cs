@@ -88,10 +88,14 @@ namespace Pilot.Classes.Tests
             int id = c.Delete();
             Assert.AreEqual(48, id);
         }
+
+        [TestMethod()]
         public void FindAllTest()
         {
             //Vérifier le prix total calculé
         }
+
+        [TestMethod()]
         public void AjouterProduit()
         {
             //Test d'unicité des produits dans les comandes
