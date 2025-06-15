@@ -21,6 +21,9 @@ namespace Pilot.UC
 {
     /// <summary>
     /// Logique d'interaction pour UserControlSelectionnerProduit.xaml
+    /// Stocke 1 informations :
+    /// 1 ObservableCollection<Produit> : Tous les produits de la base de données
+    /// Le UC est définit comme DataContext
     /// </summary>
     public partial class UserControlSelectionnerProduit : UserControl
     {
@@ -32,13 +35,18 @@ namespace Pilot.UC
             dgProduits.Items.Filter = RechercherMotCle;
         }
 
+        /// <summary>
+        /// Ouvre la window AjouterProduitCommande lié au produit sélectionné lorsque le bouton AjouterProduitCommande est cliqué
+        /// </summary>
         private void butAjouterProduitACommande_Click(object sender, RoutedEventArgs e)
         {
+            // Vérifie si un produit est sélectionné
             if (dgProduits.SelectedItem == null)
                 MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
             {
                 Produit unProduit = (Produit)dgProduits.SelectedItem;
+                //Vérifie si le produit est disponible
                 if (!unProduit.Disponible)
                 {
                     MessageBox.Show("Le produit est indisponible", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -54,7 +62,6 @@ namespace Pilot.UC
                         {
                             unProduit.Numproduit = copie.Numproduit;
                             unProduit.NomProduit = copie.NomProduit;
-                            //A terminer
                         }
                         catch (Exception ex)
                         {
@@ -81,6 +88,10 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Recherche si les produits correspondent aux critères de recherche saisis dans les TextBox
+        /// </summary>
+        /// /// <returns>Si les produits correspondent aux critères de recherche saisis dans les TextBox</returns>
         private bool RechercherMotCle(object obj)
         {
             if (String.IsNullOrEmpty(tbMotCle.Text) && String.IsNullOrEmpty(tbType.Text) && String.IsNullOrEmpty(tbTypePointe.Text) && String.IsNullOrEmpty(tbCategorie.Text) && String.IsNullOrEmpty(tbCouleur.Text))
@@ -98,7 +109,9 @@ namespace Pilot.UC
             return (produit.CodeProduit.StartsWith(tbMotCle.Text, StringComparison.OrdinalIgnoreCase) && produit.LeType.LibelleType.StartsWith(tbType.Text, StringComparison.OrdinalIgnoreCase) && produit.LaPointe.LibelleTypePointe.StartsWith(tbTypePointe.Text, StringComparison.OrdinalIgnoreCase) && produit.LeType.LaCategorie.LibelleCategorie.StartsWith(tbCategorie.Text, StringComparison.OrdinalIgnoreCase) && couleurPresente);
         }
 
-
+        /// <summary>
+        /// Lorsque le texte de la textbox change, on refresh le contenu du dataGrid dgProduits
+        /// </summary>
         private void tbMotCle_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (dgProduits != null)

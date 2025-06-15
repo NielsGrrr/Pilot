@@ -20,6 +20,9 @@ namespace Pilot.UC
 {
     /// <summary>
     /// Logique d'interaction pour UserControlConsulterProduit.xaml
+    /// Stocke 1 informations :
+    /// 1 ObservableCollection<Produit> : Tous les produits de la base de données
+    /// Le UC est définit comme DataContext
     /// </summary>
     public partial class UserControlConsulterProduit : UserControl
     {
@@ -31,6 +34,10 @@ namespace Pilot.UC
             dgProduits.Items.Filter = RechercherMotCle;
         }
 
+        /// <summary>
+        /// Recherche si les produits correspondent aux critères de recherche saisis dans les TextBox
+        /// </summary>
+        /// /// <returns>Si les produits correspondent aux critères de recherche saisis dans les TextBox</returns>
         private bool RechercherMotCle(object obj)
         {
             if (String.IsNullOrEmpty(tbMotCle.Text) && String.IsNullOrEmpty(tbType.Text) && String.IsNullOrEmpty(tbTypePointe.Text) && String.IsNullOrEmpty(tbCategorie.Text))
@@ -54,6 +61,9 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Ouvre la window AjouterProduit lié au produit sélectionné lorsque le bouton AjouterProduit est cliqué
+        /// </summary>
         private void butAjouterProduit_Click(object sender, RoutedEventArgs e)
         {
             Produit unProduit = new Produit();
@@ -76,6 +86,9 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Ouvre la window SupprimerProduit lié au produit sélectionné lorsque le bouton SupprimerProduit est cliqué
+        /// </summary>
         private void butSupprimerProduit_Click(object sender, RoutedEventArgs e)
         {
             if (dgProduits.SelectedItem ==  null)
@@ -96,6 +109,9 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Lorsque le texte de la textbox change, on refresh le contenu du dataGrid dgProduits
+        /// </summary>
         private void tbCategorie_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (dgProduits != null)
@@ -120,6 +136,9 @@ namespace Pilot.UC
                 CollectionViewSource.GetDefaultView(dgProduits.ItemsSource).Refresh();
         }
 
+        /// <summary>
+        /// Ouvre la window ModifierProduit lié au produit sélectionné lorsque le bouton ModifierProduit est cliqué
+        /// </summary>
         private void butModifierProduit_Click(object sender, RoutedEventArgs e)
         {
             if (dgProduits.SelectedItem == null)
