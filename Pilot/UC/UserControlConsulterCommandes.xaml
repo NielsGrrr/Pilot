@@ -8,14 +8,20 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <StackPanel>
-        <Label
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
             HorizontalContentAlignment="Center"
             Background="#FF005CA9"
             Content="Liste des commandes"
             FontWeight="DemiBold"
             Foreground="White" />
-        <StackPanel Margin="0,20,0,0">
+        <StackPanel Grid.Row="1" Margin="0,20,0,0">
             <Label Content="Raison sociale du revendeur" HorizontalAlignment="Center"/>
             <TextBox
                 x:Name="tbMotClefCommande"
@@ -23,9 +29,9 @@
                 Text=""
                 TextChanged="tbMotClefCommande_TextChanged"
                 TextWrapping="Wrap" />
-            <DataGrid
+        </StackPanel>
+        <DataGrid Grid.Row="2"
                 x:Name="dgCommande"
-                Height="250"
                 Margin="20,20,20,0"
                 ItemsSource="{Binding LesCommandes}"
                 AutoGenerateColumns="False">
@@ -42,11 +48,11 @@
                     <DataGridTextColumn Width="*" Binding="{Binding UnTransport.LibelleTransport, ValidatesOnExceptions=true}" Header="Mode de livraison" />
                     <DataGridTextColumn Width="*" Binding="{Binding DateCommande, StringFormat=d,ValidatesOnExceptions=true}" Header="Date création" />
                     <DataGridTextColumn Width="*" Binding="{Binding DateLivraison, StringFormat=d,ValidatesOnExceptions=true}" Header="Date livraison" />
-                    <DataGridTextColumn Width="*" Binding="{Binding PrixFinal,ValidatesOnExceptions=true}" Header="Prix" />
+                    <DataGridTextColumn Width="*" Binding="{Binding PrixFinal, StringFormat=c, ConverterCulture=fr-FR,ValidatesOnExceptions=true}" Header="Prix" />
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel
-                Margin="0,20,0,0"
+            <StackPanel Grid.Row="3"
+                Margin="0,20"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
@@ -93,6 +99,6 @@
                     Foreground="White"
                     ToolTip="Supprimer" Click="butDetailCommande_Click" />
             </StackPanel>
-        </StackPanel>
-    </StackPanel>
+        
+    </Grid>
 </UserControl>

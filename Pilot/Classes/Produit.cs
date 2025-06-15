@@ -3,10 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using NpgsqlTypes;
 
 namespace Pilot.Classes
 {
@@ -20,6 +24,7 @@ namespace Pilot.Classes
         private decimal prixVente;
         private int quantiteStock;
         private bool disponible;
+        private byte[] imageData;
         private ObservableCollection<Couleur> lesCouleurs = new ObservableCollection<Couleur>();
         public ObservableCollection<Couleur> ToutesLesCouleurs { get; set; } = new ObservableCollection<Couleur>(new Couleur().FindAll());
         private Dictionary<Couleur, bool> couleursUtilisees = new Dictionary<Couleur, bool>();
@@ -216,10 +221,57 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Contient les données binaires de l'image du produit. C'est cette donnée qui sera stockée dans la colonne BYTEA de PostgreSQL.
+        /// </summary>
+        public byte[] ImageData
+        {
+            get
+            {
+                return this.imageData;
+            }
+
+            set
+            {
+                this.imageData = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriété utilitaire pour l'affichage de l'image dans l'interface utilisateur.
+        /// Elle convertit le tableau d'octets (ImageData) en un objet ImageSource affichable.
+        /// </summary>
+        public ImageSource ImageSource
+        {
+            get
+            {
+                if (ImageData == null || ImageData.Length == 0)
+                    return null;
+
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream(ImageData))
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.StreamSource = ms;
+                        bitmap.EndInit();
+                        bitmap.Freeze();
+                        return bitmap;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur lors de la conversion de l'image : {ex.Message}", "Erreur Image", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+        }
         public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into produit (numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible ) values (@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible) RETURNING numproduit"))
+            using (var cmdInsert = new NpgsqlCommand("insert into produit (numTypePointe,numType,codeProduit,nomProduit,prixVente,quantiteStock,disponible,imagedata) values (@numTypePointe,@numType,@codeProduit,@nomProduit,@prixVente,@quantiteStock,@disponible,@imagedata) RETURNING numproduit"))
             {
                 cmdInsert.Parameters.AddWithValue("numTypePointe", this.LaPointe.NumTypePointe);
                 cmdInsert.Parameters.AddWithValue("numType", this.LeType.NumType);
@@ -228,6 +280,7 @@ namespace Pilot.Classes
                 cmdInsert.Parameters.AddWithValue("prixVente", this.PrixVente);
                 cmdInsert.Parameters.AddWithValue("quantiteStock", this.QuantiteStock);
                 cmdInsert.Parameters.AddWithValue("disponible", this.Disponible);
+                cmdInsert.Parameters.AddWithValue("imagedata", this.ImageData);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
             this.Numproduit = nb;
@@ -255,6 +308,10 @@ namespace Pilot.Classes
                 {
                     Produit pro = new Produit((Int32)dr["numproduit"], (String)dr["codeproduit"], (String)dr["nomproduit"], (decimal)dr["prixvente"], (Int32)dr["quantitestock"], (bool)dr["disponible"]);
                     Couleur couleur = new Couleur();
+                    if (dr["ImageData"] != DBNull.Value)
+                    {
+                        pro.ImageData = (byte[])dr["ImageData"];
+                    }
                     TypePointe pointe = new TypePointe((Int32)dr["numtypepointe"], (String)dr["libelletypepointe"]);
                     pro.LaPointe = pointe;
                     Categorie cat = new Categorie((Int32)dr["numcategorie"], (String)dr["libellecategorie"]);
@@ -301,7 +358,7 @@ namespace Pilot.Classes
 
         public int Update()
         {
-            using (var cmdUpdate = new NpgsqlCommand("update produit set numtype=@numtype, numtypepointe=@numtypepointe, codeproduit=@codeproduit, nomproduit=@nomproduit, prixvente=@prixvente, quantitestock=@quantitestock, disponible=@disponible, numproduit=@numproduit WHERE numproduit=@numproduit;"))
+            using (var cmdUpdate = new NpgsqlCommand("update produit set numtype=@numtype, numtypepointe=@numtypepointe, codeproduit=@codeproduit, nomproduit=@nomproduit, prixvente=@prixvente, quantitestock=@quantitestock, disponible=@disponible, numproduit=@numproduit, imagedata=@imagedata WHERE numproduit=@numproduit;"))
             {
                 cmdUpdate.Parameters.AddWithValue("numtype", this.LeType.NumType);
                 cmdUpdate.Parameters.AddWithValue("numtypepointe", this.LaPointe.NumTypePointe);
@@ -310,6 +367,7 @@ namespace Pilot.Classes
                 cmdUpdate.Parameters.AddWithValue("prixvente", this.prixVente);
                 cmdUpdate.Parameters.AddWithValue("quantitestock", this.QuantiteStock);
                 cmdUpdate.Parameters.AddWithValue("disponible", this.Disponible);
+                cmdUpdate.Parameters.Add("imagedata", NpgsqlDbType.Bytea).Value = (object)this.ImageData ?? DBNull.Value;
                 cmdUpdate.Parameters.AddWithValue("numproduit", this.Numproduit);
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }

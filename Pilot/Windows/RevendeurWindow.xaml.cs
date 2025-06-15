@@ -24,6 +24,7 @@ namespace Pilot.Windows
         {
             this.DataContext = copie;
             InitializeComponent();
+            labT.Content = action.ToString() + labT.Content;
             but.Content = action.ToString();
         }
         private void but_Click(object sender, RoutedEventArgs e)
@@ -31,7 +32,7 @@ namespace Pilot.Windows
             int cp;
             if (txtRaisonSociale.Text.Length == 0 || txtAdresse.Text.Length == 0 || txtVille.Text.Length == 0)
                 MessageBox.Show("Les champs ne sont pas remplis", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
-            else if (txtCodePostal.Text.Length != 5 )
+            if (txtCodePostal.Text.Length != 5 )
                 MessageBox.Show("Le code postal doit être de longueur 5", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
             {

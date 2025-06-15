@@ -143,6 +143,7 @@ namespace Pilot.UC
                         produitSelectionne.QuantiteStock = copie.QuantiteStock;
                         produitSelectionne.Disponible = copie.Disponible;
                         produitSelectionne.LesCouleurs = copie.LesCouleurs;
+                        produitSelectionne.ImageData = copie.ImageData;
                         produitSelectionne.Update();
                         dgProduits.Items.Refresh();
                     }

@@ -31,6 +31,7 @@ namespace Pilot.Windows
             ChargeData();
             this.DataContext = uneCommande;
             InitializeComponent();
+            labT.Content = act.ToString() + labT.Content;
             butValiderCommande.Content = act;
             comboModeLivraison.ItemsSource = LesTransports;
             dgEmploye.ItemsSource = LesEmployes;
@@ -89,6 +90,25 @@ namespace Pilot.Windows
                     MessageBox.Show("La commande n'a pas pu être ajoutée.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 DialogResult = ok;
+            }
+        }
+
+        private void butAjouterRevendeur_Click(object sender, RoutedEventArgs e)
+        {
+            Revendeur revendeur = new Revendeur();
+            RevendeurWindow revendeurWindow = new RevendeurWindow(revendeur, Action.Créer);
+            bool? result = revendeurWindow.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    revendeur.NumRevendeur = revendeur.Create();
+                    LesRevendeurs.Add(revendeur);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le revendeur n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

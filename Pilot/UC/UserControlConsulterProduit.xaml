@@ -9,18 +9,23 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <Label
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
             Height="35"
-            Padding="0,10,0,0"
+            Padding="0,10,0,10"
             HorizontalContentAlignment="Center"
             Background="#FF005CA9"
             Content="Modifier des produits"
             FontWeight="DemiBold"
             Foreground="White" />
 
-        <StackPanel Margin="20">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Margin="0,20" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
                 <StackPanel Margin="20,0,20,0">
                     <Label Content="Mot clé" />
                     <TextBox
@@ -59,10 +64,8 @@
                 </StackPanel>
 
             </StackPanel>
-            <DataGrid
+            <DataGrid Grid.Row="2" Margin="20,0"
                 x:Name="dgProduits"
-                Height="220"
-                Margin="0,20,0,0"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding LesProduits}">
                 <DataGrid.Resources>
@@ -73,8 +76,21 @@
                         <Setter Property="Height" Value="30" />
                     </Style>
                 </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Image" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LightGray" BorderThickness="0.5" Width="50" Height="50">
+                                <Image Source="{Binding ImageSource}"
+                                       Width="48" Height="48"
+                                       Stretch="Uniform"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
                         Width="*"
                         Binding="{Binding CodeProduit, ValidatesOnExceptions=true}"
                         Header="Code" />
@@ -92,7 +108,7 @@
                         Header="Categorie" />
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding PrixVente, ValidatesOnExceptions=true}"
+                        Binding="{Binding PrixVente, StringFormat=c, ConverterCulture=fr-FR, ValidatesOnExceptions=true}"
                         Header="Prix" />
                     <DataGridTextColumn
                         Width="*"
@@ -104,7 +120,7 @@
                         Header="Disponible" />
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel
+            <StackPanel Grid.Row="3"
                 Margin="0,20,0,0"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
@@ -141,7 +157,6 @@
                     Foreground="White"
                     ToolTip="Supprimer" />
             </StackPanel>
-        </StackPanel>
-    </StackPanel>
+    </Grid>
 
 </UserControl>

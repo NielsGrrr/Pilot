@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:Pilot.Windows"
         xmlns:UC="clr-namespace:Pilot.UC" x:Class="Pilot.Windows.WindowCommande"
         mc:Ignorable="d"
-        Title="WindowCommande" Height="550" Width="300">
+        Title="WindowCommande" Height="550" Width="400" WindowStartupLocation="CenterScreen">
     <StackPanel>
 
 
-        <Label Content="Créer une nouvelle commande" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35"/>
+        <Label x:Name="labT" Content=" une commande" Background="#FF005CA9" Foreground="White" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,10,0,0" Height="35"/>
         <StackPanel Margin="20">
 
             <StackPanel x:Name="panelFormCommande">
@@ -33,6 +33,7 @@
             <StackPanel>
 
                 <Label Content="Revendeur*"/>
+                
                 <DataGrid x:Name="dgRevendeurs" Height="100" SelectedItem="{Binding UnRevendeur}" AutoGenerateColumns="False">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -47,6 +48,7 @@
                         <DataGridTextColumn Width="*" Binding="{Binding AdresseCP}" Header="Code postal"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button x:Name="butAjouterRevendeur" Content="Ajouter un revendeur" Click="butAjouterRevendeur_Click" />
             </StackPanel>
             <StackPanel Margin="0,10,0,0">
                 <Label Content="Mode de livraison*"/>
@@ -54,7 +56,7 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Label Content="Date de livraison"/>
-                <DatePicker SelectedDate="{Binding DateLivraison}" x:Name="DatePickerLivraison" Text="" Margin="20,0,0,0" Width="70"/>
+                <DatePicker SelectedDate="{Binding DateLivraison}" x:Name="DatePickerLivraison" Text="" Margin="20,0,0,0" Width="100"/>
 
             </StackPanel>
             <Button x:Name="butValiderCommande" Content="Valider la commande" Background="#FF005CA9" Foreground="White" Margin="0,20,0,0" Height="30" Click="butValiderCommande_Click"/>

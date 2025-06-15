@@ -33,6 +33,8 @@
                 Margin="0,20,0,0"
                 Content="Disponible"
                 IsChecked="{Binding Disponible, ValidatesOnExceptions=True}" />
+            <Image x:Name="imgProduit" Source="{Binding ImageSource}" Stretch="Uniform" />
+            <Button x:Name="butAjouterImage" Content="Ajouter une image" Margin="0,20,0,0" Background="#FF005CA9" BorderBrush="White" Foreground="White" Click="butAjouterImage_Click"/>
             <Button
                 x:Name="butValider"
                 Margin="0,20,0,0"

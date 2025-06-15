@@ -1,7 +1,9 @@
-﻿using Pilot.Classes;
+﻿using Microsoft.Win32;
+using Pilot.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,6 +126,25 @@ namespace Pilot.Windows
                 catch (Exception ex)
                 {
                     MessageBox.Show("Le produit n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void butAjouterImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Sélectionnez une image";
+            op.Filter = "Tous les fichiers images|*.jpg;*.jpeg;*.png;*.gif;*.bmp|JPG|*.jpg;*.jpeg|PNG|*.png|GIF|*.gif|BMP|*.bmp";
+
+            if (op.ShowDialog() == true)
+            {
+                try
+                {
+                    prodWindow.ImageData = File.ReadAllBytes(op.FileName);
+               }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur lors du chargement de l'image : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

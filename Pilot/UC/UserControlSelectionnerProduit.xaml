@@ -24,7 +24,7 @@
             Content="Sélectionner des produits"
             FontWeight="DemiBold"
             Foreground="White" />
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                 <StackPanel Margin="20,0,20,0">
                     <Label Content="Mot clé" />
                     <TextBox x:Name="tbMotCle" Width="80" Text="" TextWrapping="Wrap" TextChanged="tbMotCle_TextChanged" />
@@ -79,7 +79,7 @@
                         Header="Categorie" />
                 <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding PrixVente, ValidatesOnExceptions=true}"
+                        Binding="{Binding PrixVente, StringFormat=c, ConverterCulture=fr-FR, ValidatesOnExceptions=true}"
                         Header="Prix" />
                 <DataGridTextColumn
                         Width="*"
