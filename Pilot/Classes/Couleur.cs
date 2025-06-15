@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
+    /// <summary>
+    /// Stocke les informations d'une couleur :
+    /// 1 entier : le numéro de la commande
+    /// 1 chaine de caractères : le libelle de la couleur
+    /// </summary>
     public class Couleur:ICrud<Couleur>
     {
         private int numCouleur;
@@ -29,6 +34,10 @@ namespace Pilot.Classes
             this.LibelleCouleur = libelleCouleur;
         }
 
+        /// <summary>
+        /// Obtient ou définit le numéro de la couleur.
+        /// Doit être un entier positif.
+        /// </summary>
         public int NumCouleur
         {
             get
@@ -44,6 +53,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le libellé (nom) de la couleur.
+        /// </summary>
         public string LibelleCouleur
         {
             get
@@ -57,16 +69,28 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Insère la couleur en base de données.
+        /// </summary>
+        /// <returns>Identifiant généré</returns>
         public int Create()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Supprime la couleur de la base de données.
+        /// </summary>
+        /// <returns>Nombre de lignes supprimées</returns>
         public int Delete()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Récupère toutes les couleurs depuis la base de données.
+        /// </summary>
+        /// <returns>Liste de toutes les couleurs</returns>
         public List<Couleur> FindAll()
         {
             List<Couleur> lesCouleurs = new List<Couleur>();
@@ -96,6 +120,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Vérifie si la couleur actuelle est déjà présente dans une collection.
+        /// </summary>
+        /// <returns>True si la couleur est présente, false sinon</returns>
         public bool EstPresent(ObservableCollection<Couleur> lesCouleurs)
         {
             if (lesCouleurs == null)

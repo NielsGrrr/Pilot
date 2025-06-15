@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
+    /// <summary>
+    /// Stocke les informations d'un revendeur :
+    /// 1 entier : le numéro unique du revendeur
+    /// 1 chaîne : la raison sociale
+    /// 3 chaînes : l'adresse (rue, code postal, ville)
+    /// </summary>
     public class Revendeur : ICrud<Revendeur>, INotifyPropertyChanged
     {
         private Int32 numRevendeur;
@@ -36,6 +42,9 @@ namespace Pilot.Classes
             this.AdresseVille = adresseVille;
         }
 
+        /// <summary>
+        /// Identifiant unique du revendeur.
+        /// </summary>
         public Int32 NumRevendeur
         {
             get
@@ -51,6 +60,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Raison sociale du revendeur.
+        /// </summary>
         public string RaisonSociale
         {
             get
@@ -64,6 +76,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Rue de l’adresse du revendeur.
+        /// </summary>
         public string AdresseRue
         {
             get
@@ -77,6 +92,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Code postal (doit contenir 5 caractères).
+        /// </summary>
         public string AdresseCP
         {
             get
@@ -92,6 +110,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Ville du revendeur.
+        /// </summary>
         public string AdresseVille
         {
             get
@@ -107,6 +128,10 @@ namespace Pilot.Classes
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>
+        /// Crée un revendeur dans la base de données.
+        /// </summary>
+        /// <returns>Identifiant du revendeur nouvellement créé.</returns>
         public int Create()
         {
             int nb = 0;
@@ -122,6 +147,10 @@ namespace Pilot.Classes
             return nb;
         }
 
+        /// <summary>
+        /// Supprime ce revendeur de la base de données.
+        /// </summary>
+        /// <returns>Nombre de lignes supprimées.</returns>
         public int Delete()
         {
             using (var cmdUpdate = new NpgsqlCommand("delete from revendeur where numrevendeur =@numrevendeur;"))
@@ -131,6 +160,10 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Récupère tous les revendeurs depuis la base de données.
+        /// </summary>
+        /// <returns>Liste des revendeurs.</returns>
         public List<Revendeur> FindAll()
         {
             List<Revendeur> lesRevendeurs = new List<Revendeur>();
@@ -155,6 +188,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Met à jour ce revendeur dans la base de données.
+        /// </summary>
+        /// <returns>Nombre de lignes modifiées.</returns>
         public int Update()
         {
             using (var cmdUpdate = new NpgsqlCommand("update revendeur set raisonsociale=@raisonsociale, adresserue=@adresserue, adressecp=@adressecp, adresseville=@adresseville WHERE numrevendeur=@numrevendeur;"))

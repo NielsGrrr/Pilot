@@ -37,6 +37,9 @@ namespace Pilot.Classes
             this.Role = role;
         }
 
+        /// <summary>
+        /// Numéro unique de l'employé.
+        /// </summary>
         public Int32 NumEmploye
         {
             get
@@ -52,6 +55,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Rôle de l'employé (Commercial ou Responsable de Production).
+        /// </summary>
         public RoleEmploye Role
         {
             get
@@ -65,6 +71,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Nom de l'employé.
+        /// </summary>
         public string Nom
         {
             get
@@ -78,6 +87,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Prénom de l'employé.
+        /// </summary>
         public string Prenom
         {
             get
@@ -91,6 +103,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Mot de passe de l'employé.
+        /// </summary>
         public string Password
         {
             get
@@ -104,6 +119,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Identifiant de connexion de l'employé.
+        /// </summary>
         public string Login
         {
             get
@@ -127,6 +145,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Récupère tous les employés enregistrés dans la base de données.
+        /// </summary>
+        /// <returns>Liste d'employés</returns>
         public List<Employe> FindAll()
         {
             List<Employe> lesEmployes = new List<Employe>();
@@ -150,6 +172,10 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Recherche les employés en fonction d'un critère SQL personnalisé.
+        /// </summary>
+        /// <returns>Liste des employés correspondant aux critères</returns>
         public List<Employe> FindBySelection(string criteres)
         {
             List<Employe> lesEmployes = new List<Employe>();
