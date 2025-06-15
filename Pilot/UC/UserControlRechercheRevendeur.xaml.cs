@@ -20,6 +20,9 @@ namespace Pilot.UC
 {
     /// <summary>
     /// Logique d'interaction pour UserControlRechercheRevendeur.xaml
+    /// Stocke 1 informations :
+    /// 1 ObservableCollection<Revendeur> : Tous les revendeurs de la base de données
+    /// Le UC est définit comme DataContext
     /// </summary>
     public partial class UserControlRechercheRevendeur : UserControl
     {
@@ -45,6 +48,9 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Ouvre la window AjouterRevendeur lié au revendeur sélectionné lorsque le bouton AjouterRevendeur est cliqué
+        /// </summary>
         private void butAjouterRevendeur_Click(object sender, RoutedEventArgs e)
         {
             Revendeur revendeur = new Revendeur();
@@ -64,6 +70,9 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Ouvre la window ModifierRevendeur lié au revendeur sélectionné lorsque le bouton ModifierRevendeur est cliqué
+        /// </summary>
         private void butModifierRevendeur_Click(object sender, RoutedEventArgs e)
         {
             if (dgRevendeur.SelectedItem == null)
@@ -92,6 +101,11 @@ namespace Pilot.UC
                 }
             }
         }
+
+        /// <summary>
+        /// Recherche si les revendeurs correspondent aux critères de recherche saisis dans les TextBox
+        /// </summary>
+        /// /// <returns>Si les revendeurs correspondent aux critères de recherche saisis dans les TextBox</returns>
         private bool RechercheMotClefRevendeur(object obj)
         {
             if (String.IsNullOrEmpty(tbMotClefRevendeur.Text))
@@ -99,11 +113,18 @@ namespace Pilot.UC
             Revendeur rev = obj as Revendeur;
             return (rev.RaisonSociale.StartsWith(tbMotClefRevendeur.Text, StringComparison.OrdinalIgnoreCase));
         }
+
+        /// <summary>
+        /// Lorsque le texte de la textbox change, on refresh le contenu du dataGrid dgRevendeur
+        /// </summary>
         private void tbMotClefRevendeur_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(dgRevendeur.ItemsSource).Refresh();
         }
 
+        /// <summary>
+        /// Ouvre la window SupprimerRevendeur lié au revendeur sélectionné lorsque le bouton SupprimerRevendeur est cliqué
+        /// </summary>
         private void butSupprimerRevendeur_Click(object sender, RoutedEventArgs e)
         {
             if (dgRevendeur.SelectedItem == null)

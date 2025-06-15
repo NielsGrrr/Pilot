@@ -18,6 +18,7 @@ namespace Pilot.UC
 {
     /// <summary>
     /// Logique d'interaction pour UserControlDetailCommande.xaml
+    /// Définit la commande récupérée comme DataContext
     /// </summary>
     public partial class UserControlDetailCommande : UserControl
     {

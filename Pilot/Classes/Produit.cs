@@ -14,6 +14,19 @@ using NpgsqlTypes;
 
 namespace Pilot.Classes
 {
+    /// <summary>
+    /// Stocke les informations d'un produit :
+    /// 1 entier : le numéro unique du produit
+    /// 1 type de pointe : le type de pointe du produit
+    /// 1 type : le type du produit
+    /// 1 chaîne : le code du produit
+    /// 1 chaîne : le nom du produit
+    /// 1 decimal : Le prix de vente du produit
+    /// 1 entier : la quantité en stock
+    /// 1 booléen : indique si le produit est disponible
+    /// 1 ObservableCOllection<couleur> : les couleurs du produit
+    /// 1 tableau d'octects : stocke l'image du produit
+    /// </summary>
     public class Produit: ICrud<Produit>
     {
         private int numproduit;
@@ -80,6 +93,9 @@ namespace Pilot.Classes
             this.CouleursUtilisees = couleursUtilisees;
         }
 
+        /// <summary>
+        /// Numéro unique du produit
+        /// </summary>
         public int Numproduit
         {
             get
@@ -95,6 +111,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Type de pointe du produit.
+        /// </summary>
         public TypePointe LaPointe
         {
             get
@@ -108,6 +127,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Type du produit.
+        /// </summary>
         public Type LeType
         {
             get
@@ -121,6 +143,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Code unique à 5 caractères pour identifier le produit.
+        /// </summary>
         public string CodeProduit
         {
             get
@@ -139,6 +164,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Nom du produit.
+        /// </summary>
         public string NomProduit
         {
             get
@@ -152,6 +180,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Prix de vente du produit.
+        /// </summary>
         public decimal PrixVente
         {
             get
@@ -167,6 +198,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Quantité en stock du produit.
+        /// </summary>
         public int QuantiteStock
         {
             get
@@ -182,6 +216,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Indique si le produit est disponible à la vente.
+        /// </summary>
         public bool Disponible
         {
             get
@@ -195,6 +232,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Liste des couleurs associées au produit.
+        /// </summary>
         public ObservableCollection<Couleur> LesCouleurs
         {
             get
@@ -208,6 +248,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Toutes les couleurs disponibles dans le système et leur utilisation dans le produit
+        /// </summary>
         public Dictionary<Couleur, bool> CouleursUtilisees
         {
             get
@@ -231,6 +274,7 @@ namespace Pilot.Classes
                 return this.imageData;
             }
 
+        
             set
             {
                 this.imageData = value;
@@ -268,6 +312,11 @@ namespace Pilot.Classes
                 }
             }
         }
+
+        /// <summary>
+        /// Crée un nouveau produit dans la base de données.
+        /// </summary>
+        /// <returns>Identifiant du produit créé.</returns>
         public int Create()
         {
             int nb = 0;
@@ -287,6 +336,10 @@ namespace Pilot.Classes
             return nb;
         }
 
+        /// <summary>
+        /// Supprime ce produit de la base de données.
+        /// </summary>
+        /// <returns>Nombre de lignes supprimées.</returns>
         public int Delete()
         {
             using (var cmdDelete = new NpgsqlCommand("delete from produit where numproduit = @numproduit ;"))
@@ -296,6 +349,10 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Récupère tous les produits depuis la base de données.
+        /// </summary>
+        /// <returns>Liste des produits.</returns>
         public List<Produit> FindAll()
         {
             List<Produit> lesProduits = new List<Produit>();
@@ -356,6 +413,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Mise à jour du produit dans la base de données.
+        /// </summary>
+        /// <returns>Nombre de lignes affectées.</returns>
         public int Update()
         {
             using (var cmdUpdate = new NpgsqlCommand("update produit set numtype=@numtype, numtypepointe=@numtypepointe, codeproduit=@codeproduit, nomproduit=@nomproduit, prixvente=@prixvente, quantitestock=@quantitestock, disponible=@disponible, numproduit=@numproduit, imagedata=@imagedata WHERE numproduit=@numproduit;"))
@@ -373,7 +434,9 @@ namespace Pilot.Classes
             }
         }
 
-
+        /// <summary>
+        /// Ajoute une couleur au produit dans la base.
+        /// </summary>
         public void AjouterCouleur(Couleur uneCouleur)
         {
             int nb = 0;
@@ -385,6 +448,9 @@ namespace Pilot.Classes
             }            
         }
 
+        /// <summary>
+        /// Supprime une couleur du produit dans la base.
+        /// </summary>
         public int SupprimerCouleur(Couleur uneCouleur)
         {
             this.LesCouleurs.Remove(uneCouleur);

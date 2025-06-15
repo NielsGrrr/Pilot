@@ -17,6 +17,9 @@ namespace Pilot.Windows
 {
     /// <summary>
     /// Logique d'interaction pour AuthentificationWindow.xaml
+    /// Stocke 2 informations :
+    /// 1 List<Employe> : Tous les employés de la base de données
+    /// 1 RoleEmploye : Le rôle de l'employé connecté
     /// </summary>
     public partial class AuthentificationWindow : Window
     {

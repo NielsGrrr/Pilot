@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
+    /// <summary>
+    /// Stocke les informations d'un type de produit :
+    /// 1 entier : le numéro unique du type
+    /// 1 catégorie : la catégorie à laquelle appartient ce type
+    /// 1 chaîne : le libellé du type
+    /// </summary>
     public class Type: ICrud<Type>
     {
         private int numType;
@@ -25,6 +31,9 @@ namespace Pilot.Classes
             this.LibelleType = libelleType;
         }
 
+        /// <summary>
+        /// Identifiant unique du type.
+        /// </summary>
         public int NumType
         {
             get
@@ -40,6 +49,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Catégorie associée à ce type.
+        /// </summary>
         public Categorie LaCategorie
         {
             get
@@ -53,6 +65,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Libellé du type.
+        /// </summary>
         public string LibelleType
         {
             get
@@ -76,6 +91,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Récupère tous les types de produits présents dans la base de données.
+        /// </summary>
+        /// <returns>Liste des types de produits.</returns>
         public List<Type> FindAll()
         {
             List<Type> lesTypes = new List<Type>();
@@ -92,6 +111,10 @@ namespace Pilot.Classes
             return lesTypes;
         }
 
+        /// <summary>
+        /// Recherche des types correspondant au libellé donné.
+        /// </summary>
+        /// <returns>Liste des types correspondants.</returns>
         public List<Type> FindBySelection(string criteres)
         {
             List<Type> lesTypes = new Type().FindAll();

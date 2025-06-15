@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace Pilot.Classes
 {
+    /// <summary>
+    /// Stocke les informations d'un type de pointe :
+    /// 1 entier : le numéro unique du type de pointe
+    /// 1 chaîne : le libellé du type de pointe
+    /// </summary>
     public class TypePointe: ICrud<TypePointe>
     {
         private int numTypePointe;
@@ -23,6 +28,9 @@ namespace Pilot.Classes
             this.LibelleTypePointe = libelleTypePointe;
         }
 
+        /// <summary>
+        /// Obtient ou définit le numéro unique du type de pointe.
+        /// </summary>
         public int NumTypePointe
         {
             get
@@ -38,6 +46,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le libellé du type de pointe.
+        /// </summary>
         public string LibelleTypePointe
         {
             get
@@ -61,6 +72,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Récupère tous les types de pointe depuis la base de données.
+        /// </summary>
+        /// <returns>Liste de tous les types de pointe.</returns>
         public List<TypePointe> FindAll()
         {
             List<TypePointe> lesPointes = new List<TypePointe>();

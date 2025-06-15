@@ -12,12 +12,12 @@ namespace Pilot.Classes
 {
     /// <summary>
     /// Stocke les informations d'une commande :
-    /// - un entier : le numéro de la commande
-    /// - un employé : celui qui a enregistré la commande
-    /// - un transport : mode de transport utilisé
-    /// - un revendeur : client ayant passé la commande
-    /// - deux dates : la date de commande et la date de livraison
-    /// - un dictionnaire : les produits commandés et leur quantité
+    /// 1 entier : le numéro de la commande
+    /// 1 employé : celui qui a enregistré la commande
+    /// 1 transport : mode de transport utilisé
+    /// 1 revendeur : client ayant passé la commande
+    /// 2 dates : la date de commande et la date de livraison
+    /// 1 dictionnaire : les produits commandés et leur quantité
     /// </summary>
     public class Commande: ICrud<Commande>
     {

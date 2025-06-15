@@ -21,8 +21,12 @@ namespace Pilot.UC
 {
     /// <summary>
     /// Logique d'interaction pour UserControlConsulterCommandes.xaml
+    /// Stocke 2 informations :
+    /// 1 ObservableCollection<Commande> : Toutes les commandes de la base de données
+    /// 1 commande : La commande sélectionnée
+    /// Le UC est définit comme DataContext
     /// </summary>
-    
+
 
     public partial class UserControlConsulterCommandes : UserControl
     {
@@ -35,6 +39,10 @@ namespace Pilot.UC
             dgCommande.Items.Filter = RechercheMotClefCommande;
         }
 
+        /// <summary>
+        /// Recherche si la raison sociale du revendeur débute bien par le mot clé saisi dans la textbox tbMotClefCommande
+        /// </summary>
+        /// /// <returns>Si la raison sociale du revendeur débute bien par le mot clé saisi</returns>
         private bool RechercheMotClefCommande(object obj)
         {
             if (String.IsNullOrEmpty(tbMotClefCommande.Text))
@@ -44,10 +52,14 @@ namespace Pilot.UC
             return (uneCommande.UnRevendeur.RaisonSociale.StartsWith(tbMotClefCommande.Text, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>
+        /// Chare les données du UC
+        /// </summary>
         private void ChargeData()
         {
             try
             {
+                //Récupère toutes les commandes de la base de données
                 LesCommandes = new ObservableCollection<Commande>(new Commande().FindAll());
                 this.DataContext = this;
             }
@@ -59,12 +71,18 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Lorsque le texte de la textbox change, on refresh le contenu du dataGrid dgCommande
+        /// </summary>
         private void tbMotClefCommande_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (dgCommande != null)
                 CollectionViewSource.GetDefaultView(dgCommande.ItemsSource).Refresh();
         }
 
+        /// <summary>
+        /// Ouvre la window AjouterCommande lié à la commande sélectionnée lorsque le bouton AjouterCommande est cliqué
+        /// </summary>
         private void butAjouterCommande_Click(object sender, RoutedEventArgs e)
         {
             Commande uneCommande = new Commande();
@@ -86,8 +104,13 @@ namespace Pilot.UC
             }
         }
 
+
+        /// <summary>
+        /// Ouvre la window ModifierCommande lié à la commande sélectionnée lorsque le bouton ModifierCommande est cliqué
+        /// </summary>
         private void butModifierCommande_Click(object sender, RoutedEventArgs e)
         {
+            //On modifie uniquement si une commande a été sélectionnée
             if (dgCommande.SelectedItem == null) 
                 MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             else
@@ -116,8 +139,12 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Supprime la commande sélectionnée lorsque le bounton supprimé est cliqué
+        /// </summary>
         private void butSupprimerCommande_Click(object sender, RoutedEventArgs e)
         {
+            //On supprime uniquement si une commande a été sélectionnée
             if (dgCommande.SelectedItem == null)
                 MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             else
@@ -136,8 +163,12 @@ namespace Pilot.UC
             }
         }
 
+        /// <summary>
+        /// Ouvre la window DetailCommand lié à la commande sélectionnéelorsque le bouton DetailCommande est cliqué
+        /// </summary>
         private void butDetailCommande_Click(object sender, RoutedEventArgs e)
         {
+            //On affiche les détails uniquement si une commande a été sélectionnée
             if (dgCommande.SelectedItem is null)
             {
                 MessageBox.Show("Veuillez sélectionner une commande", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);

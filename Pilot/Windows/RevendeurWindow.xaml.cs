@@ -17,6 +17,7 @@ namespace Pilot.Windows
 {
     /// <summary>
     /// Logique d'interaction pour RevendeurWindow.xaml
+    /// Le revendeur lié est utilisé en DataContext
     /// </summary>
     public partial class RevendeurWindow : Window
     {
@@ -27,11 +28,17 @@ namespace Pilot.Windows
             labT.Content = action.ToString() + labT.Content;
             but.Content = action.ToString();
         }
+
+        /// <summary>
+        /// Vérifie les champs du formulaire et valide le dialogue
+        /// </summary>
         private void but_Click(object sender, RoutedEventArgs e)
         {
             int cp;
+            //Si les champs sont vides, on affiche un message d'erreur
             if (txtRaisonSociale.Text.Length == 0 || txtAdresse.Text.Length == 0 || txtVille.Text.Length == 0)
                 MessageBox.Show("Les champs ne sont pas remplis", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //Si leCP ne fait pas 5 caractères, on affiche un message d'erreur
             if (txtCodePostal.Text.Length != 5 )
                 MessageBox.Show("Le code postal doit être de longueur 5", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             else

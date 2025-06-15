@@ -23,6 +23,9 @@ namespace Pilot.Classes
             this.LibelleTransport = libelleTransport;
         }
 
+        /// <summary>
+        /// Numéro unique du mode de transport.
+        /// </summary>
         public Int32 NumTransport
         {
             get
@@ -38,6 +41,9 @@ namespace Pilot.Classes
             }
         }
 
+        /// <summary>
+        /// Libellé du mode de transport (ex: "Camion", "Train").
+        /// </summary>
         public string LibelleTransport
         {
             get
@@ -61,6 +67,10 @@ namespace Pilot.Classes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Récupère tous les modes de transport présents en base.
+        /// </summary>
+        /// <returns>Liste de modes de transport</returns>
         public List<ModeTransport> FindAll()
         {
             List<ModeTransport> lesTransports = new List<ModeTransport>();

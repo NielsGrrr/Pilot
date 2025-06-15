@@ -20,6 +20,12 @@ namespace Pilot.Windows
 {
     /// <summary>
     /// Logique d'interaction pour WindowAjouterProduit.xaml
+    /// Stocke 5 informations :
+    /// 1 ObservableCollection<Type> : Tous les types de la base de données
+    /// 1 ObservableCollection<TypePointe> : Tous les types de pointes de la base de données
+    /// 2 ObservableCollection<Couleur> : Toutes les couleurs de la base de données ainsi que celles du produit utilisé
+    /// 1 Produit : Le produit sélectionné
+    /// Le produit sélectionné est définit comme DataContext
     /// </summary>
     public partial class WindowAjouterProduit : Window
     {
@@ -53,12 +59,17 @@ namespace Pilot.Windows
             LesCouleurs = prodWindow.LesCouleurs;
         }
 
+        /// <summary>
+        /// Vérifie les champs du formulaire et valide le dialogue
+        /// </summary>
         private void butValider_Click(object sender, RoutedEventArgs e)
         {
+            // Vérifie que le code produit n'est pas vide ou null
             if (txtCodeProduit.Text == null)
             {
                 MessageBox.Show("Veuillez saisir un code produit valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            //Vérifie que tous les champs obligatoires sont remplis
             else if (String.IsNullOrWhiteSpace(txtCodeProduit.Text) || String.IsNullOrWhiteSpace(txtNomProduit.Text) || String.IsNullOrWhiteSpace(txtPrixVente.Text) || String.IsNullOrWhiteSpace(txtQuantite.Text))
                 MessageBox.Show("Veuillez remplir tous les champs obligatoires", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
@@ -80,18 +91,21 @@ namespace Pilot.Windows
                 }
                 DialogResult = ok;
             }
-            
-
         }
 
+        /// <summary>
+        /// Ajoute une couleur à la liste des couleurs du produit
+        /// </summary>
         private void butAjoutCouleurs_Click(object sender, RoutedEventArgs e)
         {
+            //Vérifie si le champ de couleur est vide ou null
             if (txtCouleurs.Text == null)
                 MessageBox.Show("Veuillez saisir une couleur valide", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             else
             {
                 Couleur couleurAAjouter;
                 Couleur uneCouleur = new Couleur(txtCouleurs.Text);
+                //Si la couleur est bien une couleur existante
                 if (uneCouleur.EstPresent(ToutesLesCouleurs))
                 {
                     foreach (Couleur coul in ToutesLesCouleurs)
@@ -110,8 +124,12 @@ namespace Pilot.Windows
             
         }
 
+        /// <summary>
+        /// Supprime une couleur de la liste des couleurs du produit
+        /// </summary>
         private void butSupprCouleurs_Click(object sender, RoutedEventArgs e)
         {
+            //Si aucune couleur n'est sélectionnée, on affiche un message d'erreur
             if (lbCouleurs.SelectedItem == null)
                 MessageBox.Show("Veuillez sélectionner un produit", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
             else
