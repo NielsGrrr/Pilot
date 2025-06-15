@@ -19,6 +19,11 @@ namespace Pilot.Windows
 {
     /// <summary>
     /// Logique d'interaction pour WindowCommande.xaml
+    /// Stocke 3 informations :
+    /// 1 ObservableCollection<Revendeur> : Tous les revendeurs de la base de données dont le rôle est commercial
+    /// 1 ObservableCollection<Employe> : Tous les employés de la base de données
+    /// 1 ObservableCollection<Transport> : Tous les transports de la base de données
+    /// La commande sélectionnée est définit comme DataContext
     /// </summary>
     public partial class WindowCommande : Window
     {
@@ -54,8 +59,12 @@ namespace Pilot.Windows
             }
         }
 
+        /// <summary>
+        /// Vérifie les champs du formulaire et valide le dialogue
+        /// </summary>
         private void butValiderCommande_Click(object sender, RoutedEventArgs e)
         {
+            // Vérification que les champs obligatoires sont remplis
             if (dgEmploye.SelectedItem == null || dgRevendeurs.SelectedItem == null || comboModeLivraison.SelectedItem == null)
             {
                 MessageBox.Show("Veuillez sélectionner un employé, un revendeur et un mode de livraison.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
