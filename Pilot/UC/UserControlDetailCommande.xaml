@@ -15,8 +15,8 @@
         Foreground="White" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="66*"/>
+                <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <GroupBox Margin="50,10,50,0" Header="Commande">
@@ -32,15 +32,36 @@
                     </StackPanel>
                 </GroupBox>
 
-                <ListView ItemsSource="{Binding ProduitsQuantites}" Margin="20,20,20,20">
+                <ListView Width="auto" ItemsSource="{Binding ProduitsQuantites}" Margin="20,20,20,20">
                     <ListView.View>
                         <GridView>
+                            <GridViewColumn Header="Quantité" DisplayMemberBinding="{Binding Value}" />
                             <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Key.CodeProduit}" />
                             <GridViewColumn Header="Pointe" DisplayMemberBinding="{Binding Key.LaPointe.LibelleTypePointe}" />
                             <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Key.LeType.LibelleType}" />
                             <GridViewColumn Header="Catégorie" DisplayMemberBinding="{Binding Key.LeType.LaCategorie.LibelleCategorie}" />
                             <GridViewColumn Header="Prix" DisplayMemberBinding="{Binding Key.PrixVente}" />
-                            <GridViewColumn Header="Quantité" DisplayMemberBinding="{Binding Value}" />
+                            <GridViewColumn Header="Couleurs">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl ItemsSource="{Binding Key.LesCouleurs}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding LibelleCouleur}" />
+                                                        <TextBlock Text=", " />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
